@@ -17,4 +17,34 @@ bibliography: [refs.bib, packages.bib]
 
 # Preamble {-}
 
-In this course ...
+The main objective of this course is to demonstrate how to proceed
+with a complete analysis of RNA-seq data, including principal
+component analysis, identification of differentially expressed genes
+and gene set enrichment and over-representation analysis.
+
+The background for these analyses includes introductions to hypthesis
+testing, linear modelling and adjustment for multiple comparisons,
+principal component analysis and high throughtput sequencing.
+
+This course is based on material from the
+[WSBIM1322](http://bit.ly/WSBIM1322) and
+[WSBIM2122](http://bit.ly/WSBIM2122) chapters taught at the [Faculty
+of Pharmacy and Biomedical
+Sciences](https://uclouvain.be/en/faculties/fasb) at the UCLouvain.
+
+## Installation instructions
+
+```{r install, eval=FALSE}
+
+pks <- c("tidyverse", "patchwork",
+         "SummarizedExperiment", "DESeq2",
+         "patchwork", "biomaRt",
+         "org.Hs.eg.db", "GO.db",
+         "org.Hs.eg.db", "msigdbr",
+         "clusterProfiler")
+
+if (!require("BiocManager"))
+    install.packages("BiocManager")
+
+BiocManager::install(pks)
+```

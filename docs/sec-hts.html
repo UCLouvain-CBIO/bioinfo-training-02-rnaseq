@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto and Axelle Loriot" />
 
-<meta name="date" content="2022-10-07" />
+<meta name="date" content="2022-10-08" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -371,7 +371,7 @@ allows to analyse different features of the reads and generates a
 report that includes several diagnostic plots to highlight any problem
 the data may have.</p>
 <p>FastQC is run from the command line:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="sec-hts.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> fastqc SampleName.fastq</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="sec-hts.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> fastqc SampleName.fastq</span></code></pre></div>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -592,7 +592,7 @@ Each entry has 11 mandatories fields for essential mapping information
 and a variable number of other fields for aligner specific information.
 An example of few entries from a SAM
 file is displayed below.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="sec-hts.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> wsbim2122_data/RNAseq_pipeline/example.sam</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="sec-hts.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> wsbim2122_data/RNAseq_pipeline/example.sam</span></code></pre></div>
 <pre><code>## DRR016707.26395247   147 1   19626495    60  101M    =   19626490    -106    GTAACAATGTTATCAGTAATGCTTTAAACTCCAGCACCTGGTTATGCATTTGAAACCAAGTCTGTTTCTTGTTTTGTATTTTCTCTCTGGAAGTTGTAAGG   DDDDDDDDDDDDDEEEEEEEFFFFFFHCHHHJJJHHJJJJJJJJJJJJIHFJJIHJJJJJJJJJJJJJJJJJJJJJJJJJJJJIJJJJHHHHHFFFFFCCC   AS:i:0  XN:i:0  XM:i:0  XO:i:0  XG:i:0  NM:i:0  MD:Z:101    YS:i:0  YT:Z:CP NH:i:1
 ## DRR016707.26395247   99  1   19626490    60  101M    =   19626495    106 CTTCTGTAACAATGTTATCAGTAATGCTTTAAACTCCAGCACCTGGTTATGCATTTGAAACCAAGTCTGTTTCTTGTTTTGTATTTTCTCTCTGGAAGTTG   CCCFFFFFHHHHHJIJJJJIJJJJJJJJJJIJJJJJJJJJJJJJJJHHIHIJJJIJJHIJJJIIIIIIJGIJJJJDHJJJHHHHHHHFFFFFFEDACEEDD   AS:i:0  XN:i:0  XM:i:0  XO:i:0  XG:i:0  NM:i:0  MD:Z:101    YS:i:0  YT:Z:CP NH:i:1
 ## DRR016707.34969377   163 1   19626487    60  101M    =   19626493    107 ATTCTTCTGTAACAATGTTATCAGTAATGCTTTAAACTCCAGCACCTGGTTATGCATTTGAAACCAAGTCTGTTTCTTGTTTTGTATTTTCTCTCTGGAAG   CC@FFFFFHFHFFHGGJCIFJGHIIIIGIIIIJIIJJJIGIIIIIIGII?:BFHGHIIIIGEHHHGIIDGGH@GGIGHJGHHHHCEHDEFDDFFEEECCEC   AS:i:0  XN:i:0  XM:i:0  XO:i:0  XG:i:0  NM:i:0  MD:Z:101    YS:i:0  YT:Z:CP NH:i:1
@@ -666,7 +666,7 @@ from the <a href="https://www.gencodegenes.org/human/">UCSC table
 browser</a>. The first few lines of
 gtf annotation file for human genome assembly GRCh38 look like this:</p>
 <p><img src="figs/gtf_example.png" width="100%" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="sec-hts.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> -n 20 wsbim2122_data/RNAseq_pipeline/Homo_sapiens.GRCh38.94.gtf</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="sec-hts.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> -n 20 wsbim2122_data/RNAseq_pipeline/Homo_sapiens.GRCh38.94.gtf</span></code></pre></div>
 <pre><code>## #!genome-build GRCh38.p12
 ## #!genome-version GRCh38
 ## #!genome-date 2013-12
@@ -709,10 +709,10 @@ for more details).</p>
 SampleName.bam              # bam file</code></pre>
 <p>Here is an example of featurecounts output file. The last column gives
 the raw counts of each gene in that sample.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="sec-hts.html#cb12-1" aria-hidden="true" tabindex="-1"></a>counts_result <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="at">file =</span> <span class="st">"wsbim2122_data/count_data/sample1_counts.tsv.gz"</span>)</span>
-<span id="cb12-2"><a href="sec-hts.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">datatable</span>(<span class="fu">head</span>(counts_result))</span></code></pre></div>
-<div id="htmlwidget-8e7639f7b76a8621d60b" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8e7639f7b76a8621d60b">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["ENSG00000223972","ENSG00000227232","ENSG00000278267","ENSG00000243485","ENSG00000284332","ENSG00000237613"],["1;1;1;1;1;1;1;1;1","1;1;1;1;1;1;1;1;1;1;1","1","1;1;1;1;1","1","1;1;1;1;1"],["11869;12010;12179;12613;12613;12975;13221;13221;13453","14404;15005;15796;16607;16858;17233;17606;17915;18268;24738;29534","17369","29554;30267;30564;30976;30976","30366","34554;35245;35277;35721;35721"],["12227;12057;12227;12721;12697;13052;13374;14409;13670","14501;15038;15947;16765;17055;17368;17742;18061;18366;24891;29570","17436","30039;30667;30667;31109;31097","30503","35174;35481;35481;36073;36081"],["+;+;+;+;+;+;+;+;+","-;-;-;-;-;-;-;-;-;-;-","-","+;+;+;+;+","+","-;-;-;-;-"],[1735,1351,68,1021,138,1219],[0,14,8,0,0,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Geneid<\/th>\n      <th>Chr<\/th>\n      <th>Start<\/th>\n      <th>End<\/th>\n      <th>Strand<\/th>\n      <th>Length<\/th>\n      <th>../processed_data/bam/sample1.bam<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[6,7]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div class="question">
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="sec-hts.html#cb13-1" aria-hidden="true" tabindex="-1"></a>counts_result <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="at">file =</span> <span class="st">"wsbim2122_data/count_data/sample1_counts.tsv.gz"</span>)</span>
+<span id="cb13-2"><a href="sec-hts.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">datatable</span>(<span class="fu">head</span>(counts_result))</span></code></pre></div>
+<div id="htmlwidget-dd8383d2c77862c3a6e4" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-dd8383d2c77862c3a6e4">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["ENSG00000223972","ENSG00000227232","ENSG00000278267","ENSG00000243485","ENSG00000284332","ENSG00000237613"],["1;1;1;1;1;1;1;1;1","1;1;1;1;1;1;1;1;1;1;1","1","1;1;1;1;1","1","1;1;1;1;1"],["11869;12010;12179;12613;12613;12975;13221;13221;13453","14404;15005;15796;16607;16858;17233;17606;17915;18268;24738;29534","17369","29554;30267;30564;30976;30976","30366","34554;35245;35277;35721;35721"],["12227;12057;12227;12721;12697;13052;13374;14409;13670","14501;15038;15947;16765;17055;17368;17742;18061;18366;24891;29570","17436","30039;30667;30667;31109;31097","30503","35174;35481;35481;36073;36081"],["+;+;+;+;+;+;+;+;+","-;-;-;-;-;-;-;-;-;-;-","-","+;+;+;+;+","+","-;-;-;-;-"],[1735,1351,68,1021,138,1219],[0,14,8,0,0,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Geneid<\/th>\n      <th>Chr<\/th>\n      <th>Start<\/th>\n      <th>End<\/th>\n      <th>Strand<\/th>\n      <th>Length<\/th>\n      <th>../processed_data/bam/sample1.bam<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[6,7]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div class="question">
 <p class="question-begin">
 ► Question
 </p>
@@ -738,31 +738,31 @@ the raw counts of each gene in that sample.</p>
 <ol style="list-style-type: decimal">
 <li>How many genes are tested ?</li>
 </ol>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="sec-hts.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(counts_result)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="sec-hts.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(counts_result)</span></code></pre></div>
 <pre><code>## [1] 58735</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>How many reads were assigned to genes?</li>
 </ol>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="sec-hts.html#cb15-1" aria-hidden="true" tabindex="-1"></a>counts_result <span class="ot">&lt;-</span> counts_result <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a href="sec-hts.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">counts =</span> <span class="st">"../processed_data/bam/sample1.bam"</span>)</span>
-<span id="cb15-3"><a href="sec-hts.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(counts_result<span class="sc">$</span>counts)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="sec-hts.html#cb16-1" aria-hidden="true" tabindex="-1"></a>counts_result <span class="ot">&lt;-</span> counts_result <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="sec-hts.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">counts =</span> <span class="st">"../processed_data/bam/sample1.bam"</span>)</span>
+<span id="cb16-3"><a href="sec-hts.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(counts_result<span class="sc">$</span>counts)</span></code></pre></div>
 <pre><code>## [1] 10527830</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Inspect the counts. What is the maximum value? How many genes have zero counts ?</li>
 </ol>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="sec-hts.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(counts_result<span class="sc">$</span>counts)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="sec-hts.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(counts_result<span class="sc">$</span>counts)</span></code></pre></div>
 <pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
 ##      0.0      0.0      0.0    179.2      6.0 143371.0</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="sec-hts.html#cb19-1" aria-hidden="true" tabindex="-1"></a>counts_result <span class="sc">%&gt;%</span></span>
-<span id="cb19-2"><a href="sec-hts.html#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(counts <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb19-3"><a href="sec-hts.html#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="sec-hts.html#cb20-1" aria-hidden="true" tabindex="-1"></a>counts_result <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="sec-hts.html#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(counts <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="sec-hts.html#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code></pre></div>
 <pre><code>## [1] 36035</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>Plot the distribution of counts. How does it look like?</li>
 </ol>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="sec-hts.html#cb21-1" aria-hidden="true" tabindex="-1"></a>counts_result <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="sec-hts.html#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log2</span>(counts <span class="sc">+</span> <span class="dv">1</span>))) <span class="sc">+</span></span>
-<span id="cb21-3"><a href="sec-hts.html#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="sec-hts.html#cb22-1" aria-hidden="true" tabindex="-1"></a>counts_result <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="sec-hts.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log2</span>(counts <span class="sc">+</span> <span class="dv">1</span>))) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="sec-hts.html#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>)</span></code></pre></div>
 <p><img src="rnaseq_files/figure-html/unnamed-chunk-39-1.png" width="672"></p>
 <p>Note that a “pseudo-count” was added before the log2 transformation of the counts,
 to avoid elimination of counts equal to zero.</p>
@@ -808,20 +808,20 @@ in the folder <code>wsbim_data/count_data/</code>. Use these files to create a c
 ► Solution<span id="sol-start-4" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-4', 'sol-start-4')"></span>
 </p>
 <div id="sol-body-4" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="sec-hts.html#cb23-1" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"wsbim2122_data/count_data/"</span>, <span class="at">pattern =</span> <span class="st">"*tsv.gz"</span>)</span>
-<span id="cb23-2"><a href="sec-hts.html#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="sec-hts.html#cb23-3" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="at">file =</span> <span class="fu">paste0</span>(<span class="st">"wsbim2122_data/count_data/"</span>, samples[<span class="dv">1</span>])) <span class="sc">%&gt;%</span></span>
-<span id="cb23-4"><a href="sec-hts.html#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Geneid, <span class="fu">ends_with</span>(<span class="st">'.bam'</span>))</span>
-<span id="cb23-5"><a href="sec-hts.html#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="sec-hts.html#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (sample <span class="cf">in</span> samples[<span class="sc">-</span><span class="dv">1</span>]){</span>
-<span id="cb23-7"><a href="sec-hts.html#cb23-7" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="at">file =</span> <span class="fu">paste0</span>(<span class="st">"wsbim2122_data/count_data/"</span>, sample)) <span class="sc">%&gt;%</span></span>
-<span id="cb23-8"><a href="sec-hts.html#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">ends_with</span>(<span class="st">'.bam'</span>))</span>
-<span id="cb23-9"><a href="sec-hts.html#cb23-9" aria-hidden="true" tabindex="-1"></a>  counts <span class="ot">&lt;-</span> <span class="fu">cbind</span>(counts, tmp)</span>
-<span id="cb23-10"><a href="sec-hts.html#cb23-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb23-11"><a href="sec-hts.html#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-12"><a href="sec-hts.html#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(counts) <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="at">pattern =</span> <span class="st">".bam$"</span>, <span class="st">''</span>, <span class="fu">names</span>(counts))</span>
-<span id="cb23-13"><a href="sec-hts.html#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(counts) <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="at">pattern =</span> <span class="st">"../processed_data/bam/"</span>, <span class="st">''</span>, <span class="fu">names</span>(counts))   </span>
-<span id="cb23-14"><a href="sec-hts.html#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(counts) </span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="sec-hts.html#cb24-1" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"wsbim2122_data/count_data/"</span>, <span class="at">pattern =</span> <span class="st">"*tsv.gz"</span>)</span>
+<span id="cb24-2"><a href="sec-hts.html#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="sec-hts.html#cb24-3" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="at">file =</span> <span class="fu">paste0</span>(<span class="st">"wsbim2122_data/count_data/"</span>, samples[<span class="dv">1</span>])) <span class="sc">%&gt;%</span></span>
+<span id="cb24-4"><a href="sec-hts.html#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Geneid, <span class="fu">ends_with</span>(<span class="st">'.bam'</span>))</span>
+<span id="cb24-5"><a href="sec-hts.html#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="sec-hts.html#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (sample <span class="cf">in</span> samples[<span class="sc">-</span><span class="dv">1</span>]){</span>
+<span id="cb24-7"><a href="sec-hts.html#cb24-7" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="at">file =</span> <span class="fu">paste0</span>(<span class="st">"wsbim2122_data/count_data/"</span>, sample)) <span class="sc">%&gt;%</span></span>
+<span id="cb24-8"><a href="sec-hts.html#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">ends_with</span>(<span class="st">'.bam'</span>))</span>
+<span id="cb24-9"><a href="sec-hts.html#cb24-9" aria-hidden="true" tabindex="-1"></a>  counts <span class="ot">&lt;-</span> <span class="fu">cbind</span>(counts, tmp)</span>
+<span id="cb24-10"><a href="sec-hts.html#cb24-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-11"><a href="sec-hts.html#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="sec-hts.html#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(counts) <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="at">pattern =</span> <span class="st">".bam$"</span>, <span class="st">''</span>, <span class="fu">names</span>(counts))</span>
+<span id="cb24-13"><a href="sec-hts.html#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(counts) <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="at">pattern =</span> <span class="st">"../processed_data/bam/"</span>, <span class="st">''</span>, <span class="fu">names</span>(counts))   </span>
+<span id="cb24-14"><a href="sec-hts.html#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(counts) </span></code></pre></div>
 <pre><code>##            Geneid sample1 sample2 sample3 sample4 sample5 sample6
 ## 1 ENSG00000223972       0       0       0       0       0       1
 ## 2 ENSG00000227232      14      28      17      40      16      13
@@ -845,7 +845,7 @@ it will be covered in the next chapter.</p>
 <a href="sec-rnaseq.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2022-10-07
+2022-10-08
  using 
 R version 4.2.1 (2022-06-23)
 </p>

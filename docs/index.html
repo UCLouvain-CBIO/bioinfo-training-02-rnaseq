@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto and Axelle Loriot" />
 
-<meta name="date" content="2022-10-07" />
+<meta name="date" content="2022-10-08" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -182,7 +182,9 @@ div.csl-indent {
 <li class="dropdown" style="float:right">
 <a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
 <div class="dropdown-content">
-<a id="active-page" href="index.html">Preamble</a>
+<a id="active-page" href="index.html">Preamble</a><ul class="toc-sections">
+<li class="toc"><a href="#installation-instructions"> Installation instructions</a></li>
+</ul>
 <a href="hypothesis-testing.html"><span class="toc-section-number">1</span> Hypothesis testing</a>
 <a href="principal-component-analysis.html"><span class="toc-section-number">2</span> Principal component analysis</a>
 <a href="summarizedexperiments.html"><span class="toc-section-number">3</span> SummarizedExperiments</a>
@@ -200,15 +202,42 @@ div.csl-indent {
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <!--bookdown:title:end--><!--bookdown:title:start--><html><body><div id="preamble" class="section level1 unnumbered">
 <h1>Preamble</h1>
-<p>In this course …</p>
+<p>The main objective of this course is to demonstrate how to proceed
+with a complete analysis of RNA-seq data, including principal
+component analysis, identification of differentially expressed genes
+and gene set enrichment and over-representation analysis.</p>
+<p>The background for these analyses includes introductions to hypthesis
+testing, linear modelling and adjustment for multiple comparisons,
+principal component analysis and high throughtput sequencing.</p>
+<p>This course is based on material from the
+<a href="http://bit.ly/WSBIM1322">WSBIM1322</a> and
+<a href="http://bit.ly/WSBIM2122">WSBIM2122</a> chapters taught at the <a href="https://uclouvain.be/en/faculties/fasb">Faculty
+of Pharmacy and Biomedical
+Sciences</a> at the UCLouvain.</p>
+<div id="installation-instructions" class="section level2" number="0.1">
+<h2>
+<span class="header-section-number">0.1</span> Installation instructions<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('installation-instructions')" onmouseout="reset_tooltip('installation-instructions-tooltip')"><span class="tooltiptext" id="installation-instructions-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a>pks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"patchwork"</span>,</span>
+<span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a>         <span class="st">"SummarizedExperiment"</span>, <span class="st">"DESeq2"</span>,</span>
+<span id="cb1-3"><a href="index.html#cb1-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">"patchwork"</span>, <span class="st">"biomaRt"</span>,</span>
+<span id="cb1-4"><a href="index.html#cb1-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">"org.Hs.eg.db"</span>, <span class="st">"GO.db"</span>,</span>
+<span id="cb1-5"><a href="index.html#cb1-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">"org.Hs.eg.db"</span>, <span class="st">"msigdbr"</span>,</span>
+<span id="cb1-6"><a href="index.html#cb1-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">"clusterProfiler"</span>)</span>
+<span id="cb1-7"><a href="index.html#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="index.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"BiocManager"</span>))</span>
+<span id="cb1-9"><a href="index.html#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
+<span id="cb1-10"><a href="index.html#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="index.html#cb1-11" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(pks)</span></code></pre></div>
 
+</div>
 </div></body></html>
 
 <p style="text-align: center;">
 <a href="hypothesis-testing.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2022-10-07
+2022-10-08
  using 
 R version 4.2.1 (2022-06-23)
 </p>
