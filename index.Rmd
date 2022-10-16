@@ -22,7 +22,7 @@ with a complete analysis of RNA-seq data, including principal
 component analysis, identification of differentially expressed genes
 and gene set enrichment and over-representation analysis.
 
-The background for these analyses includes introductions to hypthesis
+The background for these analyses inludes introductions to hypthesis
 testing, linear modelling and adjustment for multiple comparisons,
 principal component analysis and high throughtput sequencing.
 
@@ -41,7 +41,9 @@ pks <- c("tidyverse", "patchwork",
          "patchwork", "biomaRt",
          "org.Hs.eg.db", "GO.db",
          "org.Hs.eg.db", "msigdbr",
-         "clusterProfiler")
+         "clusterProfiler",
+         "UCLouvain-CBIO/rWSBIM2122",
+         "UCLouvain-CBIO/rWSBIM1322")
 
 if (!require("BiocManager"))
     install.packages("BiocManager")

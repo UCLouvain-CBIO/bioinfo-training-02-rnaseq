@@ -1,1 +1,846 @@
-# Principal component analysis
+# Unsupervised learning: dimensionality reduction {#sec-dimred}
+
+## Introduction
+
+In this chapter, we are going to learn about dimensionality reduction,
+also called ordination. The goal of dimensionality reduction is to
+transform a high-dimensional data into data of lesser dimensions while
+minimising the loss of information.
+
+Dimensionality reduction is used as a data transformation technique
+for input to other machine learning methods such as classifications,
+or as a very efficient visualisation technique, which is the use case
+we will focus on here. We are going to focus on a widerly used method
+called Principal Component Analysis (PCA).
+
+
+```{r pcaexdata, echo = FALSE, message = FALSE}
+library("rWSBIM1322")
+data(xy)
+```
+
+We are going to use the following dataset to illustrate some important
+concepts that are scale and central to PCA. The small dataset show
+below represents the measurement of genes *x* and *y* in 20
+samples. We will be using the scaled and centred version of this data.
+
+```{r xyplot, echo = FALSE, fig.cap = "Raw (left) and scale/centred (right) expression data for genes *x* and *y* in 20 samples", fig.height = 5, fig.width = 11}
+library("ggplot2")
+library("patchwork")
+
+## original data
+p0 <- ggplot(xy0, aes(x = gene_x, y = gene_y)) +
+    geom_point(shape = 21, size = 3)
+
+## scaled data
+p <- ggplot(xy, aes(x = gene_x, y = gene_y)) +
+    geom_point(shape = 21, size = 3)
+
+p0 + p
+```
+
+## Lower-dimensional projections
+
+The goal of dimensionality reduction is to reduce the number of
+dimensions in a way that the new data remains useful. One way to
+reduce a 2-dimensional data is by projecting the data onto a
+lines. Below, we project our data on the x and y axes. These are
+called **linear projections**.
+
+```{r linproj, echo = FALSE, fig.cap = "Projection of the data on the x (left) and y (right) axes.", fig.heigth = 5, fig.width = 11}
+
+## projection on y = 0
+py <- p +
+    geom_point(aes(y = 0), colour = "red") +
+    geom_segment(aes(xend = gene_x, yend = 0), linetype = "dashed")
+
+## projection on x = 0
+px <- p +
+    geom_point(aes(x = 0), colour = "red") +
+    geom_segment(aes(yend = gene_y, xend = 0), linetype = "dashed")
+
+## projections on x = 0 and y = 0
+py + px
+```
+
+In general, and in particular in the projections above, we lose
+information when reducing the number of dimensions (above, from 2
+(plane) to 1 (line)). In the first example above (left), we lose all
+the measurements of gene *y*. In the second example (right), we lose
+all the measurements of gene *x*.
+
+The goal of dimensionality reduction is to limit this loss.
+
+We know already about **linear regression**. Below, we use the `lm`
+function to regress *y* onto *x* (left) and *x* onto *y*
+(right). These regression lines give us an approximate linear
+relationship between the expression of genes *x* and *y*. The
+relationship differs depending on which gene we choose to be the
+predictor and the response.
+
+
+```{r linreg, echo = FALSE, fig.cap = "Regression of y onto x (left) minimisises the sums of squares of vertical residuals (red). Regression of x onto y (right) minimisises the sums of squares of horizontal residuals (orange).", fig.width = 5, fig.width = 11}
+reg1 <- lm(gene_y ~ gene_x, data = xy)
+a1 <- reg1$coefficients[1] # intercept
+b1 <- reg1$coefficients[2] # slope
+pline1 <- p +
+    geom_abline(intercept = a1, slope = b1, col = "blue", lwd = 1.5) +
+    geom_segment(aes(xend = gene_x, yend = reg1$fitted),
+                 colour = "red",
+                 arrow = arrow(length = unit(0.15, "cm")))
+
+reg2 <- lm(gene_x ~ gene_y, data = xy)
+a2 <- reg2$coefficients[1] # intercept
+b2 <- reg2$coefficients[2] # slope
+pline2 <- p +
+    geom_abline(intercept = -a2/b2, slope = 1/b2,
+                col = "blue", lwd = 1.5) +
+    geom_segment(aes(xend = reg2$fitted, yend = gene_y),
+                 colour = "orange",
+                 arrow = arrow(length = unit(0.15, "cm")))
+
+pline1 + pline2
+```
+
+We now want a line that minimises distances in both directions, as
+shown below. This line, called **principal component**, is also the
+ones that maximises the variance of the projections along itself.
+
+```{r pxaex, echo = FALSE, fig.cap = "The first prinicpal component minimises the sum of squares of the orthogonal projections.", fig.height = 5.6, fig.width = 11.5}
+svda <- svd(xy)
+pc <- as.matrix(xy) %*% svda$v[, 1] %*% t(svda$v[, 1])
+bp <- svda$v[2, 1] / svda$v[1, 1]
+ap <- mean(pc[, 2]) - bp * mean(pc[, 1])
+pline3 <- p +
+    geom_segment(xend = pc[, 1], yend = pc[, 2]) +
+    geom_abline(intercept = ap, slope = bp,
+                col = "purple", lwd = 1.5)
+
+ppdf <- tibble(PC1n = -svda$u[, 1] * svda$d[1],
+               PC2n = svda$u[, 2] * svda$d[2])
+
+pca <- ggplot(ppdf, aes(x = PC1n, y = PC2n)) +
+    geom_point(shape = 21, size = 3) +
+    xlab("PC1 ") + ylab("PC2") +
+    geom_point(aes(x = PC1n, y = 0), color = "red") +
+    geom_segment(aes(xend = PC1n, yend = 0)) +
+    geom_hline(yintercept = 0, color = "purple",
+               lwd=1.5)
+
+pline3 + pca
+```
+
+The second principal component is then chosen to be orthogonal to the
+first one. In our case above, there is only one possibility.
+
+
+```{r pxaex2, echo = FALSE, fig.cap = "The second prinicpal component is orthogonal to the second one.", fig.height = 5.8, fig.width = 11}
+pca2 <- ggplot(ppdf, aes(x = PC1n, y = PC2n)) +
+    geom_point(shape = 21, size = 3) +
+    xlab("PC1 ") + ylab("PC2") +
+    geom_point(aes(x = PC1n, y = 0), color = "red") +
+    geom_segment(aes(xend = PC1n, yend = 0), linetype = "dotted") +
+    geom_segment(aes(x = PC1n, xend = 0, y = PC2n, yend = PC2n)) +
+    geom_hline(yintercept = 0, color = "purple",
+               lwd=1) +
+    geom_vline(xintercept = 0, color = "purple",
+               lwd=1.5)
+
+pca + pca2
+```
+
+```{r prcomp, echo = FALSE}
+.pca <- prcomp(xy)
+var <- .pca$sdev^2
+pve <- var/sum(var)
+```
+In the example above the variance, the variance along the PCs are
+`r round(var[1], 2)` and `r round(var[2], 2)`. The first one explains
+`r round(pve[1] * 100, 1)`% or that variance, and the second one merely
+`r round(pve[2] * 100, 1)`%. This is also reflected in the different
+scales along the x and y axis.
+
+To account for these differences in variation along the different PCs,
+it is better to represent a PCA plot as a rectangle, using an aspect
+ratio that is illustrative of the respective variances.
+
+```{r pxaex3, echo = FALSE, fig.cap = "Final principal component analysis of the data.", fig.height = 2, fig.width = 10}
+pca_final <- pca2 <- ggplot(ppdf, aes(x = PC1n, y = PC2n)) +
+    geom_point(shape = 21, size = 3) +
+    xlab("PC1 ") + ylab("PC2")
+    ## geom_hline(yintercept = 0) +
+    ## geom_vline(xintercept = 0)
+pca_final
+```
+
+
+## The new linear combinations
+
+Principal components are linear combinations of the variables that
+were originally measured, they provide a new coordinate system. The
+PC in the previous example is a linear combination of *gene_x* and
+*gene_y*, more specifically
+
+$$ PC = c_{1} ~ gene_{x} + c_{2} ~ gene_{y} $$
+
+It has coefficients $(c_1, c_2)$, also called loading.
+
+PCA in general will find linear combinations of the original
+variables. These new linear combinations will maximise the variance
+of the data.
+
+## Summary and application
+
+Principal Component Analysis (PCA) is a technique that transforms the
+original n-dimensional data into a new  space.
+
+- These new dimensions are linear combinations of the original data,
+  i.e.  they are composed of proportions of the original variables.
+
+- Along these new dimensions, called principal components, the data
+  expresses most of its variability along the first PC, then second,
+  ...
+
+- Principal components are orthogonal to each other,
+  i.e. non-correlated.
+
+
+```{r pcaex, echo=FALSE, fig.width=12, fig.height=4, fig.cap="Original data (left). PC1 will maximise the variability while minimising the residuals (centre). PC2 is orthogonal to PC1 (right).", fig.fullwidth = TRUE}
+pca <- prcomp(xy)
+z <- cbind(x = c(-1, 1), y = c(0, 0))
+zhat <- z %*% t(pca$rotation[, 1:2])
+zhat <- scale(zhat, center = colMeans(xy), scale = FALSE)
+par(mfrow = c(1, 3))
+plot(xy, main = "Orignal data (2 dimensions)")
+plot(xy, main = "Orignal data with PC1")
+abline(lm(gene_y ~ gene_x, data = data.frame(zhat - 10)), lty = "dashed")
+grid()
+plot(pca$x, main = "Data in PCA space", ylim = c(-2, 2))
+grid()
+```
+
+In R, we can use the `prcomp` function. A summary of the `prcomp`
+output shows that along PC1, we are able to retain close to 92%
+of the total variability in the data.
+
+
+```{r pcaxy}
+library("rWSBIM1322")
+data(xy)
+pca_xy <- prcomp(xy)
+summary(pca_xy)
+```
+
+This `pca_xy` variable is an object of class `prcomp`. To learn what
+it contains, we can look at its structure with `str` and read the
+`?prcomp` manual page.
+
+```{r}
+str(pca_xy)
+```
+
+We are going to focus on two elements:
+
+- **sdev** contains the standard deviations along the respective PCs
+  (as also displayed in the summary). From these, we can compute the
+  variances, the percentages of variance explained by the individual
+  PCs, and the cumulative variances.
+
+```{r pcavar}
+(var <- pca_xy$sdev^2)
+(pve <- var/sum(var))
+cumsum(pve)
+```
+
+- **x** contains the coordinates of the data along the PCs. These are
+  the values we could use to produce the PCA plot as above by hand.
+
+```{r pcaplot, fig.cap = ""}
+pca_xy$x
+plot(pca_xy$x)
+```
+
+
+## Visualisation
+
+A **biplot** features all original points re-mapped (rotated) along the
+first two PCs as well as the original features as vectors along the
+same PCs. Feature vectors that are in the same direction in PC space
+are also correlated in the original data space.
+
+```{r biplot, fig.cap = "A biplot shows both the variables (arrows) and observations of the PCA analysis."}
+biplot(pca_xy)
+```
+
+One important piece of information when using PCA is the proportion of
+variance explained along the PCs (see above), in particular when
+dealing with high dimensional data, as PC1 and PC2 (that are generally
+used for visualisation), might only account for an insufficient
+proportion of variance to be relevant on their own. This can be
+visualised on a **screeplot**, that can be produced with
+
+```{r screeplot, fig.cap = "Screeplot showing the variances for the PCs."}
+plot(pca_xy)
+```
+
+`r msmbstyle::question_begin()`
+Repeat the analysis above with the `xy0` data, that you can load
+from the `rWSBIM1322` data. First scale it, then repeat the PCA
+analysis as shown above.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+```{r pcaex1, fig.cap = ""}
+xy <- scale(xy0)
+pca1 <- prcomp(xy)
+summary(pca1)
+screeplot(pca1)
+biplot(pca1)
+```
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+
+Load the `cptac_prot` data[^msnset1], scale the data (see below for
+why scaling is important), then perform the PCA analysis and interpret
+it. Also produce a PCA for PCs 2 and 3.
+
+[^msnset1]: The [`MSnSet`
+    class](https://lgatto.github.io/MSnbase/reference/MSnSet-class.html)
+    (defined in the `MSnbase` package) is similar to
+    `SummarizedExperiment`, that we have seen in detail in chapter
+    \@ref(sec-obj). You can convert an `MSnSet` object to a
+    `SummarizedExperiment` with `as(x, "SummarizexExperiment")`.
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+```{r pcaex2, fig.cap = ""}
+library("MSnbase")
+data(cptac_prot)
+x <- scale(exprs(cptac_prot))
+pca2 <- prcomp(x)
+summary(pca2)
+screeplot(pca2)
+biplot(pca2)
+plot(pca2$x[, 2:3])
+biplot(pca2, choices = 2:3)
+```
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+In the exercise above, the PCA was performed on the features
+(proteins). Transpose the data and produce a PCA of the
+samples. Interprete the figures.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+```{r, warning = FALSE}
+x_t <- t(x)
+pca3 <- prcomp(x_t)
+summary(pca3)
+screeplot(pca3)
+biplot(pca3)
+```
+
+`r msmbstyle::solution_end()`
+
+
+## Pre-processing and missing values with PCA
+
+We haven't looked at other `prcomp` parameters, other that the first
+one, `x`. There are two other ones that are or importance, in
+particular in the light of the section on pre-processing above, which
+are `center` and `scale.`. The former is set to `TRUE` by default,
+while the second one is set the `FALSE`.
+
+
+`r msmbstyle::question_begin()`
+
+Perform a PCA analysis on the `mtcars` dataset with and without
+scaling. Compare and interpret the results.
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+
+```{r scalepcasol, fig.with=12, fig.cap=""}
+par(mfrow = c(1, 2))
+biplot(prcomp(mtcars, scale = FALSE), main = "No scaling")  ## 1
+biplot(prcomp(mtcars, scale = TRUE), main = "With scaling") ## 2
+```
+
+Without scaling, `disp` and `hp` are the features with the highest
+loadings along PC1 and 2 (all others are negligible), which are also
+those with the highest units of measurement. Scaling removes this
+effect.
+
+`r msmbstyle::solution_end()`
+
+Real datasets often come with *missing values*. In R, these should be
+encoded using `NA`. Unfortunately, PCA cannot deal with missing
+values, and observations containing `NA` values will be dropped
+automatically. This is a viable solution only when the proportion of
+missing values is low. Otherwise, it is possible to impute missing
+values (which often requires great care) or use an implementation of
+PCA such as *non-linear iterative partial least squares* (NIPALS),
+that support missing values.
+
+Finally, we should be careful when using categorical data in any of
+the unsupervised methods. Categories are generally represented as
+factors, which are encoded as integer levels, and might give the
+impression that a distance between levels is a relevant measure (which
+it is not, unless the factors are ordered). In such situations,
+categorical data can be dropped, or it is possible to encode
+categories as binary *dummy variables*. For example, if we have 3
+categories, say `A`, `B` and `C`, we would create two dummy variables
+to encode the categories as:
+
+```{r dummvar, echo=FALSE}
+dfr <- data.frame(x = c(1, 0, 0),
+                  y = c(0, 1, 0))
+rownames(dfr) <- LETTERS[1:3]
+dfr
+```
+
+so that the distance between each category are approximately equal to 1.
+
+## The full PCA workflow
+
+In this section, we will describe the detailed PCA analysis and
+interpretation of two real-life proteomics datasets. Both of these
+datasets are available in the `pRolocdata` package.
+
+
+### Extra-embryonic endoderm differentiation in mouse embryonic stem cells {#sec-dimred01}
+
+We are first going to focus on the data from Mulvey *et al.* (2015),
+where they present the *Dynamic proteomic profiling of extra-embryonic
+endoderm differentiation in mouse embryonic stem cells* [@Mulvey:2015].
+
+> During mammalian preimplantation development, the cells of the
+> blastocyst's inner cell mass differentiate into the epiblast and
+> primitive endoderm lineages, which give rise to the fetus and
+> extra-embryonic tissues, respectively. Extra-embryonic endoderm
+> (XEN) differentiation can be modeled in vitro by induced
+> expression of GATA transcription factors in mouse embryonic stem
+> cells. Here, we use this GATA-inducible system to quantitatively
+> monitor the dynamics of global proteomic changes during the early
+> stages of this differentiation event and also investigate the
+> fully differentiated phenotype, as represented by embryo-derived
+> XEN cells. Using mass spectrometry-based quantitative proteomic
+> profiling with multivariate data analysis tools, we reproducibly
+> quantified 2,336 proteins across three biological replicates and
+> have identified clusters of proteins characterized by distinct,
+> dynamic temporal abundance profiles. We first used this approach
+> to highlight novel marker candidates of the pluripotent state and
+> XEN differentiation. Through functional annotation enrichment
+> analysis, we have shown that the downregulation of
+> chromatin-modifying enzymes, the reorganization of membrane
+> trafficking machinery, and the breakdown of cell-cell adhesion are
+> successive steps of the extra-embryonic differentiation process.
+> Thus, applying a range of sophisticated clustering approaches to a
+> time-resolved proteomic dataset has allowed the elucidation of
+> complex biological processes which characterize stem cell
+> differentiation and could establish a general paradigm for the
+> investigation of these processes.
+
+
+`r msmbstyle::question_begin()`
+
+Load the `mulvey2015` data from the `pRolocdata` package. The data
+comes as an object of class `MSnSet`[^msnset2], which you can convert to a
+`SummarizedExperiment` as shown below. Familiarise yourself with its
+experimental design stored in the *colData* slot.
+
+[^msnset2]: The [`MSnSet`
+    class](https://lgatto.github.io/MSnbase/reference/MSnSet-class.html)
+    is similar to the `SummarizedExperiment` class, that we have seen
+    in detail in chapter \@ref(sec-obj).
+
+
+```{r, eval = FALSE}
+library(pRolocdata)
+data(mulvey2015)
+library("SummarizedExperiment")
+mulvey2015 <- as(mulvey2015, "SummarizedExperiment")
+```
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+```{r}
+library(pRolocdata)
+data(mulvey2015)
+library("SummarizedExperiment")
+mulvey2015 <- as(mulvey2015, "SummarizedExperiment")
+colData(mulvey2015)
+```
+
+`r msmbstyle::solution_end()`
+
+Here, we will want to do a PCA analysis on the samples. We want to remap the
+`r ncol(mulvey2015)` samples from a `r nrow(mulvey2015)`-dimensional space into 2, or
+possibly 3 dimensions. This will require to transpose the data matrix
+before passing it to the `prcomp` function.
+
+`r msmbstyle::question_begin()`
+
+- Run a PCA analysis on the samples of the `mulvey2015` data and
+  display a summary of the results.
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+```{r}
+pca_mulvey2015 <- prcomp(t(assay(mulvey2015)), scale. = TRUE)
+summary(pca_mulvey2015)
+```
+
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+- Assuming we are happy with a reduced space explaining 90% of the
+  variance of the data, how many PCs do we need?
+
+- Visualise the variance captured by the 18 PCs. To do so, you can use
+  the `fviz_screeplot` function from the `factoextra` package.
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+
+```{r, fig.cap = "Scree plot for the `mulvey2015` data showing the percentage of explained variance onlong the principal components.", message = FALSE}
+library("factoextra")
+fviz_screeplot(pca_mulvey2015)
+```
+
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+
+- Visualise your PCA analysis on a biplot. You can use the `fviz_pca`
+  function from the `factoextra` package, or the `fviz_pca_ind`
+  function to focus on the individuals (the rows of the original
+  input).
+
+- Use the `habillage` argument of the `fviz_pca_ind` function to
+  highlight the time experimental variable. Interpret the figures in
+  the light of the experimental design.
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+```{r, fig.cap = "Biplot and variables PCA plot of the `mulvey2015` data.", fig.width = 8, fig.height = 4}
+fviz_pca(pca_mulvey2015)
+fviz_pca_ind(pca_mulvey2015)
+fviz_pca_ind(pca_mulvey2015, habillage = mulvey2015$times)
+```
+
+`r msmbstyle::solution_end()`
+
+
+`r msmbstyle::question_begin()`
+To visualise the data in 3 dimension, you can use the `plot3d`
+function from the `rgl` package, that provides means to rotate the
+cube along the three first PCs.
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+```{r, eval = FALSE}
+library("rgl")
+plot3d(pca_mulvey2015$x[, 1],
+       pca_mulvey2015$x[, 2],
+       pca_mulvey2015$x[, 3],
+       col = mulvey2015$time,
+       size = 10)
+```
+
+`r msmbstyle::solution_end()`
+
+### A map of the mouse pluripotent stem cell spatial proteome  {#sec-dimred02}
+
+In this section, we are going to use PCA to explore spatial map of
+mouse pluripotent stem cell by Christoforou *et al.*
+[@Christoforou:2016].
+
+> Knowledge of the subcellular distribution of proteins is vital for
+> understanding cellular mechanisms. Capturing the subcellular
+> proteome in a single experiment has proven challenging, with studies
+> focusing on specific compartments or assigning proteins to
+> subcellular niches with low resolution and/or accuracy. Here we
+> introduce hyperLOPIT, a method that couples extensive fractionation,
+> quantitative high-resolution accurate mass spectrometry with
+> multivariate data analysis. We apply hyperLOPIT to a pluripotent
+> stem cell population whose subcellular proteome has not been
+> extensively studied. We provide localization data on over 5,000
+> proteins with unprecedented spatial resolution to reveal the
+> organization of organelles, sub-organellar compartments, protein
+> complexes, functional networks and steady-state dynamics of proteins
+> and unexpected subcellular locations. The method paves the way for
+> characterizing the impact of post-transcriptional and
+> post-translational modification on protein location and studies
+> involving proteome-level locational changes on cellular
+> perturbation. An interactive open-source resource is presented that
+> enables exploration of these data.
+
+
+`r msmbstyle::question_begin()`
+
+Load the `hyperLOPIT2015` data from the `pRolocdata` package. Convert
+the data to a `SummarizedExperiment` object and familiarise yourself
+with its experimental design and its feature annotation stored in the
+*rowData* slot.
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+```{r}
+library(pRolocdata)
+data(hyperLOPIT2015)
+hyperLOPIT2015 <- as(hyperLOPIT2015, "SummarizedExperiment")
+colData(hyperLOPIT2015)
+head(rowData(hyperLOPIT2015)[, c("entry.name", "markers")])
+```
+`r msmbstyle::solution_end()`
+
+Here, we will want to do a PCA analysis on the features. We want to
+remap the `r nrow(hyperLOPIT2015)` proteins from a
+`r ncol(hyperLOPIT2015)`-dimensional space into 2, or
+possibly 3 dimensions. Here, we can use the data as it when
+passing it to the `prcomp` function.
+
+`r msmbstyle::question_begin()`
+
+- Run a PCA analysis on the features of the `hyperLOPIT2015` data and
+  display a summary of the results.
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+```{r}
+pca_hl <- prcomp(assay(hyperLOPIT2015), scale. = TRUE)
+summary(pca_hl)
+```
+
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+- Assuming we are happy with a reduced space explaining 75% of the
+  variance of the data, how many PCs do we need?
+
+- Visualise the variance captured by the 18 PCs. To do so, you can use
+  the `fviz_screeplot` function from the `factoextra` package.
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::solution_begin()`
+
+```{r, fig.cap = "Scree plot for the `hyperLOPIT2015` data showing the percentage of explained variance onlong the principal components.", message = FALSE}
+library("factoextra")
+fviz_screeplot(pca_hl)
+```
+
+`r msmbstyle::solution_end()`
+
+`r msmbstyle::question_begin()`
+
+- Visualise your PCA analysis on a biplot. You can use the `fviz_pca`
+  function from the `factoextra` package, or the `fviz_pca_var`
+  function to focus on the variables (the columns of the original
+  input).
+
+- Interpret the variables on the biplot. Which ones are correlated? Is
+  this to be expected in the light of the experimental design.
+
+- Use the `fviz_pca_ind` function to focus on the individuals (the
+  rows of the orgininal input). Use the `habillage` argument of the
+  `fviz_pca_ind` function to highlight sub-cellular locations of the
+  proteins (use the `"markers"` feature variable) and set the `geom`
+  argument to `"point"` to drop the feature names from the plot (which
+  correspond to `geom = "text"`). Interpret the figures in the light of
+  the spatial proteomics experiment.
+
+
+- Repeat the figure above setting the `"final.assignment"` variable to
+  annotate the plot. Compare and interpret the two plots.
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+```{r, fig.cap = "Biplot and variables PCA plot of the `hyperLOPIT2015` data.", fig.width = 8, fig.height = 4}
+fviz_pca(pca_hl)
+fviz_pca_var(pca_hl)
+```
+
+```{r, fig.cap = "Biplot and individuals PCA plot of the `hyperLOPIT2015` data showing the sub-cellular localisation of the proteins.", fig.width = 8, fig.height = 4}
+## Manual colour palette (from the pRoloc package)
+
+cls <- c("#E41A1C", "#377EB8", "#238B45", "#FF7F00", "#FFD700",
+         "#333333", "#00CED1", "#A65628", "#F781BF", "#984EA3",
+         "#9ACD32", "#B0C4DE", "#00008A", "#8B795E", "#E0E0E060")
+
+fviz_pca_ind(pca_hl, geom = "point",
+             habillage = rowData(hyperLOPIT2015)$markers,
+             palette = cls)
+fviz_pca_ind(pca_hl, geom = "point",
+             habillage = rowData(hyperLOPIT2015)$final.assignment,
+             palette = cls)
+```
+`r msmbstyle::solution_end()`
+
+## Additional exercises
+
+
+`r msmbstyle::question_begin()`
+Professor Simpson and her team wanted to test the effect of drug A and
+drug B on fibroblast. They measured gene expression using RNA-Seq in
+three conditions: a control without any drug, cells in presence of
+drug A, and cells in presence of drug B. Each of these were measured
+in triplicates in a single batch by the same operator.
+
+The figure below shows the PCA plot of the 9 samples, coloured by
+condition. Interpreted the figure in the light of the experimentally
+design and suggest how to best analyse these data.
+
+```{r, echo = FALSE, fig.cap = "PCA analysis illustrating the global effect of drug A and B."}
+library("factoextra")
+library("pRolocdata")
+data(mulvey2015)
+x <- mulvey2015[, mulvey2015$times %in% c(1, 2, 6)]
+sampleNames(x) <-  paste(c("CTRL", "DrugA", "DrugB"),
+                         rep(1:3, each = 3))
+x$grp <- sub("[1-3]", "", sampleNames(x))
+p <- prcomp(t(exprs(x)), scale = TRUE, center = TRUE)
+fviz_pca_ind(p, habillage = x$grp)
+```
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::question_begin()`
+Consider the same experimental design as above, but with the PCA plot
+below. Interpret the figure in the light of the experimental design
+and suggest how to best analyse these data.
+
+```{r, echo = FALSE, fig.cap = "PCA analysis illustrating the global effect of drug A and B."}
+library("factoextra")
+library("pRolocdata")
+data(mulvey2015)
+x <- mulvey2015[, mulvey2015$times %in% c(1, 2, 6)]
+sampleNames(x) <-  c(paste0("CTRL", 1:3),
+                     paste0("DrugA", 1:3),
+                     paste0("DrugB", 1:3))
+x$grp <- sub("[1-3]", "", sampleNames(x))
+p <- prcomp(t(exprs(x)), scale = TRUE, center = TRUE)
+fviz_pca_ind(p, habillage = x$grp)
+```
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::question_begin()`
+
+Researchers of the famous FLVIT (Fosse-La-Ville Institute of
+Technology) wanted to test the effect of a newly identified
+anti-cancer drug C121 on KEK293 cells. They measured proteins
+expression using quantitative mass spectrometry in these two
+conditions and 4 replicates. Each of these were measured in
+triplicates in a single batch.
+
+Interpret the PCA plot in the light of the experimental design. Do you
+think the analysis is likely to provide significant results?
+
+
+```{r, echo = FALSE, fig.cap = "Quantitative proteomics experiment measuring the effect of drug C121."}
+x <- mulvey2015[, mulvey2015$times %in% c(1, 3)]
+sampleNames(x) <-  paste0(c("CTRL.", "C121."),
+                          rep(1:3, each = 2))
+x$grp <- sub("\\.[1-3]", "", sampleNames(x))
+p <- prcomp(t(exprs(x)), scale = TRUE, center = TRUE)
+fviz_pca_ind(p, habillage = x$grp)
+```
+
+`r msmbstyle::question_end()`
+
+
+
+`r msmbstyle::question_begin()`
+
+In the following experimental design, clinicians have used
+quantitative PCR to measure the expression of 96 micro RNAs in the
+blood of three patients and three healthy donor, with the goal of
+identifying novel biomarkers.
+
+In the light of the experimental design, interpret the PCA plot. What
+are the chances to find good biomarkers?
+
+```{r, echo = FALSE, fig.cap = "Quantitative proteomics experiment measuring the effect of drug C121."}
+x <- mulvey2015[, mulvey2015$rep == 1]
+set.seed(123)
+exprs(x) <- exprs(x) + rnorm(prod(dim(x)), 1, 1)
+sampleNames(x) <-  c("DONOR1", "DONOR2", "PATIENT2", "PATIENT1", "PATIENT3", "DONOR3")
+x$grp <- sub("[1-3]", "", sampleNames(x))
+p <- prcomp(t(exprs(x)), scale = TRUE, center = TRUE)
+fviz_pca_ind(p, habillage = x$grp)
+```
+
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::question_begin()`
+
+The team of Professor Von der Brille have quantified the gene
+expression of Jurkat cells using two RNA-Seq protocols. 25 samples
+were tested with kit 1 by operator A and B (12 and 13 samples
+respectively), and 27 samples were processed with kit 2 by operators A
+and C (20 and 7 samples respectively).
+
+
+In the light of the experimental design, interpret the PCA plot. What
+would you suggest to do before testing whether using kit 1 and 2 have
+an impact on the data?
+
+```{r, echo = FALSE, fig.cap = "Testing the effect of RNA sequencing kits 1 and 2."}
+x <- cbind(matrix(rnorm(1000 * (25 + 26)), nrow = 1000),
+           rnorm(1000, 3, 1))
+colnames(x) <- c(paste0("kit1.", 1:25),
+                 paste0("kit2.", 1:27))
+p <- prcomp(t(x))
+fviz_pca_ind(p, habillage = sub("\\.[0-9]+$", "", colnames(x)))
+```
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::question_begin()`
+Load the `tdata1` dataset from the `rWSBIM1322` package and run a PCA
+analysis on the samples. Interpret the results, knowing that these
+data are random.
+`r msmbstyle::question_end()`
+
+`r msmbstyle::question_begin()`
+Using the function `kem2.tsv` from the `rWSBIM1207` package, import
+the RNA-seq data and perform a PCA analysis on the samples.
+`r msmbstyle::question_end()`
+
+
+`r msmbstyle::question_begin()`
+Load the `metab1` data from the `rWSBIM1322` package (version >=
+`0.1.10`) and perform a PCA analysis on the samples. These data
+represent mass spectrometry-based metabolomics data. Do the samples
+seem to be randomly placed? Do you notice any structure explained by
+the labels?
+`r msmbstyle::question_end()`
