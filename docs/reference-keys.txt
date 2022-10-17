@@ -20,10 +20,10 @@ fig:unnamed-chunk-35
 fig:unnamed-chunk-36
 fig:unnamed-chunk-37
 fig:unnamed-chunk-38
+fig:unnamed-chunk-155
 fig:unnamed-chunk-156
-fig:unnamed-chunk-157
 fig:gsea1
-fig:unnamed-chunk-168
+fig:unnamed-chunk-167
 finding-ifferentially-expressed-features
 sec-linmod
 starting-with-a-t-test
@@ -48,7 +48,6 @@ additional-exercises
 summarizedexperiments
 summarizedexperiment
 creating-a-summarizedexperiment
-saving-data
 subsetting-a-summarizedexperiment
 adding-variables-to-metadata
 rangedsummarizedexperiment
