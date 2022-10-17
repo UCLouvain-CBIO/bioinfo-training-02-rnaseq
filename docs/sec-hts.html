@@ -371,7 +371,7 @@ allows to analyse different features of the reads and generates a
 report that includes several diagnostic plots to highlight any problem
 the data may have.</p>
 <p>FastQC is run from the command line:</p>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="sec-hts.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> fastqc SampleName.fastq</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="sec-hts.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> fastqc SampleName.fastq</span></code></pre></div>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -566,7 +566,7 @@ use an aligner able to handle spliced reads.</p>
 launched with default parameters. In this basic configuration,
 mandatory parameters are of course the fastq file(s) and the sequence
 of the genome on which the reads have to be aligned. In practical, the
-genome’s sequence is not given as it is but in an indexed form.<label for="tufte-sn-7" class="margin-toggle sidenote-number">7</label><input type="checkbox" id="tufte-sn-7" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">7</span> Genome indexing allows the aligner to quickly find
+genome’s sequence is not given as it is but in an indexed form.<label for="tufte-sn-6" class="margin-toggle sidenote-number">6</label><input type="checkbox" id="tufte-sn-6" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">6</span> Genome indexing allows the aligner to quickly find
 potential alignment sites for query sequences in a genome, which saves
 considerable time during alignment. Frequently used genome (human,
 mouse, rat…) already have indexed versions that can be downloaded
@@ -592,7 +592,7 @@ Each entry has 11 mandatories fields for essential mapping information
 and a variable number of other fields for aligner specific information.
 An example of few entries from a SAM
 file is displayed below.</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb241-1"><a href="sec-hts.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> wsbim2122_data/RNAseq_pipeline/example.sam</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb240-1"><a href="sec-hts.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> wsbim2122_data/RNAseq_pipeline/example.sam</span></code></pre></div>
 <pre><code>## DRR016707.26395247   147 1   19626495    60  101M    =   19626490    -106    GTAACAATGTTATCAGTAATGCTTTAAACTCCAGCACCTGGTTATGCATTTGAAACCAAGTCTGTTTCTTGTTTTGTATTTTCTCTCTGGAAGTTGTAAGG   DDDDDDDDDDDDDEEEEEEEFFFFFFHCHHHJJJHHJJJJJJJJJJJJIHFJJIHJJJJJJJJJJJJJJJJJJJJJJJJJJJJIJJJJHHHHHFFFFFCCC   AS:i:0  XN:i:0  XM:i:0  XO:i:0  XG:i:0  NM:i:0  MD:Z:101    YS:i:0  YT:Z:CP NH:i:1
 ## DRR016707.26395247   99  1   19626490    60  101M    =   19626495    106 CTTCTGTAACAATGTTATCAGTAATGCTTTAAACTCCAGCACCTGGTTATGCATTTGAAACCAAGTCTGTTTCTTGTTTTGTATTTTCTCTCTGGAAGTTG   CCCFFFFFHHHHHJIJJJJIJJJJJJJJJJIJJJJJJJJJJJJJJJHHIHIJJJIJJHIJJJIIIIIIJGIJJJJDHJJJHHHHHHHFFFFFFEDACEEDD   AS:i:0  XN:i:0  XM:i:0  XO:i:0  XG:i:0  NM:i:0  MD:Z:101    YS:i:0  YT:Z:CP NH:i:1
 ## DRR016707.34969377   163 1   19626487    60  101M    =   19626493    107 ATTCTTCTGTAACAATGTTATCAGTAATGCTTTAAACTCCAGCACCTGGTTATGCATTTGAAACCAAGTCTGTTTCTTGTTTTGTATTTTCTCTCTGGAAG   CC@FFFFFHFHFFHGGJCIFJGHIIIIGIIIIJIIJJJIGIIIIIIGII?:BFHGHIIIIGEHHHGIIDGGH@GGIGHJGHHHHCEHDEFDDFFEEECCEC   AS:i:0  XN:i:0  XM:i:0  XO:i:0  XG:i:0  NM:i:0  MD:Z:101    YS:i:0  YT:Z:CP NH:i:1
@@ -630,12 +630,12 @@ a very useful interactive tool for the visual exploration of genomic data.</p>
 <p>Visualising the alignments is not part of the processing pipeline
 but sometimes it can be useful..</p>
 <p><img src="figs/pipeline_IGV.png" width="60%" style="display: block; margin: auto;"></p>
-<p>IGV requires that BAM files have an associated index file<label for="tufte-sn-8" class="margin-toggle sidenote-number">8</label><input type="checkbox" id="tufte-sn-8" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">8</span> Indexing a BAM file allows IGV to quickly extract alignments overlapping
+<p>IGV requires that BAM files have an associated index file<label for="tufte-sn-7" class="margin-toggle sidenote-number">7</label><input type="checkbox" id="tufte-sn-7" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">7</span> Indexing a BAM file allows IGV to quickly extract alignments overlapping
 particular genomic regions</span>.
 Samtools can be used to index the BAM file. The following command would create
 the indexed SampleName.bam.bai file.</p>
 <pre><code>samtools index SampleName.bam</code></pre>
-<p>Bam file can be loaded in IGV<label for="tufte-sn-9" class="margin-toggle sidenote-number">9</label><input type="checkbox" id="tufte-sn-9" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">9</span> Note that the index file must reside in the same directory as the bam
+<p>Bam file can be loaded in IGV<label for="tufte-sn-8" class="margin-toggle sidenote-number">8</label><input type="checkbox" id="tufte-sn-8" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">8</span> Note that the index file must reside in the same directory as the bam
 file that it indexes, and it must have the same basename</span>.
 Below is an example of visualisation of a bam file using IGV, focusing on CDKN1A gene.</p>
 <p><img src="figs/IGV.png" width="100%" style="display: block; margin: auto;"></p>
@@ -666,7 +666,7 @@ from the <a href="https://www.gencodegenes.org/human/">UCSC table
 browser</a>. The first few lines of
 gtf annotation file for human genome assembly GRCh38 look like this:</p>
 <p><img src="figs/gtf_example.png" width="100%" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb245-1"><a href="sec-hts.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> -n 20 wsbim2122_data/RNAseq_pipeline/Homo_sapiens.GRCh38.94.gtf</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb244-1"><a href="sec-hts.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> -n 20 wsbim2122_data/RNAseq_pipeline/Homo_sapiens.GRCh38.94.gtf</span></code></pre></div>
 <pre><code>## #!genome-build GRCh38.p12
 ## #!genome-version GRCh38
 ## #!genome-date 2013-12
@@ -709,10 +709,10 @@ for more details).</p>
 SampleName.bam              # bam file</code></pre>
 <p>Here is an example of featurecounts output file. The last column gives
 the raw counts of each gene in that sample.</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="sec-hts.html#cb248-1" aria-hidden="true" tabindex="-1"></a>counts_result <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="at">file =</span> <span class="st">"wsbim2122_data/count_data/sample1_counts.tsv.gz"</span>)</span>
-<span id="cb248-2"><a href="sec-hts.html#cb248-2" aria-hidden="true" tabindex="-1"></a><span class="fu">datatable</span>(<span class="fu">head</span>(counts_result))</span></code></pre></div>
-<div id="htmlwidget-a2427e15646d8590d0c2" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a2427e15646d8590d0c2">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["ENSG00000223972","ENSG00000227232","ENSG00000278267","ENSG00000243485","ENSG00000284332","ENSG00000237613"],["1;1;1;1;1;1;1;1;1","1;1;1;1;1;1;1;1;1;1;1","1","1;1;1;1;1","1","1;1;1;1;1"],["11869;12010;12179;12613;12613;12975;13221;13221;13453","14404;15005;15796;16607;16858;17233;17606;17915;18268;24738;29534","17369","29554;30267;30564;30976;30976","30366","34554;35245;35277;35721;35721"],["12227;12057;12227;12721;12697;13052;13374;14409;13670","14501;15038;15947;16765;17055;17368;17742;18061;18366;24891;29570","17436","30039;30667;30667;31109;31097","30503","35174;35481;35481;36073;36081"],["+;+;+;+;+;+;+;+;+","-;-;-;-;-;-;-;-;-;-;-","-","+;+;+;+;+","+","-;-;-;-;-"],[1735,1351,68,1021,138,1219],[0,14,8,0,0,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Geneid<\/th>\n      <th>Chr<\/th>\n      <th>Start<\/th>\n      <th>End<\/th>\n      <th>Strand<\/th>\n      <th>Length<\/th>\n      <th>../processed_data/bam/sample1.bam<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[6,7]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div class="question">
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="sec-hts.html#cb247-1" aria-hidden="true" tabindex="-1"></a>counts_result <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="at">file =</span> <span class="st">"wsbim2122_data/count_data/sample1_counts.tsv.gz"</span>)</span>
+<span id="cb247-2"><a href="sec-hts.html#cb247-2" aria-hidden="true" tabindex="-1"></a><span class="fu">datatable</span>(<span class="fu">head</span>(counts_result))</span></code></pre></div>
+<div id="htmlwidget-2be0da38fbec4226450b" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2be0da38fbec4226450b">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["ENSG00000223972","ENSG00000227232","ENSG00000278267","ENSG00000243485","ENSG00000284332","ENSG00000237613"],["1;1;1;1;1;1;1;1;1","1;1;1;1;1;1;1;1;1;1;1","1","1;1;1;1;1","1","1;1;1;1;1"],["11869;12010;12179;12613;12613;12975;13221;13221;13453","14404;15005;15796;16607;16858;17233;17606;17915;18268;24738;29534","17369","29554;30267;30564;30976;30976","30366","34554;35245;35277;35721;35721"],["12227;12057;12227;12721;12697;13052;13374;14409;13670","14501;15038;15947;16765;17055;17368;17742;18061;18366;24891;29570","17436","30039;30667;30667;31109;31097","30503","35174;35481;35481;36073;36081"],["+;+;+;+;+;+;+;+;+","-;-;-;-;-;-;-;-;-;-;-","-","+;+;+;+;+","+","-;-;-;-;-"],[1735,1351,68,1021,138,1219],[0,14,8,0,0,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Geneid<\/th>\n      <th>Chr<\/th>\n      <th>Start<\/th>\n      <th>End<\/th>\n      <th>Strand<\/th>\n      <th>Length<\/th>\n      <th>../processed_data/bam/sample1.bam<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[6,7]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div class="question">
 <p class="question-begin">
 ► Question
 </p>
@@ -738,32 +738,32 @@ the raw counts of each gene in that sample.</p>
 <ol style="list-style-type: decimal">
 <li>How many genes are tested ?</li>
 </ol>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="sec-hts.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(counts_result)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="sec-hts.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(counts_result)</span></code></pre></div>
 <pre><code>## [1] 58735</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>How many reads were assigned to genes?</li>
 </ol>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="sec-hts.html#cb251-1" aria-hidden="true" tabindex="-1"></a>counts_result <span class="ot">&lt;-</span> counts_result <span class="sc">%&gt;%</span></span>
-<span id="cb251-2"><a href="sec-hts.html#cb251-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">counts =</span> <span class="st">"../processed_data/bam/sample1.bam"</span>)</span>
-<span id="cb251-3"><a href="sec-hts.html#cb251-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(counts_result<span class="sc">$</span>counts)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="sec-hts.html#cb250-1" aria-hidden="true" tabindex="-1"></a>counts_result <span class="ot">&lt;-</span> counts_result <span class="sc">%&gt;%</span></span>
+<span id="cb250-2"><a href="sec-hts.html#cb250-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">counts =</span> <span class="st">"../processed_data/bam/sample1.bam"</span>)</span>
+<span id="cb250-3"><a href="sec-hts.html#cb250-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(counts_result<span class="sc">$</span>counts)</span></code></pre></div>
 <pre><code>## [1] 10527830</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Inspect the counts. What is the maximum value? How many genes have zero counts ?</li>
 </ol>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="sec-hts.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(counts_result<span class="sc">$</span>counts)</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="sec-hts.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(counts_result<span class="sc">$</span>counts)</span></code></pre></div>
 <pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
 ##      0.0      0.0      0.0    179.2      6.0 143371.0</code></pre>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="sec-hts.html#cb255-1" aria-hidden="true" tabindex="-1"></a>counts_result <span class="sc">%&gt;%</span></span>
-<span id="cb255-2"><a href="sec-hts.html#cb255-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(counts <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb255-3"><a href="sec-hts.html#cb255-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="sec-hts.html#cb254-1" aria-hidden="true" tabindex="-1"></a>counts_result <span class="sc">%&gt;%</span></span>
+<span id="cb254-2"><a href="sec-hts.html#cb254-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(counts <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb254-3"><a href="sec-hts.html#cb254-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code></pre></div>
 <pre><code>## [1] 36035</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>Plot the distribution of counts. How does it look like?</li>
 </ol>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="sec-hts.html#cb257-1" aria-hidden="true" tabindex="-1"></a>counts_result <span class="sc">%&gt;%</span></span>
-<span id="cb257-2"><a href="sec-hts.html#cb257-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log2</span>(counts <span class="sc">+</span> <span class="dv">1</span>))) <span class="sc">+</span></span>
-<span id="cb257-3"><a href="sec-hts.html#cb257-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>)</span></code></pre></div>
-<p><img src="rnaseq_files/figure-html/unnamed-chunk-97-1.png" width="672"></p>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="sec-hts.html#cb256-1" aria-hidden="true" tabindex="-1"></a>counts_result <span class="sc">%&gt;%</span></span>
+<span id="cb256-2"><a href="sec-hts.html#cb256-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log2</span>(counts <span class="sc">+</span> <span class="dv">1</span>))) <span class="sc">+</span></span>
+<span id="cb256-3"><a href="sec-hts.html#cb256-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>)</span></code></pre></div>
+<p><img src="rnaseq_files/figure-html/unnamed-chunk-96-1.png" width="672"></p>
 <p>Note that a “pseudo-count” was added before the log2 transformation of the counts,
 to avoid elimination of counts equal to zero.</p>
 <p class="solution-end">
@@ -810,28 +810,28 @@ in the folder <code>wsbim_data/count_data/</code>. Use these files to create a c
 ► Solution<span id="sol-start-20" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-20', 'sol-start-20')"></span>
 </p>
 <div id="sol-body-20" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="sec-hts.html#cb259-1" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"wsbim2122_data/count_data"</span>,</span>
-<span id="cb259-2"><a href="sec-hts.html#cb259-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">pattern =</span> <span class="st">"*tsv.gz"</span>,</span>
-<span id="cb259-3"><a href="sec-hts.html#cb259-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb259-4"><a href="sec-hts.html#cb259-4" aria-hidden="true" tabindex="-1"></a>samples</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="sec-hts.html#cb258-1" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"wsbim2122_data/count_data"</span>,</span>
+<span id="cb258-2"><a href="sec-hts.html#cb258-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">pattern =</span> <span class="st">"*tsv.gz"</span>,</span>
+<span id="cb258-3"><a href="sec-hts.html#cb258-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb258-4"><a href="sec-hts.html#cb258-4" aria-hidden="true" tabindex="-1"></a>samples</span></code></pre></div>
 <pre><code>## [1] "wsbim2122_data/count_data/sample1_counts.tsv.gz"
 ## [2] "wsbim2122_data/count_data/sample2_counts.tsv.gz"
 ## [3] "wsbim2122_data/count_data/sample3_counts.tsv.gz"
 ## [4] "wsbim2122_data/count_data/sample4_counts.tsv.gz"
 ## [5] "wsbim2122_data/count_data/sample5_counts.tsv.gz"
 ## [6] "wsbim2122_data/count_data/sample6_counts.tsv.gz"</code></pre>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="sec-hts.html#cb261-1" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="at">file =</span> samples[<span class="dv">1</span>]) <span class="sc">%&gt;%</span></span>
-<span id="cb261-2"><a href="sec-hts.html#cb261-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Geneid, <span class="fu">ends_with</span>(<span class="st">'.bam'</span>))</span>
-<span id="cb261-3"><a href="sec-hts.html#cb261-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb261-4"><a href="sec-hts.html#cb261-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (sample <span class="cf">in</span> samples[<span class="sc">-</span><span class="dv">1</span>]){</span>
-<span id="cb261-5"><a href="sec-hts.html#cb261-5" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(sample) <span class="sc">%&gt;%</span></span>
-<span id="cb261-6"><a href="sec-hts.html#cb261-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">ends_with</span>(<span class="st">'.bam'</span>))</span>
-<span id="cb261-7"><a href="sec-hts.html#cb261-7" aria-hidden="true" tabindex="-1"></a>  counts <span class="ot">&lt;-</span> <span class="fu">cbind</span>(counts, tmp)</span>
-<span id="cb261-8"><a href="sec-hts.html#cb261-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb261-9"><a href="sec-hts.html#cb261-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb261-10"><a href="sec-hts.html#cb261-10" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(counts) <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="at">pattern =</span> <span class="st">".bam$"</span>, <span class="st">''</span>, <span class="fu">names</span>(counts))</span>
-<span id="cb261-11"><a href="sec-hts.html#cb261-11" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(counts) <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="at">pattern =</span> <span class="st">"../processed_data/bam/"</span>, <span class="st">''</span>, <span class="fu">names</span>(counts))</span>
-<span id="cb261-12"><a href="sec-hts.html#cb261-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(counts)</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="sec-hts.html#cb260-1" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="at">file =</span> samples[<span class="dv">1</span>]) <span class="sc">%&gt;%</span></span>
+<span id="cb260-2"><a href="sec-hts.html#cb260-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Geneid, <span class="fu">ends_with</span>(<span class="st">'.bam'</span>))</span>
+<span id="cb260-3"><a href="sec-hts.html#cb260-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb260-4"><a href="sec-hts.html#cb260-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (sample <span class="cf">in</span> samples[<span class="sc">-</span><span class="dv">1</span>]){</span>
+<span id="cb260-5"><a href="sec-hts.html#cb260-5" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(sample) <span class="sc">%&gt;%</span></span>
+<span id="cb260-6"><a href="sec-hts.html#cb260-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">ends_with</span>(<span class="st">'.bam'</span>))</span>
+<span id="cb260-7"><a href="sec-hts.html#cb260-7" aria-hidden="true" tabindex="-1"></a>  counts <span class="ot">&lt;-</span> <span class="fu">cbind</span>(counts, tmp)</span>
+<span id="cb260-8"><a href="sec-hts.html#cb260-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb260-9"><a href="sec-hts.html#cb260-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb260-10"><a href="sec-hts.html#cb260-10" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(counts) <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="at">pattern =</span> <span class="st">".bam$"</span>, <span class="st">''</span>, <span class="fu">names</span>(counts))</span>
+<span id="cb260-11"><a href="sec-hts.html#cb260-11" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(counts) <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="at">pattern =</span> <span class="st">"../processed_data/bam/"</span>, <span class="st">''</span>, <span class="fu">names</span>(counts))</span>
+<span id="cb260-12"><a href="sec-hts.html#cb260-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(counts)</span></code></pre></div>
 <pre><code>##            Geneid sample1 sample2 sample3 sample4 sample5 sample6
 ## 1 ENSG00000223972       0       0       0       0       0       1
 ## 2 ENSG00000227232      14      28      17      40      16      13

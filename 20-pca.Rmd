@@ -374,9 +374,6 @@ In this section, we will describe the detailed PCA analysis and
 interpretation of two real-life proteomics datasets. Both of these
 datasets are available in the `pRolocdata` package.
 
-
-### Extra-embryonic endoderm differentiation in mouse embryonic stem cells {#sec-dimred01}
-
 We are first going to focus on the data from Mulvey *et al.* (2015),
 where they present the *Dynamic proteomic profiling of extra-embryonic
 endoderm differentiation in mouse embryonic stem cells* [@Mulvey:2015].
@@ -411,24 +408,9 @@ endoderm differentiation in mouse embryonic stem cells* [@Mulvey:2015].
 
 `r msmbstyle::question_begin()`
 
-Load the `mulvey2015` data from the `pRolocdata` package. The data
-comes as an object of class `MSnSet`[^msnset2], which you can convert
-to a `SummarizedExperiment` as shown below. Familiarise yourself with
-its experimental design stored in the *colData* slot.
-
-[^msnset2]: The [`MSnSet`
-    class](https://lgatto.github.io/MSnbase/reference/MSnSet-class.html)
-    is similar to the `SummarizedExperiment` class and can be
-    converted to a `SummarizedExperiment` with `as(x,
-    "SummarizedExperiment")`.
-
-
-```{r, eval = FALSE}
-library(pRolocdata)
-data(mulvey2015)
-library("SummarizedExperiment")
-mulvey2015 <- as(mulvey2015, "SummarizedExperiment")
-```
+Load the `mulvey2015_se` data from the `pRolocdata` package. The data
+comes as an object of class `SummarizedExperiment`. Familiarise
+yourself with its experimental design stored in the *colData* slot.
 
 `r msmbstyle::question_end()`
 
@@ -436,23 +418,20 @@ mulvey2015 <- as(mulvey2015, "SummarizedExperiment")
 
 ```{r}
 library(pRolocdata)
-data(mulvey2015)
-library("SummarizedExperiment")
-mulvey2015 <- as(mulvey2015, "SummarizedExperiment")
-colData(mulvey2015)
+data(mulvey2015_se)
+colData(mulvey2015_se)
 ```
 
 `r msmbstyle::solution_end()`
 
 Here, we will want to do a PCA analysis on the samples. We want to
-remap the `r ncol(mulvey2015)` samples from a `r
-nrow(mulvey2015)`-dimensional space into 2, or possibly 3
-dimensions. This will require to transpose the data matrix before
-passing it to the `prcomp` function.
+remap the `r ncol(mulvey2015_se)` samples from a `r nrow(mulvey2015_se)`-dimensional
+space into 2, or possibly 3 dimensions. This will require to transpose
+the data matrix before passing it to the `prcomp` function.
 
 `r msmbstyle::question_begin()`
 
-- Run a PCA analysis on the samples of the `mulvey2015` data and
+- Run a PCA analysis on the samples of the `mulvey2015_se` data and
   display a summary of the results.
 
 `r msmbstyle::question_end()`
@@ -460,7 +439,7 @@ passing it to the `prcomp` function.
 `r msmbstyle::solution_begin()`
 
 ```{r}
-pca_mulvey2015 <- prcomp(t(assay(mulvey2015)), scale. = TRUE)
+pca_mulvey2015 <- prcomp(t(assay(mulvey2015_se)), scale. = TRUE)
 summary(pca_mulvey2015)
 ```
 
@@ -478,7 +457,7 @@ summary(pca_mulvey2015)
 
 `r msmbstyle::solution_begin()`
 
-```{r, fig.cap = "Scree plot for the `mulvey2015` data showing the percentage of explained variance onlong the principal components.", message = FALSE}
+```{r, fig.cap = "Scree plot for the `mulvey2015_se` data showing the percentage of explained variance onlong the principal components.", message = FALSE}
 library("factoextra")
 fviz_screeplot(pca_mulvey2015)
 ```
@@ -500,10 +479,10 @@ fviz_screeplot(pca_mulvey2015)
 
 `r msmbstyle::solution_begin()`
 
-```{r, fig.cap = "Biplot and variables PCA plot of the `mulvey2015` data.", fig.width = 8, fig.height = 4}
+```{r, fig.cap = "Biplot and variables PCA plot of the `mulvey2015_se` data.", fig.width = 8, fig.height = 4}
 fviz_pca(pca_mulvey2015)
 fviz_pca_ind(pca_mulvey2015)
-fviz_pca_ind(pca_mulvey2015, habillage = mulvey2015$times)
+fviz_pca_ind(pca_mulvey2015, habillage = mulvey2015_se$times)
 ```
 
 `r msmbstyle::solution_end()`
@@ -522,7 +501,7 @@ library("rgl")
 plot3d(pca_mulvey2015$x[, 1],
        pca_mulvey2015$x[, 2],
        pca_mulvey2015$x[, 3],
-       col = mulvey2015$times,
+       col = mulvey2015_se$times,
        size = 10)
 ```
 

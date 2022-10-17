@@ -670,10 +670,6 @@ that support missing values.</p>
 <p>In this section, we will describe the detailed PCA analysis and
 interpretation of two real-life proteomics datasets. Both of these
 datasets are available in the <code>pRolocdata</code> package.</p>
-<div id="sec-dimred01" class="section level3" number="2.7.1">
-<h3>
-<span class="header-section-number">2.7.1</span> Extra-embryonic endoderm differentiation in mouse embryonic stem cells<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('sec-dimred01')" onmouseout="reset_tooltip('sec-dimred01-tooltip')"><span class="tooltiptext" id="sec-dimred01-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
-</h3>
 <p>We are first going to focus on the data from Mulvey <em>et al.</em> (2015),
 where they present the <em>Dynamic proteomic profiling of extra-embryonic
 endoderm differentiation in mouse embryonic stem cells</em> <span class="citation">(<label for="tufte-mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-1" class="margin-toggle">Mulvey et al. 2015<span class="marginnote">Mulvey, C M, C Schröter, L Gatto, D Dikicioglu, I Baris Fidaner, A Christoforou, M J Deery, et al. 2015. <span>“Dynamic Proteomic Profiling of Extra-Embryonic Endoderm Differentiation in Mouse Embryonic Stem Cells.”</span> <em>Stem Cells</em>, June. <a href="https://doi.org/10.1002/stem.2067">https://doi.org/10.1002/stem.2067</a>.</span>)</span>.</p>
@@ -710,17 +706,9 @@ investigation of these processes.</p>
 ► Question
 </p>
 <div class="question-body">
-<p>Load the <code>mulvey2015</code> data from the <code>pRolocdata</code> package. The data
-comes as an object of class <code>MSnSet</code><label for="tufte-sn-5" class="margin-toggle sidenote-number">5</label><input type="checkbox" id="tufte-sn-5" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">5</span> The <a href="https://lgatto.github.io/MSnbase/reference/MSnSet-class.html"><code>MSnSet</code>
-class</a>
-is similar to the <code>SummarizedExperiment</code> class and can be
-converted to a <code>SummarizedExperiment</code> with <code>as(x, "SummarizedExperiment")</code>.</span>, which you can convert
-to a <code>SummarizedExperiment</code> as shown below. Familiarise yourself with
-its experimental design stored in the <em>colData</em> slot.</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="sec-dimred.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pRolocdata)</span>
-<span id="cb150-2"><a href="sec-dimred.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mulvey2015)</span>
-<span id="cb150-3"><a href="sec-dimred.html#cb150-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"SummarizedExperiment"</span>)</span>
-<span id="cb150-4"><a href="sec-dimred.html#cb150-4" aria-hidden="true" tabindex="-1"></a>mulvey2015 <span class="ot">&lt;-</span> <span class="fu">as</span>(mulvey2015, <span class="st">"SummarizedExperiment"</span>)</span></code></pre></div>
+<p>Load the <code>mulvey2015_se</code> data from the <code>pRolocdata</code> package. The data
+comes as an object of class <code>SummarizedExperiment</code>. Familiarise
+yourself with its experimental design stored in the <em>colData</em> slot.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -731,7 +719,7 @@ its experimental design stored in the <em>colData</em> slot.</p>
 ► Solution<span id="sol-start-10" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-10', 'sol-start-10')"></span>
 </p>
 <div id="sol-body-10" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="sec-dimred.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pRolocdata)</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="sec-dimred.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pRolocdata)</span></code></pre></div>
 <pre><code>## Loading required package: MSnbase</code></pre>
 <pre><code>## Loading required package: mzR</code></pre>
 <pre><code>## Loading required package: Rcpp</code></pre>
@@ -752,10 +740,8 @@ its experimental design stored in the <em>colData</em> slot.</p>
 <pre><code>## 
 ## This is pRolocdata version 1.34.0.
 ## Use 'pRolocdata()' to list available data sets.</code></pre>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="sec-dimred.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mulvey2015)</span>
-<span id="cb162-2"><a href="sec-dimred.html#cb162-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"SummarizedExperiment"</span>)</span>
-<span id="cb162-3"><a href="sec-dimred.html#cb162-3" aria-hidden="true" tabindex="-1"></a>mulvey2015 <span class="ot">&lt;-</span> <span class="fu">as</span>(mulvey2015, <span class="st">"SummarizedExperiment"</span>)</span>
-<span id="cb162-4"><a href="sec-dimred.html#cb162-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(mulvey2015)</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="sec-dimred.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mulvey2015_se)</span>
+<span id="cb161-2"><a href="sec-dimred.html#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(mulvey2015_se)</span></code></pre></div>
 <pre><code>## DataFrame with 18 rows and 3 columns
 ##                 rep     times      cond
 ##           &lt;numeric&gt; &lt;integer&gt; &lt;numeric&gt;
@@ -776,16 +762,16 @@ its experimental design stored in the <em>colData</em> slot.</p>
 </div>
 </div>
 <p>Here, we will want to do a PCA analysis on the samples. We want to
-remap the 18 samples from a <code>r nrow(mulvey2015)</code>-dimensional space into 2, or possibly 3
-dimensions. This will require to transpose the data matrix before
-passing it to the <code>prcomp</code> function.</p>
+remap the 18 samples from a 2337-dimensional
+space into 2, or possibly 3 dimensions. This will require to transpose
+the data matrix before passing it to the <code>prcomp</code> function.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
 </p>
 <div class="question-body">
 <ul>
-<li>Run a PCA analysis on the samples of the <code>mulvey2015</code> data and
+<li>Run a PCA analysis on the samples of the <code>mulvey2015_se</code> data and
 display a summary of the results.</li>
 </ul>
 <p class="question-end">
@@ -798,8 +784,8 @@ display a summary of the results.</li>
 ► Solution<span id="sol-start-11" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-11', 'sol-start-11')"></span>
 </p>
 <div id="sol-body-11" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="sec-dimred.html#cb164-1" aria-hidden="true" tabindex="-1"></a>pca_mulvey2015 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">t</span>(<span class="fu">assay</span>(mulvey2015)), <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb164-2"><a href="sec-dimred.html#cb164-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca_mulvey2015)</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="sec-dimred.html#cb163-1" aria-hidden="true" tabindex="-1"></a>pca_mulvey2015 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">t</span>(<span class="fu">assay</span>(mulvey2015_se)), <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb163-2"><a href="sec-dimred.html#cb163-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca_mulvey2015)</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                            PC1     PC2     PC3     PC4     PC5     PC6     PC7
 ## Standard deviation     34.2468 24.0808 16.8485 7.37212 6.79981 5.84729 5.50515
@@ -839,14 +825,14 @@ the <code>fviz_screeplot</code> function from the <code>factoextra</code> packag
 ► Solution<span id="sol-start-12" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-12', 'sol-start-12')"></span>
 </p>
 <div id="sol-body-12" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="sec-dimred.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span>
-<span id="cb166-2"><a href="sec-dimred.html#cb166-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_screeplot</span>(pca_mulvey2015)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="sec-dimred.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span>
+<span id="cb165-2"><a href="sec-dimred.html#cb165-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_screeplot</span>(pca_mulvey2015)</span></code></pre></div>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-32"></span>
+<span style="display:block;" id="fig:unnamed-chunk-31"></span>
 <p class="caption marginnote shownote">
-Figure 2.10: Scree plot for the <code>mulvey2015</code> data showing the percentage of explained variance onlong the principal components.
+Figure 2.10: Scree plot for the <code>mulvey2015_se</code> data showing the percentage of explained variance onlong the principal components.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-32-1.png" alt="Scree plot for the `mulvey2015` data showing the percentage of explained variance onlong the principal components." width="672">
+<img src="rnaseq_files/figure-html/unnamed-chunk-31-1.png" alt="Scree plot for the `mulvey2015_se` data showing the percentage of explained variance onlong the principal components." width="672">
 </div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -877,29 +863,29 @@ the light of the experimental design.</p></li>
 ► Solution<span id="sol-start-13" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-13', 'sol-start-13')"></span>
 </p>
 <div id="sol-body-13" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="sec-dimred.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca</span>(pca_mulvey2015)</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="sec-dimred.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca</span>(pca_mulvey2015)</span></code></pre></div>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-33-1"></span>
+<span style="display:block;" id="fig:unnamed-chunk-32-1"></span>
 <p class="caption marginnote shownote">
-Figure 2.11: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
+Figure 2.11: Biplot and variables PCA plot of the <code>mulvey2015_se</code> data.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-33-1.png" alt="Biplot and variables PCA plot of the `mulvey2015` data." width="768">
+<img src="rnaseq_files/figure-html/unnamed-chunk-32-1.png" alt="Biplot and variables PCA plot of the `mulvey2015_se` data." width="768">
 </div>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="sec-dimred.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_mulvey2015)</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="sec-dimred.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_mulvey2015)</span></code></pre></div>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-33-2"></span>
+<span style="display:block;" id="fig:unnamed-chunk-32-2"></span>
 <p class="caption marginnote shownote">
-Figure 2.12: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
+Figure 2.12: Biplot and variables PCA plot of the <code>mulvey2015_se</code> data.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-33-2.png" alt="Biplot and variables PCA plot of the `mulvey2015` data." width="768">
+<img src="rnaseq_files/figure-html/unnamed-chunk-32-2.png" alt="Biplot and variables PCA plot of the `mulvey2015_se` data." width="768">
 </div>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="sec-dimred.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_mulvey2015, <span class="at">habillage =</span> mulvey2015<span class="sc">$</span>times)</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="sec-dimred.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_mulvey2015, <span class="at">habillage =</span> mulvey2015_se<span class="sc">$</span>times)</span></code></pre></div>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-33-3"></span>
+<span style="display:block;" id="fig:unnamed-chunk-32-3"></span>
 <p class="caption marginnote shownote">
-Figure 2.13: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
+Figure 2.13: Biplot and variables PCA plot of the <code>mulvey2015_se</code> data.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-33-3.png" alt="Biplot and variables PCA plot of the `mulvey2015` data." width="768">
+<img src="rnaseq_files/figure-html/unnamed-chunk-32-3.png" alt="Biplot and variables PCA plot of the `mulvey2015_se` data." width="768">
 </div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -924,12 +910,12 @@ cube along the three first PCs.</p>
 ► Solution<span id="sol-start-14" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-14', 'sol-start-14')"></span>
 </p>
 <div id="sol-body-14" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="sec-dimred.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rgl"</span>)</span>
-<span id="cb170-2"><a href="sec-dimred.html#cb170-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot3d</span>(pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">1</span>],</span>
-<span id="cb170-3"><a href="sec-dimred.html#cb170-3" aria-hidden="true" tabindex="-1"></a>       pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">2</span>],</span>
-<span id="cb170-4"><a href="sec-dimred.html#cb170-4" aria-hidden="true" tabindex="-1"></a>       pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">3</span>],</span>
-<span id="cb170-5"><a href="sec-dimred.html#cb170-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> mulvey2015<span class="sc">$</span>times,</span>
-<span id="cb170-6"><a href="sec-dimred.html#cb170-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="sec-dimred.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rgl"</span>)</span>
+<span id="cb169-2"><a href="sec-dimred.html#cb169-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot3d</span>(pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">1</span>],</span>
+<span id="cb169-3"><a href="sec-dimred.html#cb169-3" aria-hidden="true" tabindex="-1"></a>       pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">2</span>],</span>
+<span id="cb169-4"><a href="sec-dimred.html#cb169-4" aria-hidden="true" tabindex="-1"></a>       pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">3</span>],</span>
+<span id="cb169-5"><a href="sec-dimred.html#cb169-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> mulvey2015_se<span class="sc">$</span>times,</span>
+<span id="cb169-6"><a href="sec-dimred.html#cb169-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="dv">10</span>)</span></code></pre></div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -941,7 +927,6 @@ for an another application on features this time, taken from the paper
 ‘<a href="https://dx.doi.org/10.1038/ncomms9992">A map of the mouse pluripotent stem cell spatial
 proteome</a>’
 <span class="citation">(<label for="tufte-mn-2" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-2" class="margin-toggle">Christoforou et al. 2016<span class="marginnote">Christoforou, A, C M Mulvey, L M Breckels, A Geladaki, T Hurrell, P C Hayward, T Naake, et al. 2016. <span>“A Draft Map of the Mouse Pluripotent Stem Cell Spatial Proteome.”</span> <em>Nat Commun</em> 7: 8992. <a href="https://doi.org/10.1038/ncomms9992">https://doi.org/10.1038/ncomms9992</a>.</span>)</span>.</p>
-</div>
 </div>
 <div id="a-note-on-non-linear-dimensionality-reduction-techniques" class="section level2" number="2.8">
 <h2>
@@ -974,11 +959,11 @@ in triplicates in a single batch by the same operator.</p>
 condition. Interpreted the figure in the light of the experimentally
 design and suggest how to best analyse these data.</p>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-35"></span>
+<span style="display:block;" id="fig:unnamed-chunk-34"></span>
 <p class="caption marginnote shownote">
 Figure 2.14: PCA analysis illustrating the global effect of drug A and B.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-35-1.png" alt="PCA analysis illustrating the global effect of drug A and B." width="672">
+<img src="rnaseq_files/figure-html/unnamed-chunk-34-1.png" alt="PCA analysis illustrating the global effect of drug A and B." width="672">
 </div>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -994,11 +979,11 @@ Figure 2.14: PCA analysis illustrating the global effect of drug A and B.
 below. Interpret the figure in the light of the experimental design
 and suggest how to best analyse these data.</p>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-36"></span>
+<span style="display:block;" id="fig:unnamed-chunk-35"></span>
 <p class="caption marginnote shownote">
 Figure 2.15: PCA analysis illustrating the global effect of drug A and B.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-36-1.png" alt="PCA analysis illustrating the global effect of drug A and B." width="672">
+<img src="rnaseq_files/figure-html/unnamed-chunk-35-1.png" alt="PCA analysis illustrating the global effect of drug A and B." width="672">
 </div>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1019,11 +1004,11 @@ triplicates in a single batch.</p>
 <p>Interpret the PCA plot in the light of the experimental design. Do you
 think the analysis is likely to provide significant results?</p>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-37"></span>
+<span style="display:block;" id="fig:unnamed-chunk-36"></span>
 <p class="caption marginnote shownote">
 Figure 2.16: Quantitative proteomics experiment measuring the effect of drug C121.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-37-1.png" alt="Quantitative proteomics experiment measuring the effect of drug C121." width="672">
+<img src="rnaseq_files/figure-html/unnamed-chunk-36-1.png" alt="Quantitative proteomics experiment measuring the effect of drug C121." width="672">
 </div>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1042,11 +1027,11 @@ identifying novel biomarkers.</p>
 <p>In the light of the experimental design, interpret the PCA plot. What
 are the chances to find good biomarkers?</p>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-38"></span>
+<span style="display:block;" id="fig:unnamed-chunk-37"></span>
 <p class="caption marginnote shownote">
 Figure 2.17: Quantitative proteomics experiment measuring the effect of drug C121.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-38-1.png" alt="Quantitative proteomics experiment measuring the effect of drug C121." width="672">
+<img src="rnaseq_files/figure-html/unnamed-chunk-37-1.png" alt="Quantitative proteomics experiment measuring the effect of drug C121." width="672">
 </div>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1067,11 +1052,11 @@ and C (20 and 7 samples respectively).</p>
 would you suggest to do before testing whether using kit 1 and 2 have
 an impact on the data?</p>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-39"></span>
+<span style="display:block;" id="fig:unnamed-chunk-38"></span>
 <p class="caption marginnote shownote">
 Figure 2.18: Testing the effect of RNA sequencing kits 1 and 2.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-39-1.png" alt="Testing the effect of RNA sequencing kits 1 and 2." width="672">
+<img src="rnaseq_files/figure-html/unnamed-chunk-38-1.png" alt="Testing the effect of RNA sequencing kits 1 and 2." width="672">
 </div>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
