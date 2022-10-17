@@ -35,12 +35,10 @@ Sciences](https://uclouvain.be/en/faculties/fasb) at the UCLouvain.
 ## Installation instructions {-}
 
 ```{r install, eval=FALSE}
-
 pks <- c("tidyverse", "patchwork",
          "SummarizedExperiment", "DESeq2",
-         "patchwork", "biomaRt",
-         "org.Hs.eg.db", "GO.db",
-         "org.Hs.eg.db", "msigdbr",
+         "biomaRt", "factoextra", "pRolocdata",
+         "org.Hs.eg.db", "GO.db", "msigdbr",
          "clusterProfiler", "airway",
          "UCLouvain-CBIO/rWSBIM2122",
          "UCLouvain-CBIO/rWSBIM1322")

@@ -261,22 +261,23 @@ colData(se1)
 rowData(se1)
 ```
 
-> ## Challenge
->
-> Extract the gene expression levels of the 3 first genes in samples
-> at time 0 and at time 8.
->
-> > ## Solution
-> >
-> >
-> > ```{r, purl=FALSE}
-> > assay(se)[1:3, colData(se)$time != 4]
-> >
-> > # Equivalent to
-> > assay(se)[1:3, colData(se)$time == 0 | colData(se)$time == 8]
-> > ```
-> {: .solution}
-{: .challenge}
+`r msmbstyle::question_begin()`
+
+Extract the gene expression levels of the 3 first genes in samples at
+time 0 and at time 8.
+
+`r msmbstyle::question_end()`
+
+`r msmbstyle::solution_begin()`
+
+```{r, purl=FALSE}
+assay(se)[1:3, colData(se)$time != 4]
+
+# Equivalent to
+assay(se)[1:3, colData(se)$time == 0 | colData(se)$time == 8]
+```
+
+`r msmbstyle::solution_end()`
 
 #### Adding variables to metadata
 

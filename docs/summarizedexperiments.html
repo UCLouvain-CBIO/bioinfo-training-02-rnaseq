@@ -81,7 +81,6 @@ function reset_tooltip(id) {
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -116,7 +115,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -129,7 +128,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -183,17 +182,17 @@ div.csl-indent {
 <li class="dropdown" style="float:right">
 <a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
 <div class="dropdown-content">
-<a href="index.html" id="toc-preamble">Preamble</a>
-<a href="finding-ifferentially-expressed-features.html" id="toc-finding-ifferentially-expressed-features"><span class="toc-section-number">1</span> Finding ifferentially expressed features</a>
-<a href="sec-dimred.html" id="toc-sec-dimred"><span class="toc-section-number">2</span> Unsupervised learning: dimensionality reduction</a>
-<a id="active-page" href="summarizedexperiments.html" id="toc-summarizedexperiments"><span class="toc-section-number">3</span> SummarizedExperiments</a><ul class="toc-sections">
+<a href="index.html">Preamble</a>
+<a href="finding-ifferentially-expressed-features.html"><span class="toc-section-number">1</span> Finding ifferentially expressed features</a>
+<a href="sec-dimred.html"><span class="toc-section-number">2</span> Dimensionality reduction</a>
+<a id="active-page" href="summarizedexperiments.html"><span class="toc-section-number">3</span> SummarizedExperiments</a><ul class="toc-sections">
 <li class="toc"><a href="#summarizedexperiment"> SummarizedExperiment</a></li>
 <li class="toc"><a href="#rangedsummarizedexperiment"> RangedSummarizedExperiment</a></li>
 <li class="toc"><a href="#creating-a-count-matrix-from-multiple-files"> Creating a count matrix from multiple files</a></li>
 </ul>
-<a href="sec-hts.html" id="toc-sec-hts"><span class="toc-section-number">4</span> High throughput sequencing</a>
-<a href="sec-rnaseq.html" id="toc-sec-rnaseq"><span class="toc-section-number">5</span> Differential expression analysis</a>
-<a href="sec-gsea.html" id="toc-sec-gsea"><span class="toc-section-number">6</span> Enrichment analyses</a>
+<a href="sec-hts.html"><span class="toc-section-number">4</span> High throughput sequencing</a>
+<a href="sec-rnaseq.html"><span class="toc-section-number">5</span> Differential expression analysis</a>
+<a href="sec-gsea.html"><span class="toc-section-number">6</span> Enrichment analyses</a>
 </div>
 </li>
 </ul>
@@ -203,8 +202,7 @@ div.csl-indent {
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<div id="summarizedexperiments" class="section level1" number="3">
+<html><body><div id="summarizedexperiments" class="section level1" number="3">
 <h1>
 <span class="header-section-number">Chapter 3</span> SummarizedExperiments</h1>
 <p><strong>Objectives</strong></p>
@@ -217,7 +215,11 @@ analyses.</li>
 we have seen so far. To deal with this, developers define specialised
 data containers (termed classes) that match the properties of the data
 they need to handle.</p>
-<p>This aspect is central to the <strong>Bioconductor</strong><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> project
+<p>This aspect is central to the <strong>Bioconductor</strong><label for="tufte-sn-6" class="margin-toggle sidenote-number">6</label><input type="checkbox" id="tufte-sn-6" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">6</span> The <a href="http://www.bioconductor.org">Bioconductor</a> was
+initiated by Robert Gentleman, one of the two creators of the R
+language. Bioconductor provides tools for the analysis and
+comprehension of omics data. Bioconductor uses the R statistical
+programming language, and is open source and open development.</span> project
 which uses the same <strong>core data infrastructure</strong> across packages. This
 certainly contributed to Bioconductor’s success. Bioconductor package
 developers are advised to make use of <a href="https://uclouvain-cbio.github.io/WSBIM1322/sec-obj.html#examples-from-the-bioconductor-project">existing
@@ -269,11 +271,11 @@ the first columns contains row/gene names, and convert the
 <code>data.frame</code> to a <code>matrix</code>. You can download it
 <a href="https://raw.githubusercontent.com/carpentries-incubator/bioc-intro/main/_episodes_rmd/data/count_matrix.csv">here</a>.</li>
 </ul>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="summarizedexperiments.html#cb184-1" aria-hidden="true" tabindex="-1"></a>count_matrix <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/count_matrix.csv"</span>,</span>
-<span id="cb184-2"><a href="summarizedexperiments.html#cb184-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">row.names =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb184-3"><a href="summarizedexperiments.html#cb184-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.matrix</span>()</span>
-<span id="cb184-4"><a href="summarizedexperiments.html#cb184-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb184-5"><a href="summarizedexperiments.html#cb184-5" aria-hidden="true" tabindex="-1"></a>count_matrix[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="summarizedexperiments.html#cb182-1" aria-hidden="true" tabindex="-1"></a>count_matrix <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/count_matrix.csv"</span>,</span>
+<span id="cb182-2"><a href="summarizedexperiments.html#cb182-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">row.names =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb182-3"><a href="summarizedexperiments.html#cb182-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.matrix</span>()</span>
+<span id="cb182-4"><a href="summarizedexperiments.html#cb182-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb182-5"><a href="summarizedexperiments.html#cb182-5" aria-hidden="true" tabindex="-1"></a>count_matrix[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]</span></code></pre></div>
 <pre><code>##         GSM2545336 GSM2545337 GSM2545338 GSM2545339 GSM2545340 GSM2545341
 ## Asl           1170        361        400        586        626        988
 ## Apod         36194      10347       9173      10620      13021      29594
@@ -295,15 +297,15 @@ the first columns contains row/gene names, and convert the
 ## Cyp2d22       1821       2842       2011       4019
 ## Klk6           894        501        598        259
 ##  [ reached getOption("max.print") -- omitted 1 row ]</code></pre>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="summarizedexperiments.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(count_matrix)</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="summarizedexperiments.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(count_matrix)</span></code></pre></div>
 <pre><code>## [1] 1474   22</code></pre>
 <ul>
 <li>
 <strong>A table describing the samples</strong>, available
 <a href="https://raw.githubusercontent.com/carpentries-incubator/bioc-intro/main/_episodes_rmd/data/sample_metadata.csv">here</a>.</li>
 </ul>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="summarizedexperiments.html#cb188-1" aria-hidden="true" tabindex="-1"></a>sample_metadata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/sample_metadata.csv"</span>)</span>
-<span id="cb188-2"><a href="summarizedexperiments.html#cb188-2" aria-hidden="true" tabindex="-1"></a>sample_metadata</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="summarizedexperiments.html#cb186-1" aria-hidden="true" tabindex="-1"></a>sample_metadata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/sample_metadata.csv"</span>)</span>
+<span id="cb186-2"><a href="summarizedexperiments.html#cb186-2" aria-hidden="true" tabindex="-1"></a>sample_metadata</span></code></pre></div>
 <pre><code>##        sample     organism age    sex   infection  strain time     tissue mouse
 ## 1  GSM2545336 Mus musculus   8 Female  InfluenzaA C57BL/6    8 Cerebellum    14
 ## 2  GSM2545337 Mus musculus   8 Female NonInfected C57BL/6    0 Cerebellum     9
@@ -317,15 +319,15 @@ the first columns contains row/gene names, and convert the
 ## 10 GSM2545345 Mus musculus   8   Male  InfluenzaA C57BL/6    4 Cerebellum    13
 ## 11 GSM2545346 Mus musculus   8   Male  InfluenzaA C57BL/6    8 Cerebellum    23
 ##  [ reached 'max' / getOption("max.print") -- omitted 11 rows ]</code></pre>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="summarizedexperiments.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(sample_metadata)</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="summarizedexperiments.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(sample_metadata)</span></code></pre></div>
 <pre><code>## [1] 22  9</code></pre>
 <ul>
 <li>
 <strong>A table describing the genes</strong>, available
 <a href="https://raw.githubusercontent.com/carpentries-incubator/bioc-intro/main/_episodes_rmd/data/gene_metadata.csv">here</a>.</li>
 </ul>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="summarizedexperiments.html#cb192-1" aria-hidden="true" tabindex="-1"></a>gene_metadata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/gene_metadata.csv"</span>)</span>
-<span id="cb192-2"><a href="summarizedexperiments.html#cb192-2" aria-hidden="true" tabindex="-1"></a>gene_metadata[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="summarizedexperiments.html#cb190-1" aria-hidden="true" tabindex="-1"></a>gene_metadata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/gene_metadata.csv"</span>)</span>
+<span id="cb190-2"><a href="summarizedexperiments.html#cb190-2" aria-hidden="true" tabindex="-1"></a>gene_metadata[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span></code></pre></div>
 <pre><code>##       gene ENTREZID
 ## 1      Asl   109900
 ## 2     Apod    11815
@@ -359,7 +361,7 @@ the first columns contains row/gene names, and convert the
 ## 8  ENSMUSG00000043448
 ## 9  ENSMUSG00000031425
 ## 10 ENSMUSG00000027669</code></pre>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="summarizedexperiments.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(gene_metadata)</span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="summarizedexperiments.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(gene_metadata)</span></code></pre></div>
 <pre><code>## [1] 1474    9</code></pre>
 <p>We will create a <code>SummarizedExperiment</code> from these tables:</p>
 <ul>
@@ -371,17 +373,17 @@ metadata</strong> slot</p></li>
 </ul>
 <p>To do this we can put the different parts together using the
 <code>SummarizedExperiment</code> constructor:</p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="summarizedexperiments.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="do">## BiocManager::install("SummarizedExperiment")</span></span>
-<span id="cb196-2"><a href="summarizedexperiments.html#cb196-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"SummarizedExperiment"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="summarizedexperiments.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="do">## BiocManager::install("SummarizedExperiment")</span></span>
+<span id="cb194-2"><a href="summarizedexperiments.html#cb194-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"SummarizedExperiment"</span>)</span></code></pre></div>
 <p>First, we make sure that the samples are in the same order in the
 count matrix and the sample annotation, and the same for the genes in
 the count matrix and the gene annotation.</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="summarizedexperiments.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">rownames</span>(count_matrix) <span class="sc">==</span> gene_metadata<span class="sc">$</span>gene)</span>
-<span id="cb197-2"><a href="summarizedexperiments.html#cb197-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">colnames</span>(count_matrix) <span class="sc">==</span> sample_metadata<span class="sc">$</span>sample)</span></code></pre></div>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="summarizedexperiments.html#cb198-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">SummarizedExperiment</span>(<span class="at">assays =</span> <span class="fu">list</span>(<span class="at">counts =</span> count_matrix),</span>
-<span id="cb198-2"><a href="summarizedexperiments.html#cb198-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">colData =</span> sample_metadata,</span>
-<span id="cb198-3"><a href="summarizedexperiments.html#cb198-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">rowData =</span> gene_metadata)</span>
-<span id="cb198-4"><a href="summarizedexperiments.html#cb198-4" aria-hidden="true" tabindex="-1"></a>se</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="summarizedexperiments.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">rownames</span>(count_matrix) <span class="sc">==</span> gene_metadata<span class="sc">$</span>gene)</span>
+<span id="cb195-2"><a href="summarizedexperiments.html#cb195-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">colnames</span>(count_matrix) <span class="sc">==</span> sample_metadata<span class="sc">$</span>sample)</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="summarizedexperiments.html#cb196-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">SummarizedExperiment</span>(<span class="at">assays =</span> <span class="fu">list</span>(<span class="at">counts =</span> count_matrix),</span>
+<span id="cb196-2"><a href="summarizedexperiments.html#cb196-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">colData =</span> sample_metadata,</span>
+<span id="cb196-3"><a href="summarizedexperiments.html#cb196-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">rowData =</span> gene_metadata)</span>
+<span id="cb196-4"><a href="summarizedexperiments.html#cb196-4" aria-hidden="true" tabindex="-1"></a>se</span></code></pre></div>
 <pre><code>## class: SummarizedExperiment 
 ## dim: 1474 22 
 ## metadata(0):
@@ -407,10 +409,10 @@ guaranteed to work on any operating system, is to use the <code>saveRDS</code>
 function. Saving objects like this will generate a binary
 representation on disk (using the <code>rds</code> file extension here), which
 can be loaded back into R using the <code>readRDS</code> function.</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="summarizedexperiments.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(se, <span class="at">file =</span> <span class="st">"data_output/se.rds"</span>)</span>
-<span id="cb200-2"><a href="summarizedexperiments.html#cb200-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(se)</span>
-<span id="cb200-3"><a href="summarizedexperiments.html#cb200-3" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data_output/se.rds"</span>)</span>
-<span id="cb200-4"><a href="summarizedexperiments.html#cb200-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(se)</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="summarizedexperiments.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(se, <span class="at">file =</span> <span class="st">"data_output/se.rds"</span>)</span>
+<span id="cb198-2"><a href="summarizedexperiments.html#cb198-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(se)</span>
+<span id="cb198-3"><a href="summarizedexperiments.html#cb198-3" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data_output/se.rds"</span>)</span>
+<span id="cb198-4"><a href="summarizedexperiments.html#cb198-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(se)</span></code></pre></div>
 <p>To conclude, when it comes to saving data from R that will be loaded
 again in R, saving and loading with <code>saveRDS</code> and <code>readRDS</code> is the
 preferred approach. If tabular data need to be shared with somebody
@@ -418,7 +420,7 @@ that is not using R, then exporting to a text-based spreadsheet is a
 good alternative.</p>
 <p>Using this data structure, we can access the expression matrix with
 the <code>assay</code> function:</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="summarizedexperiments.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">assay</span>(se))</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="summarizedexperiments.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">assay</span>(se))</span></code></pre></div>
 <pre><code>##         GSM2545336 GSM2545337 GSM2545338 GSM2545339 GSM2545340 GSM2545341
 ## Asl           1170        361        400        586        626        988
 ## Apod         36194      10347       9173      10620      13021      29594
@@ -440,10 +442,10 @@ the <code>assay</code> function:</p>
 ## Cyp2d22       1821       2842       2011       4019
 ## Klk6           894        501        598        259
 ##  [ reached getOption("max.print") -- omitted 2 rows ]</code></pre>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="summarizedexperiments.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(<span class="fu">assay</span>(se))</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="summarizedexperiments.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(<span class="fu">assay</span>(se))</span></code></pre></div>
 <pre><code>## [1] 1474   22</code></pre>
 <p>We can access the sample metadata using the <code>colData</code> function:</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="summarizedexperiments.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(se)</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="summarizedexperiments.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(se)</span></code></pre></div>
 <pre><code>## DataFrame with 22 rows and 9 columns
 ##                 sample     organism       age         sex   infection
 ##            &lt;character&gt;  &lt;character&gt; &lt;integer&gt; &lt;character&gt; &lt;character&gt;
@@ -470,10 +472,10 @@ the <code>assay</code> function:</p>
 ## GSM2545362     C57BL/6         4  Cerebellum        20
 ## GSM2545363     C57BL/6         4  Cerebellum        12
 ##  [ reached getOption("max.print") -- omitted 1 row ]</code></pre>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="summarizedexperiments.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(<span class="fu">colData</span>(se))</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="summarizedexperiments.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(<span class="fu">colData</span>(se))</span></code></pre></div>
 <pre><code>## [1] 22  9</code></pre>
 <p>We can also access the feature metadata using the <code>rowData</code> function:</p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="summarizedexperiments.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rowData</span>(se))</span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="summarizedexperiments.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rowData</span>(se))</span></code></pre></div>
 <pre><code>## DataFrame with 6 rows and 9 columns
 ##                gene  ENTREZID                product    ensembl_gene_id
 ##         &lt;character&gt; &lt;integer&gt;            &lt;character&gt;        &lt;character&gt;
@@ -499,7 +501,7 @@ the <code>assay</code> function:</p>
 ## Klk6                                     KLK6
 ## Fcrls                                   FCRL4
 ## Slc2a4                                 SLC2A4</code></pre>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="summarizedexperiments.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(<span class="fu">rowData</span>(se))</span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="summarizedexperiments.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(<span class="fu">rowData</span>(se))</span></code></pre></div>
 <pre><code>## [1] 1474    9</code></pre>
 </div>
 <div id="subsetting-a-summarizedexperiment" class="section level3" number="3.1.3">
@@ -510,8 +512,8 @@ the <code>assay</code> function:</p>
 numerics or with characters of logicals.</p>
 <p>Below, we create a new instance of class SummarizedExperiment that
 contains only the 5 first features for the 3 first samples.</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="summarizedexperiments.html#cb213-1" aria-hidden="true" tabindex="-1"></a>se1 <span class="ot">&lt;-</span> se[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
-<span id="cb213-2"><a href="summarizedexperiments.html#cb213-2" aria-hidden="true" tabindex="-1"></a>se1</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="summarizedexperiments.html#cb211-1" aria-hidden="true" tabindex="-1"></a>se1 <span class="ot">&lt;-</span> se[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb211-2"><a href="summarizedexperiments.html#cb211-2" aria-hidden="true" tabindex="-1"></a>se1</span></code></pre></div>
 <pre><code>## class: SummarizedExperiment 
 ## dim: 5 3 
 ## metadata(0):
@@ -521,7 +523,7 @@ contains only the 5 first features for the 3 first samples.</p>
 ##   hsapiens_homolog_associated_gene_name
 ## colnames(3): GSM2545336 GSM2545337 GSM2545338
 ## colData names(9): sample organism ... tissue mouse</code></pre>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="summarizedexperiments.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(se1)</span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="summarizedexperiments.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(se1)</span></code></pre></div>
 <pre><code>## DataFrame with 3 rows and 9 columns
 ##                 sample     organism       age         sex   infection
 ##            &lt;character&gt;  &lt;character&gt; &lt;integer&gt; &lt;character&gt; &lt;character&gt;
@@ -533,7 +535,7 @@ contains only the 5 first features for the 3 first samples.</p>
 ## GSM2545336     C57BL/6         8  Cerebellum        14
 ## GSM2545337     C57BL/6         0  Cerebellum         9
 ## GSM2545338     C57BL/6         0  Cerebellum        10</code></pre>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="summarizedexperiments.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(se1)</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="summarizedexperiments.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(se1)</span></code></pre></div>
 <pre><code>## DataFrame with 5 rows and 9 columns
 ##                gene  ENTREZID                product    ensembl_gene_id
 ##         &lt;character&gt; &lt;integer&gt;            &lt;character&gt;        &lt;character&gt;
@@ -560,9 +562,9 @@ contains only the 5 first features for the 3 first samples.</p>
 the sample metadata or the <code>rowData()</code> to subset on something from the
 feature metadata. For example, here we keep only miRNAs and the non
 infected samples:</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="summarizedexperiments.html#cb219-1" aria-hidden="true" tabindex="-1"></a>se1 <span class="ot">&lt;-</span> se[<span class="fu">rowData</span>(se)<span class="sc">$</span>gene_biotype <span class="sc">==</span> <span class="st">"miRNA"</span>,</span>
-<span id="cb219-2"><a href="summarizedexperiments.html#cb219-2" aria-hidden="true" tabindex="-1"></a>          <span class="fu">colData</span>(se)<span class="sc">$</span>infection <span class="sc">==</span> <span class="st">"NonInfected"</span>]</span>
-<span id="cb219-3"><a href="summarizedexperiments.html#cb219-3" aria-hidden="true" tabindex="-1"></a>se1</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="summarizedexperiments.html#cb217-1" aria-hidden="true" tabindex="-1"></a>se1 <span class="ot">&lt;-</span> se[<span class="fu">rowData</span>(se)<span class="sc">$</span>gene_biotype <span class="sc">==</span> <span class="st">"miRNA"</span>,</span>
+<span id="cb217-2"><a href="summarizedexperiments.html#cb217-2" aria-hidden="true" tabindex="-1"></a>          <span class="fu">colData</span>(se)<span class="sc">$</span>infection <span class="sc">==</span> <span class="st">"NonInfected"</span>]</span>
+<span id="cb217-3"><a href="summarizedexperiments.html#cb217-3" aria-hidden="true" tabindex="-1"></a>se1</span></code></pre></div>
 <pre><code>## class: SummarizedExperiment 
 ## dim: 7 7 
 ## metadata(0):
@@ -572,7 +574,7 @@ infected samples:</p>
 ##   hsapiens_homolog_associated_gene_name
 ## colnames(7): GSM2545337 GSM2545338 ... GSM2545353 GSM2545354
 ## colData names(9): sample organism ... tissue mouse</code></pre>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="summarizedexperiments.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(se1)</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="summarizedexperiments.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(se1)</span></code></pre></div>
 <pre><code>##          GSM2545337 GSM2545338 GSM2545343 GSM2545348 GSM2545349 GSM2545353
 ## Mir1901          45         44         74         55         68         33
 ## Mir378a          11          7          9          4         12          4
@@ -589,7 +591,7 @@ infected samples:</p>
 ## Mir149            2
 ## Mir128-1          1
 ## Mir7682           5</code></pre>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="summarizedexperiments.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(se1)</span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="summarizedexperiments.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(se1)</span></code></pre></div>
 <pre><code>## DataFrame with 7 rows and 9 columns
 ##                 sample     organism       age         sex   infection
 ##            &lt;character&gt;  &lt;character&gt; &lt;integer&gt; &lt;character&gt; &lt;character&gt;
@@ -609,7 +611,7 @@ infected samples:</p>
 ## GSM2545349     C57BL/6         0  Cerebellum         7
 ## GSM2545353     C57BL/6         0  Cerebellum         4
 ## GSM2545354     C57BL/6         0  Cerebellum         2</code></pre>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="summarizedexperiments.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(se1)</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="summarizedexperiments.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(se1)</span></code></pre></div>
 <pre><code>## DataFrame with 7 rows and 9 columns
 ##                 gene  ENTREZID        product    ensembl_gene_id
 ##          &lt;character&gt; &lt;integer&gt;    &lt;character&gt;        &lt;character&gt;
@@ -638,15 +640,24 @@ infected samples:</p>
 ## Mir149                                      NA
 ## Mir128-1                              MIR128-1
 ## Mir7682                                     NA</code></pre>
-<blockquote>
-<h2 id="challenge">Challenge<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('NA')" onmouseout="reset_tooltip('NA-tooltip')"><span class="tooltiptext" id="NA-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
-</h2>
-<p>Extract the gene expression levels of the 3 first genes in samples
-at time 0 and at time 8.</p>
-<blockquote>
-<h2 id="solution">Solution<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('NA')" onmouseout="reset_tooltip('NA-tooltip')"><span class="tooltiptext" id="NA-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
-</h2>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="summarizedexperiments.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(se)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">colData</span>(se)<span class="sc">$</span>time <span class="sc">!=</span> <span class="dv">4</span>]</span></code></pre></div>
+<div class="question">
+<p class="question-begin">
+► Question
+</p>
+<div class="question-body">
+<p>Extract the gene expression levels of the 3 first genes in samples at
+time 0 and at time 8.</p>
+<p class="question-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
+<div class="msmb-solution">
+<p class="solution-begin">
+► Solution<span id="sol-start-19" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-19', 'sol-start-19')"></span>
+</p>
+<div id="sol-body-19" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="summarizedexperiments.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(se)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">colData</span>(se)<span class="sc">$</span>time <span class="sc">!=</span> <span class="dv">4</span>]</span></code></pre></div>
 <pre><code>##         GSM2545336 GSM2545337 GSM2545338 GSM2545341 GSM2545342 GSM2545343
 ## Asl           1170        361        400        988        836        535
 ## Apod         36194      10347       9173      29594      24959      13668
@@ -659,8 +670,8 @@ at time 0 and at time 8.</p>
 ## Asl            473       1192
 ## Apod         11088      38148
 ## Cyp2d22       1821       4019</code></pre>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="summarizedexperiments.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Equivalent to</span></span>
-<span id="cb229-2"><a href="summarizedexperiments.html#cb229-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(se)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">colData</span>(se)<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span> <span class="fu">colData</span>(se)<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">8</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="summarizedexperiments.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Equivalent to</span></span>
+<span id="cb227-2"><a href="summarizedexperiments.html#cb227-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(se)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">colData</span>(se)<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span> <span class="fu">colData</span>(se)<span class="sc">$</span>time <span class="sc">==</span> <span class="dv">8</span>]</span></code></pre></div>
 <pre><code>##         GSM2545336 GSM2545337 GSM2545338 GSM2545341 GSM2545342 GSM2545343
 ## Asl           1170        361        400        988        836        535
 ## Apod         36194      10347       9173      29594      24959      13668
@@ -673,17 +684,18 @@ at time 0 and at time 8.</p>
 ## Asl            473       1192
 ## Apod         11088      38148
 ## Cyp2d22       1821       4019</code></pre>
-<p>{: .solution}
-{: .challenge}</p>
-</blockquote>
-</blockquote>
+<p class="solution-end">
+<span class="fa fa-square-o solution-icon"></span>
+</p>
+</div>
+</div>
 <div id="adding-variables-to-metadata" class="section level4" number="3.1.3.1">
 <h4>
 <span class="header-section-number">3.1.3.1</span> Adding variables to metadata</h4>
 <p>We can also add information to the metadata. Suppose that you want to
 add the center where the samples were collected …</p>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="summarizedexperiments.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(se)<span class="sc">$</span>center <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">"University of Illinois"</span>, <span class="fu">nrow</span>(<span class="fu">colData</span>(se)))</span>
-<span id="cb231-2"><a href="summarizedexperiments.html#cb231-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(se)</span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="summarizedexperiments.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(se)<span class="sc">$</span>center <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">"University of Illinois"</span>, <span class="fu">nrow</span>(<span class="fu">colData</span>(se)))</span>
+<span id="cb229-2"><a href="summarizedexperiments.html#cb229-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(se)</span></code></pre></div>
 <pre><code>## DataFrame with 22 rows and 10 columns
 ##                 sample     organism       age         sex   infection
 ##            &lt;character&gt;  &lt;character&gt; &lt;integer&gt; &lt;character&gt; &lt;character&gt;
@@ -721,9 +733,9 @@ affecting the other structures!</p>
 is also possible to store information about the features’ genomic
 ranges. Below, we load the <code>airway</code> <code>RangedSummarizedExperiment</code> data
 to illustrate this:</p>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="summarizedexperiments.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(airway)</span>
-<span id="cb233-2"><a href="summarizedexperiments.html#cb233-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(airway)</span>
-<span id="cb233-3"><a href="summarizedexperiments.html#cb233-3" aria-hidden="true" tabindex="-1"></a>airway</span></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="summarizedexperiments.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(airway)</span>
+<span id="cb231-2"><a href="summarizedexperiments.html#cb231-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(airway)</span>
+<span id="cb231-3"><a href="summarizedexperiments.html#cb231-3" aria-hidden="true" tabindex="-1"></a>airway</span></code></pre></div>
 <pre><code>## class: RangedSummarizedExperiment 
 ## dim: 64102 8 
 ## metadata(1): ''
@@ -732,7 +744,7 @@ to illustrate this:</p>
 ## rowData names(0):
 ## colnames(8): SRR1039508 SRR1039509 ... SRR1039520 SRR1039521
 ## colData names(9): SampleName cell ... Sample BioSample</code></pre>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="summarizedexperiments.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowRanges</span>(airway)</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="summarizedexperiments.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowRanges</span>(airway)</span></code></pre></div>
 <pre><code>## GRangesList object of length 64102:
 ## $ENSG00000000003
 ## GRanges object with 17 ranges and 2 metadata columns:
@@ -757,7 +769,7 @@ to illustrate this:</p>
 <p>This <code>GRangesList</code> contains a list of 64102 range elements, one for
 each gene/feature. Each element is a <code>GRanges</code> object that contains
 the positions of the exons or the genes:</p>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="summarizedexperiments.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowRanges</span>(airway)[[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="summarizedexperiments.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowRanges</span>(airway)[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## GRanges object with 17 ranges and 2 metadata columns:
 ##        seqnames            ranges strand |   exon_id       exon_name
 ##           &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt;     &lt;character&gt;
@@ -777,8 +789,8 @@ the positions of the exons or the genes:</p>
 <p>It is possible to use these row genomic ranges to subset features in
 regions of interest, defined as <code>GRanges</code> object. Below, for example,
 we subset features between bases 1M and 2M on chromosome 7:</p>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="summarizedexperiments.html#cb239-1" aria-hidden="true" tabindex="-1"></a>roi <span class="ot">&lt;-</span> <span class="fu">GRanges</span>(<span class="at">seqnames =</span> <span class="st">"7"</span>, <span class="at">ranges =</span> <span class="fl">1e6</span><span class="sc">:</span><span class="fl">2e6</span>)</span>
-<span id="cb239-2"><a href="summarizedexperiments.html#cb239-2" aria-hidden="true" tabindex="-1"></a><span class="fu">subsetByOverlaps</span>(airway, roi)</span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="summarizedexperiments.html#cb237-1" aria-hidden="true" tabindex="-1"></a>roi <span class="ot">&lt;-</span> <span class="fu">GRanges</span>(<span class="at">seqnames =</span> <span class="st">"7"</span>, <span class="at">ranges =</span> <span class="fl">1e6</span><span class="sc">:</span><span class="fl">2e6</span>)</span>
+<span id="cb237-2"><a href="summarizedexperiments.html#cb237-2" aria-hidden="true" tabindex="-1"></a><span class="fu">subsetByOverlaps</span>(airway, roi)</span></code></pre></div>
 <pre><code>## class: RangedSummarizedExperiment 
 ## dim: 34 8 
 ## metadata(1): ''
@@ -814,10 +826,10 @@ of a differential expression analysis.</p>
 that you have processed independently giving the 6 counts files
 generated by FeatureCounts located in the folder
 <code>wsbim_data/count_data/</code>.</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="summarizedexperiments.html#cb242-1" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"wsbim2122_data/count_data"</span>,</span>
-<span id="cb242-2"><a href="summarizedexperiments.html#cb242-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">pattern =</span> <span class="st">"*tsv.gz"</span>,</span>
-<span id="cb242-3"><a href="summarizedexperiments.html#cb242-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb242-4"><a href="summarizedexperiments.html#cb242-4" aria-hidden="true" tabindex="-1"></a>samples</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="summarizedexperiments.html#cb240-1" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"wsbim2122_data/count_data"</span>,</span>
+<span id="cb240-2"><a href="summarizedexperiments.html#cb240-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">pattern =</span> <span class="st">"*tsv.gz"</span>,</span>
+<span id="cb240-3"><a href="summarizedexperiments.html#cb240-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb240-4"><a href="summarizedexperiments.html#cb240-4" aria-hidden="true" tabindex="-1"></a>samples</span></code></pre></div>
 <pre><code>## [1] "wsbim2122_data/count_data/sample1_counts.tsv.gz"
 ## [2] "wsbim2122_data/count_data/sample2_counts.tsv.gz"
 ## [3] "wsbim2122_data/count_data/sample3_counts.tsv.gz"
@@ -835,18 +847,18 @@ generated by FeatureCounts located in the folder
 ► Solution<span id="sol-start-20" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-20', 'sol-start-20')"></span>
 </p>
 <div id="sol-body-20" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="summarizedexperiments.html#cb244-1" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(samples[<span class="dv">1</span>]) <span class="sc">%&gt;%</span></span>
-<span id="cb244-2"><a href="summarizedexperiments.html#cb244-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Geneid, <span class="fu">ends_with</span>(<span class="st">'.bam'</span>))</span>
-<span id="cb244-3"><a href="summarizedexperiments.html#cb244-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb244-4"><a href="summarizedexperiments.html#cb244-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (sample <span class="cf">in</span> samples[<span class="sc">-</span><span class="dv">1</span>]){</span>
-<span id="cb244-5"><a href="summarizedexperiments.html#cb244-5" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(sample) <span class="sc">%&gt;%</span></span>
-<span id="cb244-6"><a href="summarizedexperiments.html#cb244-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(<span class="fu">ends_with</span>(<span class="st">'.bam'</span>))</span>
-<span id="cb244-7"><a href="summarizedexperiments.html#cb244-7" aria-hidden="true" tabindex="-1"></a>  counts <span class="ot">&lt;-</span> <span class="fu">cbind</span>(counts, tmp)</span>
-<span id="cb244-8"><a href="summarizedexperiments.html#cb244-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb244-9"><a href="summarizedexperiments.html#cb244-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb244-10"><a href="summarizedexperiments.html#cb244-10" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(counts) <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="at">pattern =</span> <span class="st">".bam$"</span>, <span class="st">''</span>, <span class="fu">names</span>(counts))</span>
-<span id="cb244-11"><a href="summarizedexperiments.html#cb244-11" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(counts) <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="at">pattern =</span> <span class="st">"../processed_data/bam/"</span>, <span class="st">''</span>, <span class="fu">names</span>(counts))</span>
-<span id="cb244-12"><a href="summarizedexperiments.html#cb244-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(counts)</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="summarizedexperiments.html#cb242-1" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(samples[<span class="dv">1</span>]) <span class="sc">%&gt;%</span></span>
+<span id="cb242-2"><a href="summarizedexperiments.html#cb242-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Geneid, <span class="fu">ends_with</span>(<span class="st">'.bam'</span>))</span>
+<span id="cb242-3"><a href="summarizedexperiments.html#cb242-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb242-4"><a href="summarizedexperiments.html#cb242-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (sample <span class="cf">in</span> samples[<span class="sc">-</span><span class="dv">1</span>]){</span>
+<span id="cb242-5"><a href="summarizedexperiments.html#cb242-5" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(sample) <span class="sc">%&gt;%</span></span>
+<span id="cb242-6"><a href="summarizedexperiments.html#cb242-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(<span class="fu">ends_with</span>(<span class="st">'.bam'</span>))</span>
+<span id="cb242-7"><a href="summarizedexperiments.html#cb242-7" aria-hidden="true" tabindex="-1"></a>  counts <span class="ot">&lt;-</span> <span class="fu">cbind</span>(counts, tmp)</span>
+<span id="cb242-8"><a href="summarizedexperiments.html#cb242-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb242-9"><a href="summarizedexperiments.html#cb242-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb242-10"><a href="summarizedexperiments.html#cb242-10" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(counts) <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="at">pattern =</span> <span class="st">".bam$"</span>, <span class="st">''</span>, <span class="fu">names</span>(counts))</span>
+<span id="cb242-11"><a href="summarizedexperiments.html#cb242-11" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(counts) <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="at">pattern =</span> <span class="st">"../processed_data/bam/"</span>, <span class="st">''</span>, <span class="fu">names</span>(counts))</span>
+<span id="cb242-12"><a href="summarizedexperiments.html#cb242-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(counts)</span></code></pre></div>
 <pre><code>##            Geneid sample1 sample2 sample3 sample4 sample5 sample6
 ## 1 ENSG00000223972       0       0       0       0       0       1
 ## 2 ENSG00000227232      14      28      17      40      16      13
@@ -854,8 +866,8 @@ generated by FeatureCounts located in the folder
 ## 4 ENSG00000243485       0       0       0       0       0       0
 ## 5 ENSG00000284332       0       0       0       0       0       0
 ## 6 ENSG00000237613       0       0       0       0       0       0</code></pre>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="summarizedexperiments.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="do">## We want the 7th column from each file</span></span>
-<span id="cb246-2"><a href="summarizedexperiments.html#cb246-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(samples, <span class="cf">function</span>(x) <span class="fu">names</span>(<span class="fu">read.delim</span>(x)))</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="summarizedexperiments.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="do">## We want the 7th column from each file</span></span>
+<span id="cb244-2"><a href="summarizedexperiments.html#cb244-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(samples, <span class="cf">function</span>(x) <span class="fu">names</span>(<span class="fu">read.delim</span>(x)))</span></code></pre></div>
 <pre><code>##      wsbim2122_data/count_data/sample1_counts.tsv.gz
 ## [1,] "Geneid"                                       
 ## [2,] "Chr"                                          
@@ -904,13 +916,13 @@ generated by FeatureCounts located in the folder
 ## [5,] "Strand"                                       
 ## [6,] "Length"                                       
 ## [7,] "...processed_data.bam.sample6.bam"</code></pre>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="summarizedexperiments.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Create the counts matrix</span></span>
-<span id="cb248-2"><a href="summarizedexperiments.html#cb248-2" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">sapply</span>(samples, <span class="cf">function</span>(x) <span class="fu">read.delim</span>(x)[, <span class="dv">7</span>])</span>
-<span id="cb248-3"><a href="summarizedexperiments.html#cb248-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb248-4"><a href="summarizedexperiments.html#cb248-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Update row/col names</span></span>
-<span id="cb248-5"><a href="summarizedexperiments.html#cb248-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(counts) <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(samples[<span class="dv">1</span>])[[<span class="dv">1</span>]]</span>
-<span id="cb248-6"><a href="summarizedexperiments.html#cb248-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(counts) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(sample, <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(counts))</span>
-<span id="cb248-7"><a href="summarizedexperiments.html#cb248-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(counts)</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="summarizedexperiments.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Create the counts matrix</span></span>
+<span id="cb246-2"><a href="summarizedexperiments.html#cb246-2" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">sapply</span>(samples, <span class="cf">function</span>(x) <span class="fu">read.delim</span>(x)[, <span class="dv">7</span>])</span>
+<span id="cb246-3"><a href="summarizedexperiments.html#cb246-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb246-4"><a href="summarizedexperiments.html#cb246-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Update row/col names</span></span>
+<span id="cb246-5"><a href="summarizedexperiments.html#cb246-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(counts) <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(samples[<span class="dv">1</span>])[[<span class="dv">1</span>]]</span>
+<span id="cb246-6"><a href="summarizedexperiments.html#cb246-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(counts) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(sample, <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(counts))</span>
+<span id="cb246-7"><a href="summarizedexperiments.html#cb246-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(counts)</span></code></pre></div>
 <pre><code>##                 wsbim2122_data/count_data/sample6_counts.tsv.gz1
 ## ENSG00000223972                                                0
 ## ENSG00000227232                                               14
@@ -960,18 +972,7 @@ generated by FeatureCounts located in the folder
 </div>
 
 </div>
-</div>
-<div class="footnotes">
-<hr>
-<ol start="6">
-<li id="fn6"><p>The <a href="http://www.bioconductor.org">Bioconductor</a> was
-initiated by Robert Gentleman, one of the two creators of the R
-language. Bioconductor provides tools for the analysis and
-comprehension of omics data. Bioconductor uses the R statistical
-programming language, and is open source and open development.<a href="summarizedexperiments.html#fnref6" class="footnote-back">↩︎</a></p></li>
-</ol>
-</div>
-</body></html>
+</div></body></html>
 
 <p style="text-align: center;">
 <a href="sec-dimred.html"><button class="btn btn-default">Previous</button></a>
@@ -980,7 +981,7 @@ programming language, and is open source and open development.<a href="summarize
 <p class="build-date">Page built: 
 2022-10-17
  using 
-R version 4.2.0 Patched (2022-05-13 r82357)
+R version 4.2.1 (2022-06-23)
 </p>
 </div>
 </div>

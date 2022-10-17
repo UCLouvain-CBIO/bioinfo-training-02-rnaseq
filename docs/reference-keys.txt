@@ -50,6 +50,7 @@ pre-processing-and-missing-values-with-pca
 the-full-pca-workflow
 sec-dimred01
 sec-dimred02
+a-note-on-non-linear-dimensionality-reduction-techniques
 additional-exercises
 summarizedexperiments
 summarizedexperiment

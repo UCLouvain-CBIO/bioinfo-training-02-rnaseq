@@ -5,7 +5,7 @@
 <meta charset="utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="Chapter 2 Unsupervised learning: dimensionality reduction | RNA-Seq analysis with R and Bioconductor" />
+<meta property="og:title" content="Chapter 2 Dimensionality reduction | RNA-Seq analysis with R and Bioconductor" />
 <meta property="og:type" content="book" />
 
 
@@ -22,9 +22,9 @@ MathJax.Hub.Config({
 </script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta name="description" content="Chapter 2 Unsupervised learning: dimensionality reduction | RNA-Seq analysis with R and Bioconductor">
+<meta name="description" content="Chapter 2 Dimensionality reduction | RNA-Seq analysis with R and Bioconductor">
 
-<title>Chapter 2 Unsupervised learning: dimensionality reduction | RNA-Seq analysis with R and Bioconductor</title>
+<title>Chapter 2 Dimensionality reduction | RNA-Seq analysis with R and Bioconductor</title>
 
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
@@ -81,7 +81,6 @@ function reset_tooltip(id) {
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -116,7 +115,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -129,7 +128,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -183,9 +182,9 @@ div.csl-indent {
 <li class="dropdown" style="float:right">
 <a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
 <div class="dropdown-content">
-<a href="index.html" id="toc-preamble">Preamble</a>
-<a href="finding-ifferentially-expressed-features.html" id="toc-finding-ifferentially-expressed-features"><span class="toc-section-number">1</span> Finding ifferentially expressed features</a>
-<a id="active-page" href="sec-dimred.html" id="toc-sec-dimred"><span class="toc-section-number">2</span> Unsupervised learning: dimensionality reduction</a><ul class="toc-sections">
+<a href="index.html">Preamble</a>
+<a href="finding-ifferentially-expressed-features.html"><span class="toc-section-number">1</span> Finding ifferentially expressed features</a>
+<a id="active-page" href="sec-dimred.html"><span class="toc-section-number">2</span> Dimensionality reduction</a><ul class="toc-sections">
 <li class="toc"><a href="#introduction"> Introduction</a></li>
 <li class="toc"><a href="#lower-dimensional-projections"> Lower-dimensional projections</a></li>
 <li class="toc"><a href="#the-new-linear-combinations"> The new linear combinations</a></li>
@@ -195,10 +194,10 @@ div.csl-indent {
 <li class="toc"><a href="#the-full-pca-workflow"> The full PCA workflow</a></li>
 <li class="toc"><a href="#additional-exercises"> Additional exercises</a></li>
 </ul>
-<a href="summarizedexperiments.html" id="toc-summarizedexperiments"><span class="toc-section-number">3</span> SummarizedExperiments</a>
-<a href="sec-hts.html" id="toc-sec-hts"><span class="toc-section-number">4</span> High throughput sequencing</a>
-<a href="sec-rnaseq.html" id="toc-sec-rnaseq"><span class="toc-section-number">5</span> Differential expression analysis</a>
-<a href="sec-gsea.html" id="toc-sec-gsea"><span class="toc-section-number">6</span> Enrichment analyses</a>
+<a href="summarizedexperiments.html"><span class="toc-section-number">3</span> SummarizedExperiments</a>
+<a href="sec-hts.html"><span class="toc-section-number">4</span> High throughput sequencing</a>
+<a href="sec-rnaseq.html"><span class="toc-section-number">5</span> Differential expression analysis</a>
+<a href="sec-gsea.html"><span class="toc-section-number">6</span> Enrichment analyses</a>
 </div>
 </li>
 </ul>
@@ -208,10 +207,9 @@ div.csl-indent {
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<div id="sec-dimred" class="section level1" number="2">
+<html><body><div id="sec-dimred" class="section level1" number="2">
 <h1>
-<span class="header-section-number">Chapter 2</span> Unsupervised learning: dimensionality reduction</h1>
+<span class="header-section-number">Chapter 2</span> Dimensionality reduction</h1>
 <div id="introduction" class="section level2" number="2.1">
 <h2>
 <span class="header-section-number">2.1</span> Introduction<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('introduction')" onmouseout="reset_tooltip('introduction-tooltip')"><span class="tooltiptext" id="introduction-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
@@ -451,9 +449,9 @@ Figure 2.9: Screeplot showing the variances for the PCs.
 ► Question
 </p>
 <div class="question-body">
-<p>Repeat the analysis above with the <code>xy0</code> data, that you can load
-from the <code>rWSBIM1322</code> data. First scale it, then repeat the PCA
-analysis as shown above.</p>
+<p>Load the <code>cptac_se_prot</code> data available in the <code>rWSBIM1322</code> package,
+scale the data (see below for why scaling is important), then perform
+the PCA analysis and interpret it. Also produce a PCA for PCs 2 and 3.</p>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -464,42 +462,36 @@ analysis as shown above.</p>
 ► Solution<span id="sol-start-7" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-7', 'sol-start-7')"></span>
 </p>
 <div id="sol-body-7" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="sec-dimred.html#cb108-1" aria-hidden="true" tabindex="-1"></a>xy <span class="ot">&lt;-</span> <span class="fu">scale</span>(xy0)</span>
-<span id="cb108-2"><a href="sec-dimred.html#cb108-2" aria-hidden="true" tabindex="-1"></a>pca1 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(xy)</span>
-<span id="cb108-3"><a href="sec-dimred.html#cb108-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca1)</span></code></pre></div>
-<pre><code>## Importance of components:
-##                           PC1    PC2
-## Standard deviation     1.3308 0.4784
-## Proportion of Variance 0.8856 0.1144
-## Cumulative Proportion  0.8856 1.0000</code></pre>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="sec-dimred.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">screeplot</span>(pca1)</span></code></pre></div>
-<p><img src="rnaseq_files/figure-html/pcaex1-1.png" width="672"></p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="sec-dimred.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca1)</span></code></pre></div>
-<p><img src="rnaseq_files/figure-html/pcaex1-2.png" width="672"></p>
-<p class="solution-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
-<div class="question">
-<p class="question-begin">
-► Question
-</p>
-<div class="question-body">
-<p>Load the <code>cptac_prot</code> data, scale the data (see below for why scaling
-is important), then perform the PCA analysis and interpret it. Also
-produce a PCA for PCs 2 and 3.</p>
-<p class="question-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
-<div class="msmb-solution">
-<p class="solution-begin">
-► Solution<span id="sol-start-8" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-8', 'sol-start-8')"></span>
-</p>
-<div id="sol-body-8" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="sec-dimred.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MSnbase"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="sec-dimred.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
+<span id="cb108-2"><a href="sec-dimred.html#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"SummarizedExperiment"</span>)</span></code></pre></div>
+<pre><code>## Loading required package: MatrixGenerics</code></pre>
+<pre><code>## Loading required package: matrixStats</code></pre>
+<pre><code>## 
+## Attaching package: 'matrixStats'</code></pre>
+<pre><code>## The following object is masked from 'package:dplyr':
+## 
+##     count</code></pre>
+<pre><code>## 
+## Attaching package: 'MatrixGenerics'</code></pre>
+<pre><code>## The following objects are masked from 'package:matrixStats':
+## 
+##     colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,
+##     colCounts, colCummaxs, colCummins, colCumprods, colCumsums,
+##     colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,
+##     colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,
+##     colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,
+##     colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,
+##     colWeightedMeans, colWeightedMedians, colWeightedSds,
+##     colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,
+##     rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,
+##     rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,
+##     rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,
+##     rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,
+##     rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,
+##     rowWeightedMads, rowWeightedMeans, rowWeightedMedians,
+##     rowWeightedSds, rowWeightedVars</code></pre>
+<pre><code>## Loading required package: GenomicRanges</code></pre>
+<pre><code>## Loading required package: stats4</code></pre>
 <pre><code>## Loading required package: BiocGenerics</code></pre>
 <pre><code>## 
 ## Attaching package: 'BiocGenerics'</code></pre>
@@ -517,16 +509,7 @@ produce a PCA for PCs 2 and 3.</p>
 ##     order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
 ##     rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
 ##     union, unique, unsplit, which.max, which.min</code></pre>
-<pre><code>## Loading required package: Biobase</code></pre>
-<pre><code>## Welcome to Bioconductor
-## 
-##     Vignettes contain introductory material; view with
-##     'browseVignettes()'. To cite Bioconductor, see
-##     'citation("Biobase")', and for packages 'citation("pkgname")'.</code></pre>
-<pre><code>## Loading required package: mzR</code></pre>
-<pre><code>## Loading required package: Rcpp</code></pre>
 <pre><code>## Loading required package: S4Vectors</code></pre>
-<pre><code>## Loading required package: stats4</code></pre>
 <pre><code>## 
 ## Attaching package: 'S4Vectors'</code></pre>
 <pre><code>## The following objects are masked from 'package:dplyr':
@@ -538,36 +521,57 @@ produce a PCA for PCs 2 and 3.</p>
 <pre><code>## The following objects are masked from 'package:base':
 ## 
 ##     expand.grid, I, unname</code></pre>
-<pre><code>## Loading required package: ProtGenerics</code></pre>
+<pre><code>## Loading required package: IRanges</code></pre>
 <pre><code>## 
-## Attaching package: 'ProtGenerics'</code></pre>
-<pre><code>## The following object is masked from 'package:stats':
+## Attaching package: 'IRanges'</code></pre>
+<pre><code>## The following objects are masked from 'package:dplyr':
 ## 
-##     smooth</code></pre>
-<pre><code>## 
-## This is MSnbase version 2.22.0 
-##   Visit https://lgatto.github.io/MSnbase/ to get started.</code></pre>
-<pre><code>## 
-## Attaching package: 'MSnbase'</code></pre>
-<pre><code>## The following object is masked from 'package:base':
+##     collapse, desc, slice</code></pre>
+<pre><code>## The following object is masked from 'package:purrr':
 ## 
-##     trimws</code></pre>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="sec-dimred.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(cptac_prot)</span>
-<span id="cb134-2"><a href="sec-dimred.html#cb134-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">scale</span>(<span class="fu">exprs</span>(cptac_prot))</span>
-<span id="cb134-3"><a href="sec-dimred.html#cb134-3" aria-hidden="true" tabindex="-1"></a>pca2 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(x)</span>
-<span id="cb134-4"><a href="sec-dimred.html#cb134-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca2)</span></code></pre></div>
+##     reduce</code></pre>
+<pre><code>## Loading required package: GenomeInfoDb</code></pre>
+<pre><code>## Loading required package: Biobase</code></pre>
+<pre><code>## Welcome to Bioconductor
+## 
+##     Vignettes contain introductory material; view with
+##     'browseVignettes()'. To cite Bioconductor, see
+##     'citation("Biobase")', and for packages 'citation("pkgname")'.</code></pre>
+<pre><code>## 
+## Attaching package: 'Biobase'</code></pre>
+<pre><code>## The following object is masked from 'package:MatrixGenerics':
+## 
+##     rowMedians</code></pre>
+<pre><code>## The following objects are masked from 'package:matrixStats':
+## 
+##     anyMissing, rowMedians</code></pre>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="sec-dimred.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(cptac_se_prot)</span>
+<span id="cb137-2"><a href="sec-dimred.html#cb137-2" aria-hidden="true" tabindex="-1"></a>cptac_se_prot</span></code></pre></div>
+<pre><code>## class: SummarizedExperiment 
+## dim: 114 6 
+## metadata(3): MSnbaseFiles MSnbaseProcessing MSnbaseVersion
+## assays(1): ''
+## rownames(114): P00918ups|CAH2_HUMAN_UPS
+##   P01008ups|ANT3_HUMAN_UPS;CON__P41361 ... sp|P48837|NUP57_YEAST
+##   sp|P47912|LCF4_YEAST;sp|P39002|LCF3_YEAST
+## rowData names(3): Proteins Sequence nNA
+## colnames(6): 6A_7 6A_8 ... 6B_8 6B_9
+## colData names(3): group sample nNA</code></pre>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="sec-dimred.html#cb139-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">scale</span>(<span class="fu">assay</span>(cptac_se_prot))</span>
+<span id="cb139-2"><a href="sec-dimred.html#cb139-2" aria-hidden="true" tabindex="-1"></a>pca2 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(x)</span>
+<span id="cb139-3"><a href="sec-dimred.html#cb139-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca2)</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2     PC3     PC4     PC5     PC6
 ## Standard deviation     2.3718 0.4106 0.30777 0.22335 0.20650 0.13692
 ## Proportion of Variance 0.9376 0.0281 0.01579 0.00831 0.00711 0.00312
 ## Cumulative Proportion  0.9376 0.9657 0.98145 0.98977 0.99688 1.00000</code></pre>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="sec-dimred.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">screeplot</span>(pca2)</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="sec-dimred.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">screeplot</span>(pca2)</span></code></pre></div>
 <p><img src="rnaseq_files/figure-html/pcaex2-1.png" width="672"></p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="sec-dimred.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca2)</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="sec-dimred.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca2)</span></code></pre></div>
 <p><img src="rnaseq_files/figure-html/pcaex2-2.png" width="672"></p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="sec-dimred.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pca2<span class="sc">$</span>x[, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="sec-dimred.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pca2<span class="sc">$</span>x[, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>])</span></code></pre></div>
 <p><img src="rnaseq_files/figure-html/pcaex2-3.png" width="672"></p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="sec-dimred.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca2, <span class="at">choices =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="sec-dimred.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca2, <span class="at">choices =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>)</span></code></pre></div>
 <p><img src="rnaseq_files/figure-html/pcaex2-4.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -589,20 +593,20 @@ samples. Interprete the figures.</p>
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-9" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-9', 'sol-start-9')"></span>
+► Solution<span id="sol-start-8" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-8', 'sol-start-8')"></span>
 </p>
-<div id="sol-body-9" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="sec-dimred.html#cb140-1" aria-hidden="true" tabindex="-1"></a>x_t <span class="ot">&lt;-</span> <span class="fu">t</span>(x)</span>
-<span id="cb140-2"><a href="sec-dimred.html#cb140-2" aria-hidden="true" tabindex="-1"></a>pca3 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(x_t)</span>
-<span id="cb140-3"><a href="sec-dimred.html#cb140-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca3)</span></code></pre></div>
+<div id="sol-body-8" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="sec-dimred.html#cb145-1" aria-hidden="true" tabindex="-1"></a>x_t <span class="ot">&lt;-</span> <span class="fu">t</span>(x)</span>
+<span id="cb145-2"><a href="sec-dimred.html#cb145-2" aria-hidden="true" tabindex="-1"></a>pca3 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(x_t)</span>
+<span id="cb145-3"><a href="sec-dimred.html#cb145-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca3)</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2    PC3    PC4     PC5       PC6
-## Standard deviation     1.9522 1.4632 1.0618 0.9817 0.65186 8.723e-16
+## Standard deviation     1.9522 1.4632 1.0618 0.9817 0.65186 6.826e-16
 ## Proportion of Variance 0.4501 0.2528 0.1331 0.1138 0.05018 0.000e+00
 ## Cumulative Proportion  0.4501 0.7029 0.8360 0.9498 1.00000 1.000e+00</code></pre>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="sec-dimred.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">screeplot</span>(pca3)</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="sec-dimred.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">screeplot</span>(pca3)</span></code></pre></div>
 <p><img src="rnaseq_files/figure-html/unnamed-chunk-28-1.png" width="672"></p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="sec-dimred.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca3)</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="sec-dimred.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca3)</span></code></pre></div>
 <p><img src="rnaseq_files/figure-html/unnamed-chunk-28-2.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -633,12 +637,12 @@ scaling. Compare and interpret the results.</p>
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-10" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-10', 'sol-start-10')"></span>
+► Solution<span id="sol-start-9" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-9', 'sol-start-9')"></span>
 </p>
-<div id="sol-body-10" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="sec-dimred.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb144-2"><a href="sec-dimred.html#cb144-2" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(<span class="fu">prcomp</span>(mtcars, <span class="at">scale =</span> <span class="cn">FALSE</span>), <span class="at">main =</span> <span class="st">"No scaling"</span>)  <span class="do">## 1</span></span>
-<span id="cb144-3"><a href="sec-dimred.html#cb144-3" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(<span class="fu">prcomp</span>(mtcars, <span class="at">scale =</span> <span class="cn">TRUE</span>), <span class="at">main =</span> <span class="st">"With scaling"</span>) <span class="do">## 2</span></span></code></pre></div>
+<div id="sol-body-9" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="sec-dimred.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb149-2"><a href="sec-dimred.html#cb149-2" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(<span class="fu">prcomp</span>(mtcars, <span class="at">scale =</span> <span class="cn">FALSE</span>), <span class="at">main =</span> <span class="st">"No scaling"</span>)  <span class="do">## 1</span></span>
+<span id="cb149-3"><a href="sec-dimred.html#cb149-3" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(<span class="fu">prcomp</span>(mtcars, <span class="at">scale =</span> <span class="cn">TRUE</span>), <span class="at">main =</span> <span class="st">"With scaling"</span>) <span class="do">## 2</span></span></code></pre></div>
 <p><img src="rnaseq_files/figure-html/scalepcasol-1.png" width="672"></p>
 <p>Without scaling, <code>disp</code> and <code>hp</code> are the features with the highest
 loadings along PC1 and 2 (all others are negligible), which are also
@@ -657,20 +661,6 @@ missing values is low. Otherwise, it is possible to impute missing
 values (which often requires great care) or use an implementation of
 PCA such as <em>non-linear iterative partial least squares</em> (NIPALS),
 that support missing values.</p>
-<p>Finally, we should be careful when using categorical data in any of
-the unsupervised methods. Categories are generally represented as
-factors, which are encoded as integer levels, and might give the
-impression that a distance between levels is a relevant measure (which
-it is not, unless the factors are ordered). In such situations,
-categorical data can be dropped, or it is possible to encode
-categories as binary <em>dummy variables</em>. For example, if we have 3
-categories, say <code>A</code>, <code>B</code> and <code>C</code>, we would create two dummy variables
-to encode the categories as:</p>
-<pre><code>##   x y
-## A 1 0
-## B 0 1
-## C 0 0</code></pre>
-<p>so that the distance between each category are approximately equal to 1.</p>
 </div>
 <div id="the-full-pca-workflow" class="section level2" number="2.7">
 <h2>
@@ -685,7 +675,7 @@ datasets are available in the <code>pRolocdata</code> package.</p>
 </h3>
 <p>We are first going to focus on the data from Mulvey <em>et al.</em> (2015),
 where they present the <em>Dynamic proteomic profiling of extra-embryonic
-endoderm differentiation in mouse embryonic stem cells</em> <span class="citation">(<a href="#ref-Mulvey:2015" role="doc-biblioref"><strong>Mulvey:2015?</strong></a>)</span>.</p>
+endoderm differentiation in mouse embryonic stem cells</em> <span class="citation">(<label for="tufte-mn-1" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-1" class="margin-toggle">Mulvey et al. 2015<span class="marginnote">Mulvey, C M, C Schröter, L Gatto, D Dikicioglu, I Baris Fidaner, A Christoforou, M J Deery, et al. 2015. <span>“Dynamic Proteomic Profiling of Extra-Embryonic Endoderm Differentiation in Mouse Embryonic Stem Cells.”</span> <em>Stem Cells</em>, June. <a href="https://doi.org/10.1002/stem.2067">https://doi.org/10.1002/stem.2067</a>.</span>)</span>.</p>
 <blockquote>
 <p>During mammalian preimplantation development, the cells of the
 blastocyst’s inner cell mass differentiate into the epiblast and
@@ -720,13 +710,16 @@ investigation of these processes.</p>
 </p>
 <div class="question-body">
 <p>Load the <code>mulvey2015</code> data from the <code>pRolocdata</code> package. The data
-comes as an object of class <code>MSnSet</code><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>, which you can convert to a
-<code>SummarizedExperiment</code> as shown below. Familiarise yourself with its
-experimental design stored in the <em>colData</em> slot.</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="sec-dimred.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pRolocdata)</span>
-<span id="cb146-2"><a href="sec-dimred.html#cb146-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mulvey2015)</span>
-<span id="cb146-3"><a href="sec-dimred.html#cb146-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"SummarizedExperiment"</span>)</span>
-<span id="cb146-4"><a href="sec-dimred.html#cb146-4" aria-hidden="true" tabindex="-1"></a>mulvey2015 <span class="ot">&lt;-</span> <span class="fu">as</span>(mulvey2015, <span class="st">"SummarizedExperiment"</span>)</span></code></pre></div>
+comes as an object of class <code>MSnSet</code><label for="tufte-sn-5" class="margin-toggle sidenote-number">5</label><input type="checkbox" id="tufte-sn-5" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">5</span> The <a href="https://lgatto.github.io/MSnbase/reference/MSnSet-class.html"><code>MSnSet</code>
+class</a>
+is similar to the <code>SummarizedExperiment</code> class and can be
+converted to a <code>SummarizedExperiment</code> with <code>as(x, "SummarizedExperiment")</code>.</span>, which you can convert
+to a <code>SummarizedExperiment</code> as shown below. Familiarise yourself with
+its experimental design stored in the <em>colData</em> slot.</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="sec-dimred.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pRolocdata)</span>
+<span id="cb150-2"><a href="sec-dimred.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mulvey2015)</span>
+<span id="cb150-3"><a href="sec-dimred.html#cb150-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"SummarizedExperiment"</span>)</span>
+<span id="cb150-4"><a href="sec-dimred.html#cb150-4" aria-hidden="true" tabindex="-1"></a>mulvey2015 <span class="ot">&lt;-</span> <span class="fu">as</span>(mulvey2015, <span class="st">"SummarizedExperiment"</span>)</span></code></pre></div>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -734,60 +727,34 @@ experimental design stored in the <em>colData</em> slot.</p>
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-11" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-11', 'sol-start-11')"></span>
+► Solution<span id="sol-start-10" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-10', 'sol-start-10')"></span>
 </p>
-<div id="sol-body-11" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="sec-dimred.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pRolocdata)</span></code></pre></div>
+<div id="sol-body-10" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="sec-dimred.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pRolocdata)</span></code></pre></div>
+<pre><code>## Loading required package: MSnbase</code></pre>
+<pre><code>## Loading required package: mzR</code></pre>
+<pre><code>## Loading required package: Rcpp</code></pre>
+<pre><code>## Loading required package: ProtGenerics</code></pre>
+<pre><code>## 
+## Attaching package: 'ProtGenerics'</code></pre>
+<pre><code>## The following object is masked from 'package:stats':
+## 
+##     smooth</code></pre>
+<pre><code>## 
+## This is MSnbase version 2.22.0 
+##   Visit https://lgatto.github.io/MSnbase/ to get started.</code></pre>
+<pre><code>## 
+## Attaching package: 'MSnbase'</code></pre>
+<pre><code>## The following object is masked from 'package:base':
+## 
+##     trimws</code></pre>
 <pre><code>## 
 ## This is pRolocdata version 1.34.0.
 ## Use 'pRolocdata()' to list available data sets.</code></pre>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="sec-dimred.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mulvey2015)</span>
-<span id="cb149-2"><a href="sec-dimred.html#cb149-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"SummarizedExperiment"</span>)</span></code></pre></div>
-<pre><code>## Loading required package: MatrixGenerics</code></pre>
-<pre><code>## Loading required package: matrixStats</code></pre>
-<pre><code>## 
-## Attaching package: 'matrixStats'</code></pre>
-<pre><code>## The following objects are masked from 'package:Biobase':
-## 
-##     anyMissing, rowMedians</code></pre>
-<pre><code>## The following object is masked from 'package:dplyr':
-## 
-##     count</code></pre>
-<pre><code>## 
-## Attaching package: 'MatrixGenerics'</code></pre>
-<pre><code>## The following objects are masked from 'package:matrixStats':
-## 
-##     colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,
-##     colCounts, colCummaxs, colCummins, colCumprods, colCumsums,
-##     colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,
-##     colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,
-##     colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,
-##     colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,
-##     colWeightedMeans, colWeightedMedians, colWeightedSds,
-##     colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,
-##     rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,
-##     rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,
-##     rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,
-##     rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,
-##     rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,
-##     rowWeightedMads, rowWeightedMeans, rowWeightedMedians,
-##     rowWeightedSds, rowWeightedVars</code></pre>
-<pre><code>## The following object is masked from 'package:Biobase':
-## 
-##     rowMedians</code></pre>
-<pre><code>## Loading required package: GenomicRanges</code></pre>
-<pre><code>## Loading required package: IRanges</code></pre>
-<pre><code>## 
-## Attaching package: 'IRanges'</code></pre>
-<pre><code>## The following objects are masked from 'package:dplyr':
-## 
-##     collapse, desc, slice</code></pre>
-<pre><code>## The following object is masked from 'package:purrr':
-## 
-##     reduce</code></pre>
-<pre><code>## Loading required package: GenomeInfoDb</code></pre>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="sec-dimred.html#cb164-1" aria-hidden="true" tabindex="-1"></a>mulvey2015 <span class="ot">&lt;-</span> <span class="fu">as</span>(mulvey2015, <span class="st">"SummarizedExperiment"</span>)</span>
-<span id="cb164-2"><a href="sec-dimred.html#cb164-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(mulvey2015)</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="sec-dimred.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mulvey2015)</span>
+<span id="cb162-2"><a href="sec-dimred.html#cb162-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"SummarizedExperiment"</span>)</span>
+<span id="cb162-3"><a href="sec-dimred.html#cb162-3" aria-hidden="true" tabindex="-1"></a>mulvey2015 <span class="ot">&lt;-</span> <span class="fu">as</span>(mulvey2015, <span class="st">"SummarizedExperiment"</span>)</span>
+<span id="cb162-4"><a href="sec-dimred.html#cb162-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(mulvey2015)</span></code></pre></div>
 <pre><code>## DataFrame with 18 rows and 3 columns
 ##                 rep     times      cond
 ##           &lt;numeric&gt; &lt;integer&gt; &lt;numeric&gt;
@@ -807,10 +774,10 @@ experimental design stored in the <em>colData</em> slot.</p>
 </p>
 </div>
 </div>
-<p>Here, we will want to do a PCA analysis on the samples. We want to remap the
-18 samples from a 2337-dimensional space into 2, or
-possibly 3 dimensions. This will require to transpose the data matrix
-before passing it to the <code>prcomp</code> function.</p>
+<p>Here, we will want to do a PCA analysis on the samples. We want to
+remap the 18 samples from a <code>r nrow(mulvey2015)</code>-dimensional space into 2, or possibly 3
+dimensions. This will require to transpose the data matrix before
+passing it to the <code>prcomp</code> function.</p>
 <div class="question">
 <p class="question-begin">
 ► Question
@@ -827,11 +794,11 @@ display a summary of the results.</li>
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-12" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-12', 'sol-start-12')"></span>
+► Solution<span id="sol-start-11" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-11', 'sol-start-11')"></span>
 </p>
-<div id="sol-body-12" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="sec-dimred.html#cb166-1" aria-hidden="true" tabindex="-1"></a>pca_mulvey2015 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">t</span>(<span class="fu">assay</span>(mulvey2015)), <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb166-2"><a href="sec-dimred.html#cb166-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca_mulvey2015)</span></code></pre></div>
+<div id="sol-body-11" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="sec-dimred.html#cb164-1" aria-hidden="true" tabindex="-1"></a>pca_mulvey2015 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">t</span>(<span class="fu">assay</span>(mulvey2015)), <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb164-2"><a href="sec-dimred.html#cb164-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca_mulvey2015)</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                            PC1     PC2     PC3     PC4     PC5     PC6     PC7
 ## Standard deviation     34.2468 24.0808 16.8485 7.37212 6.79981 5.84729 5.50515
@@ -842,7 +809,7 @@ display a summary of the results.</li>
 ## Proportion of Variance 0.01149 0.0095 0.00857 0.00684 0.00644 0.00533 0.00451
 ## Cumulative Proportion  0.95359 0.9631 0.97166 0.97850 0.98494 0.99027 0.99479
 ##                           PC15    PC16   PC17      PC18
-## Standard deviation     3.04106 1.24069 1.1806 1.709e-14
+## Standard deviation     3.04106 1.24069 1.1806 1.636e-14
 ## Proportion of Variance 0.00396 0.00066 0.0006 0.000e+00
 ## Cumulative Proportion  0.99874 0.99940 1.0000 1.000e+00</code></pre>
 <p class="solution-end">
@@ -868,11 +835,11 @@ the <code>fviz_screeplot</code> function from the <code>factoextra</code> packag
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-13" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-13', 'sol-start-13')"></span>
+► Solution<span id="sol-start-12" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-12', 'sol-start-12')"></span>
 </p>
-<div id="sol-body-13" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="sec-dimred.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span>
-<span id="cb168-2"><a href="sec-dimred.html#cb168-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_screeplot</span>(pca_mulvey2015)</span></code></pre></div>
+<div id="sol-body-12" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="sec-dimred.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span>
+<span id="cb166-2"><a href="sec-dimred.html#cb166-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_screeplot</span>(pca_mulvey2015)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-32"></span>
 <p class="caption marginnote shownote">
@@ -906,10 +873,10 @@ the light of the experimental design.</p></li>
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-14" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-14', 'sol-start-14')"></span>
+► Solution<span id="sol-start-13" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-13', 'sol-start-13')"></span>
 </p>
-<div id="sol-body-14" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="sec-dimred.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca</span>(pca_mulvey2015)</span></code></pre></div>
+<div id="sol-body-13" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="sec-dimred.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca</span>(pca_mulvey2015)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-33-1"></span>
 <p class="caption marginnote shownote">
@@ -917,7 +884,7 @@ Figure 2.11: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
 </p>
 <img src="rnaseq_files/figure-html/unnamed-chunk-33-1.png" alt="Biplot and variables PCA plot of the `mulvey2015` data." width="768">
 </div>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="sec-dimred.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_mulvey2015)</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="sec-dimred.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_mulvey2015)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-33-2"></span>
 <p class="caption marginnote shownote">
@@ -925,7 +892,7 @@ Figure 2.12: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
 </p>
 <img src="rnaseq_files/figure-html/unnamed-chunk-33-2.png" alt="Biplot and variables PCA plot of the `mulvey2015` data." width="768">
 </div>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="sec-dimred.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_mulvey2015, <span class="at">habillage =</span> mulvey2015<span class="sc">$</span>times)</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="sec-dimred.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_mulvey2015, <span class="at">habillage =</span> mulvey2015<span class="sc">$</span>times)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-33-3"></span>
 <p class="caption marginnote shownote">
@@ -953,15 +920,15 @@ cube along the three first PCs.</p>
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-15" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-15', 'sol-start-15')"></span>
+► Solution<span id="sol-start-14" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-14', 'sol-start-14')"></span>
 </p>
-<div id="sol-body-15" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="sec-dimred.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rgl"</span>)</span>
-<span id="cb172-2"><a href="sec-dimred.html#cb172-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot3d</span>(pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">1</span>],</span>
-<span id="cb172-3"><a href="sec-dimred.html#cb172-3" aria-hidden="true" tabindex="-1"></a>       pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">2</span>],</span>
-<span id="cb172-4"><a href="sec-dimred.html#cb172-4" aria-hidden="true" tabindex="-1"></a>       pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">3</span>],</span>
-<span id="cb172-5"><a href="sec-dimred.html#cb172-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> mulvey2015<span class="sc">$</span>time,</span>
-<span id="cb172-6"><a href="sec-dimred.html#cb172-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div id="sol-body-14" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="sec-dimred.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rgl"</span>)</span>
+<span id="cb170-2"><a href="sec-dimred.html#cb170-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot3d</span>(pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">1</span>],</span>
+<span id="cb170-3"><a href="sec-dimred.html#cb170-3" aria-hidden="true" tabindex="-1"></a>       pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">2</span>],</span>
+<span id="cb170-4"><a href="sec-dimred.html#cb170-4" aria-hidden="true" tabindex="-1"></a>       pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">3</span>],</span>
+<span id="cb170-5"><a href="sec-dimred.html#cb170-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> mulvey2015<span class="sc">$</span>times,</span>
+<span id="cb170-6"><a href="sec-dimred.html#cb170-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="dv">10</span>)</span></code></pre></div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -974,7 +941,7 @@ cube along the three first PCs.</p>
 </h3>
 <p>In this section, we are going to use PCA to explore spatial map of
 mouse pluripotent stem cell by Christoforou <em>et al.</em>
-<span class="citation">(<a href="#ref-Christoforou:2016" role="doc-biblioref"><strong>Christoforou:2016?</strong></a>)</span>.</p>
+<span class="citation">(<label for="tufte-mn-2" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-2" class="margin-toggle">Christoforou et al. 2016<span class="marginnote">Christoforou, A, C M Mulvey, L M Breckels, A Geladaki, T Hurrell, P C Hayward, T Naake, et al. 2016. <span>“A Draft Map of the Mouse Pluripotent Stem Cell Spatial Proteome.”</span> <em>Nat Commun</em> 7: 8992. <a href="https://doi.org/10.1038/ncomms9992">https://doi.org/10.1038/ncomms9992</a>.</span>)</span>.</p>
 <blockquote>
 <p>Knowledge of the subcellular distribution of proteins is vital for
 understanding cellular mechanisms. Capturing the subcellular
@@ -1012,13 +979,13 @@ with its experimental design and its feature annotation stored in the
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-16" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-16', 'sol-start-16')"></span>
+► Solution<span id="sol-start-15" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-15', 'sol-start-15')"></span>
 </p>
-<div id="sol-body-16" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="sec-dimred.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pRolocdata)</span>
-<span id="cb173-2"><a href="sec-dimred.html#cb173-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(hyperLOPIT2015)</span>
-<span id="cb173-3"><a href="sec-dimred.html#cb173-3" aria-hidden="true" tabindex="-1"></a>hyperLOPIT2015 <span class="ot">&lt;-</span> <span class="fu">as</span>(hyperLOPIT2015, <span class="st">"SummarizedExperiment"</span>)</span>
-<span id="cb173-4"><a href="sec-dimred.html#cb173-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(hyperLOPIT2015)</span></code></pre></div>
+<div id="sol-body-15" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="sec-dimred.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pRolocdata)</span>
+<span id="cb171-2"><a href="sec-dimred.html#cb171-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(hyperLOPIT2015)</span>
+<span id="cb171-3"><a href="sec-dimred.html#cb171-3" aria-hidden="true" tabindex="-1"></a>hyperLOPIT2015 <span class="ot">&lt;-</span> <span class="fu">as</span>(hyperLOPIT2015, <span class="st">"SummarizedExperiment"</span>)</span>
+<span id="cb171-4"><a href="sec-dimred.html#cb171-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(hyperLOPIT2015)</span></code></pre></div>
 <pre><code>## DataFrame with 20 rows and 5 columns
 ##            Replicate TMT.Reagent Acquisiton.Method Gradient.Fraction
 ##            &lt;numeric&gt; &lt;character&gt;          &lt;factor&gt;       &lt;character&gt;
@@ -1046,7 +1013,7 @@ with its experimental design and its feature annotation stored in the
 ## X130N.rep2              24.7
 ## X130C.rep2                NA
 ## X131.rep2               31.9</code></pre>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="sec-dimred.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rowData</span>(hyperLOPIT2015)[, <span class="fu">c</span>(<span class="st">"entry.name"</span>, <span class="st">"markers"</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="sec-dimred.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rowData</span>(hyperLOPIT2015)[, <span class="fu">c</span>(<span class="st">"entry.name"</span>, <span class="st">"markers"</span>)])</span></code></pre></div>
 <pre><code>## DataFrame with 6 rows and 2 columns
 ##           entry.name            markers
 ##          &lt;character&gt;        &lt;character&gt;
@@ -1082,11 +1049,11 @@ display a summary of the results.</li>
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-17" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-17', 'sol-start-17')"></span>
+► Solution<span id="sol-start-16" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-16', 'sol-start-16')"></span>
 </p>
-<div id="sol-body-17" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="sec-dimred.html#cb177-1" aria-hidden="true" tabindex="-1"></a>pca_hl <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">assay</span>(hyperLOPIT2015), <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb177-2"><a href="sec-dimred.html#cb177-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca_hl)</span></code></pre></div>
+<div id="sol-body-16" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="sec-dimred.html#cb175-1" aria-hidden="true" tabindex="-1"></a>pca_hl <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">assay</span>(hyperLOPIT2015), <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb175-2"><a href="sec-dimred.html#cb175-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca_hl)</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                          PC1    PC2     PC3     PC4     PC5     PC6     PC7
 ## Standard deviation     3.111 2.1843 1.27979 1.10039 0.77542 0.69215 0.66758
@@ -1123,11 +1090,11 @@ the <code>fviz_screeplot</code> function from the <code>factoextra</code> packag
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-18" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-18', 'sol-start-18')"></span>
+► Solution<span id="sol-start-17" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-17', 'sol-start-17')"></span>
 </p>
-<div id="sol-body-18" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="sec-dimred.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span>
-<span id="cb179-2"><a href="sec-dimred.html#cb179-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_screeplot</span>(pca_hl)</span></code></pre></div>
+<div id="sol-body-17" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="sec-dimred.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span>
+<span id="cb177-2"><a href="sec-dimred.html#cb177-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_screeplot</span>(pca_hl)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-37"></span>
 <p class="caption marginnote shownote">
@@ -1169,10 +1136,10 @@ annotate the plot. Compare and interpret the two plots.</p></li>
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-19" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-19', 'sol-start-19')"></span>
+► Solution<span id="sol-start-18" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-18', 'sol-start-18')"></span>
 </p>
-<div id="sol-body-19" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="sec-dimred.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca</span>(pca_hl)</span></code></pre></div>
+<div id="sol-body-18" class="solution-body" style="display: none;">
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="sec-dimred.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca</span>(pca_hl)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-38-1"></span>
 <p class="caption marginnote shownote">
@@ -1180,7 +1147,7 @@ Figure 2.15: Biplot and variables PCA plot of the <code>hyperLOPIT2015</code> da
 </p>
 <img src="rnaseq_files/figure-html/unnamed-chunk-38-1.png" alt="Biplot and variables PCA plot of the `hyperLOPIT2015` data." width="768">
 </div>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="sec-dimred.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(pca_hl)</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="sec-dimred.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(pca_hl)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-38-2"></span>
 <p class="caption marginnote shownote">
@@ -1188,15 +1155,15 @@ Figure 2.16: Biplot and variables PCA plot of the <code>hyperLOPIT2015</code> da
 </p>
 <img src="rnaseq_files/figure-html/unnamed-chunk-38-2.png" alt="Biplot and variables PCA plot of the `hyperLOPIT2015` data." width="768">
 </div>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="sec-dimred.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Manual colour palette (from the pRoloc package)</span></span>
-<span id="cb182-2"><a href="sec-dimred.html#cb182-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb182-3"><a href="sec-dimred.html#cb182-3" aria-hidden="true" tabindex="-1"></a>cls <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#E41A1C"</span>, <span class="st">"#377EB8"</span>, <span class="st">"#238B45"</span>, <span class="st">"#FF7F00"</span>, <span class="st">"#FFD700"</span>,</span>
-<span id="cb182-4"><a href="sec-dimred.html#cb182-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">"#333333"</span>, <span class="st">"#00CED1"</span>, <span class="st">"#A65628"</span>, <span class="st">"#F781BF"</span>, <span class="st">"#984EA3"</span>,</span>
-<span id="cb182-5"><a href="sec-dimred.html#cb182-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">"#9ACD32"</span>, <span class="st">"#B0C4DE"</span>, <span class="st">"#00008A"</span>, <span class="st">"#8B795E"</span>, <span class="st">"#E0E0E060"</span>)</span>
-<span id="cb182-6"><a href="sec-dimred.html#cb182-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb182-7"><a href="sec-dimred.html#cb182-7" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_hl, <span class="at">geom =</span> <span class="st">"point"</span>,</span>
-<span id="cb182-8"><a href="sec-dimred.html#cb182-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">habillage =</span> <span class="fu">rowData</span>(hyperLOPIT2015)<span class="sc">$</span>markers,</span>
-<span id="cb182-9"><a href="sec-dimred.html#cb182-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">palette =</span> cls)</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="sec-dimred.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Manual colour palette (from the pRoloc package)</span></span>
+<span id="cb180-2"><a href="sec-dimred.html#cb180-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb180-3"><a href="sec-dimred.html#cb180-3" aria-hidden="true" tabindex="-1"></a>cls <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#E41A1C"</span>, <span class="st">"#377EB8"</span>, <span class="st">"#238B45"</span>, <span class="st">"#FF7F00"</span>, <span class="st">"#FFD700"</span>,</span>
+<span id="cb180-4"><a href="sec-dimred.html#cb180-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">"#333333"</span>, <span class="st">"#00CED1"</span>, <span class="st">"#A65628"</span>, <span class="st">"#F781BF"</span>, <span class="st">"#984EA3"</span>,</span>
+<span id="cb180-5"><a href="sec-dimred.html#cb180-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">"#9ACD32"</span>, <span class="st">"#B0C4DE"</span>, <span class="st">"#00008A"</span>, <span class="st">"#8B795E"</span>, <span class="st">"#E0E0E060"</span>)</span>
+<span id="cb180-6"><a href="sec-dimred.html#cb180-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb180-7"><a href="sec-dimred.html#cb180-7" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_hl, <span class="at">geom =</span> <span class="st">"point"</span>,</span>
+<span id="cb180-8"><a href="sec-dimred.html#cb180-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">habillage =</span> <span class="fu">rowData</span>(hyperLOPIT2015)<span class="sc">$</span>markers,</span>
+<span id="cb180-9"><a href="sec-dimred.html#cb180-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">palette =</span> cls)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-39-1"></span>
 <p class="caption marginnote shownote">
@@ -1204,9 +1171,9 @@ Figure 2.17: Biplot and individuals PCA plot of the <code>hyperLOPIT2015</code> 
 </p>
 <img src="rnaseq_files/figure-html/unnamed-chunk-39-1.png" alt="Biplot and individuals PCA plot of the `hyperLOPIT2015` data showing the sub-cellular localisation of the proteins." width="768">
 </div>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="sec-dimred.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_hl, <span class="at">geom =</span> <span class="st">"point"</span>,</span>
-<span id="cb183-2"><a href="sec-dimred.html#cb183-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">habillage =</span> <span class="fu">rowData</span>(hyperLOPIT2015)<span class="sc">$</span>final.assignment,</span>
-<span id="cb183-3"><a href="sec-dimred.html#cb183-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">palette =</span> cls)</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="sec-dimred.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_hl, <span class="at">geom =</span> <span class="st">"point"</span>,</span>
+<span id="cb181-2"><a href="sec-dimred.html#cb181-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">habillage =</span> <span class="fu">rowData</span>(hyperLOPIT2015)<span class="sc">$</span>final.assignment,</span>
+<span id="cb181-3"><a href="sec-dimred.html#cb181-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">palette =</span> cls)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-39-2"></span>
 <p class="caption marginnote shownote">
@@ -1219,6 +1186,19 @@ Figure 2.18: Biplot and individuals PCA plot of the <code>hyperLOPIT2015</code> 
 </p>
 </div>
 </div>
+</div>
+<div id="a-note-on-non-linear-dimensionality-reduction-techniques" class="section level3" number="2.7.3">
+<h3>
+<span class="header-section-number">2.7.3</span> A note on non-linear dimensionality reduction techniques<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('a-note-on-non-linear-dimensionality-reduction-techniques')" onmouseout="reset_tooltip('a-note-on-non-linear-dimensionality-reduction-techniques-tooltip')"><span class="tooltiptext" id="a-note-on-non-linear-dimensionality-reduction-techniques-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h3>
+<p>Non-linear dimensionality reduction techniques such as t-SNE or UMAP
+are widely used, especially since the advent of single-cell RNA
+sequencing. They do not aim reduce the dimensions according to
+variance, as PCA, but focus on preserve neighbourhood between samples
+in a lower-dimension embedding. However, this neighbourhood is only
+maintained for close samples: close points in the lower-dimension
+embedding are also close in high dimensions, while it isn’t possible
+to make any conclusion for distant points in low dimensions.</p>
 </div>
 </div>
 <div id="additional-exercises" class="section level2" number="2.8">
@@ -1343,59 +1323,9 @@ Figure 2.23: Testing the effect of RNA sequencing kits 1 and 2.
 </p>
 </div>
 </div>
-<div class="question">
-<p class="question-begin">
-► Question
-</p>
-<div class="question-body">
-<p>Load the <code>tdata1</code> dataset from the <code>rWSBIM1322</code> package and run a PCA
-analysis on the samples. Interpret the results, knowing that these
-data are random.</p>
-<p class="question-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
-<div class="question">
-<p class="question-begin">
-► Question
-</p>
-<div class="question-body">
-<p>Using the function <code>kem2.tsv</code> from the <code>rWSBIM1207</code> package, import
-the RNA-seq data and perform a PCA analysis on the samples.</p>
-<p class="question-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
-<div class="question">
-<p class="question-begin">
-► Question
-</p>
-<div class="question-body">
-<p>Load the <code>metab1</code> data from the <code>rWSBIM1322</code> package (version &gt;=
-<code>0.1.10</code>) and perform a PCA analysis on the samples. These data
-represent mass spectrometry-based metabolomics data. Do the samples
-seem to be randomly placed? Do you notice any structure explained by
-the labels?</p>
-<p class="question-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
 
 </div>
-</div>
-<div class="footnotes">
-<hr>
-<ol start="5">
-<li id="fn5"><p>The <a href="https://lgatto.github.io/MSnbase/reference/MSnSet-class.html"><code>MSnSet</code>
-class</a>
-is similar to the <code>SummarizedExperiment</code> class and can be
-converted to a <code>SummarizedExperiment</code> with <code>as(x, "SummarizedExperiment")</code>.<a href="sec-dimred.html#fnref5" class="footnote-back">↩︎</a></p></li>
-</ol>
-</div>
-</body></html>
+</div></body></html>
 
 <p style="text-align: center;">
 <a href="finding-ifferentially-expressed-features.html"><button class="btn btn-default">Previous</button></a>
@@ -1404,7 +1334,7 @@ converted to a <code>SummarizedExperiment</code> with <code>as(x, "SummarizedExp
 <p class="build-date">Page built: 
 2022-10-17
  using 
-R version 4.2.0 Patched (2022-05-13 r82357)
+R version 4.2.1 (2022-06-23)
 </p>
 </div>
 </div>
