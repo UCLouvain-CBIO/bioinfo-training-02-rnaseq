@@ -457,15 +457,23 @@ dds <- DESeqDataSetFromMatrix(countData = counts,
 dds
 ```
 
-As for SummarizedExperiments (see chapter 3 from [WSBIM1322 course](http://bit.ly/WSBIM1322)):
+As for SummarizedExperiments (see chapter 3):
 
-- The Quantitative data can be accessed with `assay()`.
+- The quantitative data can be accessed with `assay()`.
 - The sample (columns) metadata can be access with the `colData()`
   function.
 - The features (rows) metadata can be access with the `rowData()`
   column.
 - Additional metadata describing the overall experiment can be
   accessed with `metadata()`.
+
+Note that you can also create a `DESeqDataSet` object from a
+`SummarizedExperiment` (named `se` below) with by passing it to the
+constructor and specifying a design formula:
+
+```{r, eval=FALSE}
+DESeqDataSet(se, design = ~ Condition)
+```
 
 
 `r msmbstyle::question_begin()`

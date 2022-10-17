@@ -32,197 +32,264 @@ programming language, and is open source and open development.
 To illustrate such an omics data container, we'll present the
 `SummarizedExperiment` class.
 
+
 ## SummarizedExperiment
 
-The figure below represents the anatomy of SummarizedExperiment.
+The figure below represents the anatomy of the SummarizedExperiment class.
 
 ```{r SE,  echo=FALSE, out.width = '80%'}
-knitr::include_graphics("./figs/SE.png")
+knitr::include_graphics("https://uclouvain-cbio.github.io/WSBIM1322/figs/SE.svg")
 ```
 
 Objects of the class SummarizedExperiment contain :
 
 - **One (or more) assay(s)** containing the quantitative omics data
   (expression data), stored as a matrix-like object. Features (genes,
-  transcripts, proteins, ...) are defined along the rows and samples
+  transcripts, proteins, ...) are defined along the rows, and samples
   along the columns.
 
 - A **sample metadata** slot containing sample co-variates, stored as a
   data frame. Rows from this table represent samples (rows match exactly the
-  columns of the expression data). Columns from this table represent sample
-  covariates along the columns.
+  columns of the expression data).
 
 - A **feature metadata** slot containing feature co-variates, stored as
-  data frame. The rows of this dataframe's match exactly the rows of the
+  a data frame. The rows of this data frame match exactly the rows of the
   expression data.
 
-The coordinated nature of the high throughput data guarantees that the
-dimensions of the different slots will always match (i.e the columns
-in the expression data and then rows in the sample metadata, as well
-as the rows in the expression data and feature metadata) during data
-manipulation.
+The coordinated nature of the SummarizedExperiment guarantees that
+during data manipulation, the dimensions of the different slots will
+always match (i.e the columns in the expression data and then rows in
+the sample metadata, as well as the rows in the expression data and
+feature metadata) during data manipulation. For example, if we had to
+exclude one sample from the assay, it would be automatically removed
+from the sample metadata in the same operation.
 
-The metadata slots can grow additional co-variates (columns) without
-affecting the other structures.
+The metadata slots can grow additional co-variates
+(columns) without affecting the other structures.
+
 
 ### Creating a SummarizedExperiment
 
-Let's return to the `rna` dataset that we have used previously.
+In order to create a `SummarizedExperiment`, we will create the
+individual components, i.e the count matrix, the sample and gene
+metadata from csv files. These are typically how RNA-Seq data are
+provided (after raw data have been processed).
 
-```{r , message = FALSE}
+```{r, echo = FALSE, message = FALSE}
 rna <- read_csv("data/rnaseq.csv")
-rna
-names(rna)
-```
 
-In this table, we can find gene expression per gene and per sample, as well as
-columns describing the samples (orgnanism, age, sex...), and columns describing
-the genes (ENTREZID, product, chromosome_name, gene_biotype...)
-
-We will convert this table in a `SummarizedExperiment`.
-To do so we will extract from this table:
-
-- A count matrix that will be used as the **`assay`**
-
-- A table describing the samples that will be used as the **sample metadata** slot
-
-- A table describing the genes that will be used as the **features metadata** slot
-
-**count matrix**
-
-```{r}
+## count matrix
 counts <- rna %>%
   select(gene, sample, expression) %>%
   pivot_wider(names_from = sample,
               values_from = expression)
 
+## convert to matrix and set row names
 count_matrix <- counts %>% select(-gene) %>% as.matrix()
 rownames(count_matrix) <- counts$gene
 
-count_matrix[1:5, ]
-```
-
-**table describing the samples**
-
-```{r}
+## sample annotation
 sample_metadata <- rna %>%
   select(sample, organism, age, sex, infection, strain, time, tissue, mouse)
 
-# Many lines are repeated, as in rna, each gene (n = 1474) was analysed in each sample!
-sample_metadata
-
-# Remove redundancy
+## remove redundancy
 sample_metadata <- unique(sample_metadata)
-sample_metadata
+
+## gene annotation
+gene_metadata <- rna %>%
+  select(gene, ENTREZID, product, ensembl_gene_id, external_synonym,
+         chromosome_name, gene_biotype, phenotype_description,
+         hsapiens_homolog_associated_gene_name)
+
+# remove redundancy
+gene_metadata <- unique(gene_metadata)
+
+## write to csv
+write.csv(count_matrix, file = "data/count_matrix.csv")
+write.csv(gene_metadata, file = "data/gene_metadata.csv", row.names = FALSE)
+write.csv(sample_metadata, file = "data/sample_metadata.csv", row.names = FALSE)
 ```
 
-**table describing the genes**
+- **An expression matrix**: we load the count matrix, specifying that
+  the first columns contains row/gene names, and convert the
+  `data.frame` to a `matrix`. You can download it
+  [here](https://raw.githubusercontent.com/carpentries-incubator/bioc-intro/main/_episodes_rmd/data/count_matrix.csv).
 
 ```{r}
-gene_metadata <- rna %>%
-  select(gene, ENTREZID, product, ensembl_gene_id, external_synonym, chromosome_name, gene_biotype, phenotype_description, hsapiens_homolog_associated_gene_name)
+count_matrix <- read.csv("data/count_matrix.csv",
+                         row.names = 1) %>%
+    as.matrix()
 
-# Remove redundancy
-gene_metadata <- unique(gene_metadata)
-gene_metadata
+count_matrix[1:5, ]
+dim(count_matrix)
 ```
 
 
-We can now put the different parts together using the
+- **A table describing the samples**, available
+  [here](https://raw.githubusercontent.com/carpentries-incubator/bioc-intro/main/_episodes_rmd/data/sample_metadata.csv).
+
+```{r}
+sample_metadata <- read.csv("data/sample_metadata.csv")
+sample_metadata
+dim(sample_metadata)
+```
+
+- **A table describing the genes**, available
+  [here](https://raw.githubusercontent.com/carpentries-incubator/bioc-intro/main/_episodes_rmd/data/gene_metadata.csv).
+
+```{r}
+gene_metadata <- read.csv("data/gene_metadata.csv")
+gene_metadata[1:10, 1:4]
+dim(gene_metadata)
+```
+
+We will create a `SummarizedExperiment` from these tables:
+
+- The count matrix that will be used as the **`assay`**
+
+- The table describing the samples will be used as the **sample
+  metadata** slot
+
+- The table describing the genes will be used as the **features
+  metadata** slot
+
+To do this we can put the different parts together using the
 `SummarizedExperiment` constructor:
 
 ```{r, message = FALSE}
-#BiocManager::install("SummarizedExperiment")
+## BiocManager::install("SummarizedExperiment")
 library("SummarizedExperiment")
 ```
 
+First, we make sure that the samples are in the same order in the
+count matrix and the sample annotation, and the same for the genes in
+the count matrix and the gene annotation.
+
 ```{r}
-se <- SummarizedExperiment(assays = count_matrix,
+stopifnot(rownames(count_matrix) == gene_metadata$gene)
+stopifnot(colnames(count_matrix) == sample_metadata$sample)
+```
+
+
+```{r}
+se <- SummarizedExperiment(assays = list(counts = count_matrix),
                            colData = sample_metadata,
                            rowData = gene_metadata)
 se
 ```
 
+### Saving data
+
+Exporting data to a spreadsheet, as we did in a previous episode, has
+several limitations, such as those described in the first chapter
+(possible inconsistencies with `,` and `.` for decimal separators and
+lack of variable type definitions). Furthermore, exporting data to a
+spreadsheet is only relevant for rectangular data such as dataframes
+and matrices.
+
+A more general way to save data, that is specific to R and is
+guaranteed to work on any operating system, is to use the `saveRDS`
+function. Saving objects like this will generate a binary
+representation on disk (using the `rds` file extension here), which
+can be loaded back into R using the `readRDS` function.
+
+```{r, eval = FALSE}
+saveRDS(se, file = "data_output/se.rds")
+rm(se)
+se <- readRDS("data_output/se.rds")
+head(se)
+```
+
+To conclude, when it comes to saving data from R that will be loaded
+again in R, saving and loading with `saveRDS` and `readRDS` is the
+preferred approach. If tabular data need to be shared with somebody
+that is not using R, then exporting to a text-based spreadsheet is a
+good alternative.
+
 Using this data structure, we can access the expression matrix with
-the `assay` function, the feature metadata with the `rowData` function,
-and the sample metadata with the `colData` function:
-
+the `assay` function:
 
 ```{r}
-dim(assay(se))
 head(assay(se))
+dim(assay(se))
 ```
+
+We can access the sample metadata using the `colData` function:
 
 ```{r}
 colData(se)
+dim(colData(se))
 ```
 
+We can also access the feature metadata using the `rowData` function:
+
 ```{r}
-dim(rowData(se))
 head(rowData(se))
+dim(rowData(se))
 ```
-
-#### Adding variables to metadata
-
-We can also add information to the metadata.
-Suppose that you want to add the center where the samples were collected...
-
-```{r}
-colData(se)$center <- rep("University of Illinois", nrow(colData(se)))
-colData(se)
-```
-
-This illustrates that the metadata slots can grow indefinitely without affecting
-the other structures!
-
 
 ### Subsetting a SummarizedExperiment
 
-SummarizedExperiment can be subset just like with data frames,
-with numerics or with characters of logicals.
+SummarizedExperiment can be subset just like with data frames, with
+numerics or with characters of logicals.
 
-Below, we create a new instance of class SummarizedExperiment that contains only
-the 5 first features for the 3 first samples.
+Below, we create a new instance of class SummarizedExperiment that
+contains only the 5 first features for the 3 first samples.
 
 ```{r}
 se1 <- se[1:5, 1:3]
 se1
 ```
 
-We can also use the colData() function to subset on something from the sample metadata.
-For example, here we keep only the non infected samples.
-
 ```{r}
-se1 <- se[, colData(se)$infection == "NonInfected"]
-se1
 colData(se1)
+rowData(se1)
 ```
 
-Of course the rowData() function can similarly be used to keep only certain
-features of interest. We could for example focus on miRNAs...
+
+We can also use the `colData()` function to subset on something from
+the sample metadata or the `rowData()` to subset on something from the
+feature metadata.  For example, here we keep only miRNAs and the non
+infected samples:
 
 ```{r}
-se1 <- se[rowData(se)$gene_biotype == "miRNA",]
+se1 <- se[rowData(se)$gene_biotype == "miRNA",
+          colData(se)$infection == "NonInfected"]
 se1
 assay(se1)
+colData(se1)
+rowData(se1)
 ```
 
+> ## Challenge
+>
+> Extract the gene expression levels of the 3 first genes in samples
+> at time 0 and at time 8.
+>
+> > ## Solution
+> >
+> >
+> > ```{r, purl=FALSE}
+> > assay(se)[1:3, colData(se)$time != 4]
+> >
+> > # Equivalent to
+> > assay(se)[1:3, colData(se)$time == 0 | colData(se)$time == 8]
+> > ```
+> {: .solution}
+{: .challenge}
 
-`r msmbstyle::question_begin()`
+#### Adding variables to metadata
 
-Extract the gene expression levels of the 3 first genes in sample at time 0 and at time 8.
+We can also add information to the metadata. Suppose that you want to
+add the center where the samples were collected ...
 
-`r msmbstyle::question_end()`
-
-`r msmbstyle::solution_begin()`
-
-```{r, purl=FALSE}
-assay(se)[1:3, colData(se)$time != 4]
-
-# Equivalent to
-assay(se)[1:3, colData(se)$time == 0 | colData(se)$time == 8]
+```{r}
+colData(se)$center <- rep("University of Illinois", nrow(colData(se)))
+colData(se)
 ```
-`r msmbstyle::solution_end()`
+
+This illustrates that the metadata slots can grow indefinitely without
+affecting the other structures!
 
 ## RangedSummarizedExperiment
 

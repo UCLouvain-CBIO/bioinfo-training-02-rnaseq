@@ -519,8 +519,6 @@ head(log_tdata1)
 limma::plotDensities(log_tdata1)
 ```
 
-`r msmbstyle::solution_end()`
-
 We are now going to apply a t-test to feature (row) 73, comparing the
 expression intensities in groups A and B. As we have seen, this can be
 done with the `t.test` function:
@@ -532,6 +530,7 @@ t.test(x[1:3], x[4:6])
 ```
 
 `r msmbstyle::question_begin()`
+
 We would now like to repeat the same analysis on the 100 genes.
 
 - Write a function that will take a vector as input and perform a

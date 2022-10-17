@@ -461,9 +461,9 @@ analysis as shown above.</p>
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-8" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-8', 'sol-start-8')"></span>
+► Solution<span id="sol-start-7" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-7', 'sol-start-7')"></span>
 </p>
-<div id="sol-body-8" class="solution-body" style="display: none;">
+<div id="sol-body-7" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="sec-dimred.html#cb108-1" aria-hidden="true" tabindex="-1"></a>xy <span class="ot">&lt;-</span> <span class="fu">scale</span>(xy0)</span>
 <span id="cb108-2"><a href="sec-dimred.html#cb108-2" aria-hidden="true" tabindex="-1"></a>pca1 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(xy)</span>
 <span id="cb108-3"><a href="sec-dimred.html#cb108-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca1)</span></code></pre></div>
@@ -496,9 +496,9 @@ produce a PCA for PCs 2 and 3.</p>
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-9" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-9', 'sol-start-9')"></span>
+► Solution<span id="sol-start-8" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-8', 'sol-start-8')"></span>
 </p>
-<div id="sol-body-9" class="solution-body" style="display: none;">
+<div id="sol-body-8" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="sec-dimred.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MSnbase"</span>)</span></code></pre></div>
 <pre><code>## Loading required package: BiocGenerics</code></pre>
 <pre><code>## 
@@ -589,9 +589,9 @@ samples. Interprete the figures.</p>
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-10" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-10', 'sol-start-10')"></span>
+► Solution<span id="sol-start-9" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-9', 'sol-start-9')"></span>
 </p>
-<div id="sol-body-10" class="solution-body" style="display: none;">
+<div id="sol-body-9" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="sec-dimred.html#cb140-1" aria-hidden="true" tabindex="-1"></a>x_t <span class="ot">&lt;-</span> <span class="fu">t</span>(x)</span>
 <span id="cb140-2"><a href="sec-dimred.html#cb140-2" aria-hidden="true" tabindex="-1"></a>pca3 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(x_t)</span>
 <span id="cb140-3"><a href="sec-dimred.html#cb140-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca3)</span></code></pre></div>
@@ -601,9 +601,9 @@ samples. Interprete the figures.</p>
 ## Proportion of Variance 0.4501 0.2528 0.1331 0.1138 0.05018 0.000e+00
 ## Cumulative Proportion  0.4501 0.7029 0.8360 0.9498 1.00000 1.000e+00</code></pre>
 <div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="sec-dimred.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">screeplot</span>(pca3)</span></code></pre></div>
-<p><img src="rnaseq_files/figure-html/unnamed-chunk-27-1.png" width="672"></p>
+<p><img src="rnaseq_files/figure-html/unnamed-chunk-28-1.png" width="672"></p>
 <div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="sec-dimred.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca3)</span></code></pre></div>
-<p><img src="rnaseq_files/figure-html/unnamed-chunk-27-2.png" width="672"></p>
+<p><img src="rnaseq_files/figure-html/unnamed-chunk-28-2.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -633,9 +633,9 @@ scaling. Compare and interpret the results.</p>
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-11" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-11', 'sol-start-11')"></span>
+► Solution<span id="sol-start-10" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-10', 'sol-start-10')"></span>
 </p>
-<div id="sol-body-11" class="solution-body" style="display: none;">
+<div id="sol-body-10" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="sec-dimred.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
 <span id="cb144-2"><a href="sec-dimred.html#cb144-2" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(<span class="fu">prcomp</span>(mtcars, <span class="at">scale =</span> <span class="cn">FALSE</span>), <span class="at">main =</span> <span class="st">"No scaling"</span>)  <span class="do">## 1</span></span>
 <span id="cb144-3"><a href="sec-dimred.html#cb144-3" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(<span class="fu">prcomp</span>(mtcars, <span class="at">scale =</span> <span class="cn">TRUE</span>), <span class="at">main =</span> <span class="st">"With scaling"</span>) <span class="do">## 2</span></span></code></pre></div>
@@ -734,9 +734,9 @@ experimental design stored in the <em>colData</em> slot.</p>
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-12" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-12', 'sol-start-12')"></span>
+► Solution<span id="sol-start-11" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-11', 'sol-start-11')"></span>
 </p>
-<div id="sol-body-12" class="solution-body" style="display: none;">
+<div id="sol-body-11" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="sec-dimred.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pRolocdata)</span></code></pre></div>
 <pre><code>## 
 ## This is pRolocdata version 1.34.0.
@@ -827,9 +827,9 @@ display a summary of the results.</li>
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-13" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-13', 'sol-start-13')"></span>
+► Solution<span id="sol-start-12" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-12', 'sol-start-12')"></span>
 </p>
-<div id="sol-body-13" class="solution-body" style="display: none;">
+<div id="sol-body-12" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="sec-dimred.html#cb166-1" aria-hidden="true" tabindex="-1"></a>pca_mulvey2015 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">t</span>(<span class="fu">assay</span>(mulvey2015)), <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb166-2"><a href="sec-dimred.html#cb166-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca_mulvey2015)</span></code></pre></div>
 <pre><code>## Importance of components:
@@ -868,17 +868,17 @@ the <code>fviz_screeplot</code> function from the <code>factoextra</code> packag
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-14" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-14', 'sol-start-14')"></span>
+► Solution<span id="sol-start-13" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-13', 'sol-start-13')"></span>
 </p>
-<div id="sol-body-14" class="solution-body" style="display: none;">
+<div id="sol-body-13" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="sec-dimred.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span>
 <span id="cb168-2"><a href="sec-dimred.html#cb168-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_screeplot</span>(pca_mulvey2015)</span></code></pre></div>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-31"></span>
+<span style="display:block;" id="fig:unnamed-chunk-32"></span>
 <p class="caption marginnote shownote">
 Figure 2.10: Scree plot for the <code>mulvey2015</code> data showing the percentage of explained variance onlong the principal components.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-31-1.png" alt="Scree plot for the `mulvey2015` data showing the percentage of explained variance onlong the principal components." width="672">
+<img src="rnaseq_files/figure-html/unnamed-chunk-32-1.png" alt="Scree plot for the `mulvey2015` data showing the percentage of explained variance onlong the principal components." width="672">
 </div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -906,32 +906,32 @@ the light of the experimental design.</p></li>
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-15" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-15', 'sol-start-15')"></span>
+► Solution<span id="sol-start-14" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-14', 'sol-start-14')"></span>
 </p>
-<div id="sol-body-15" class="solution-body" style="display: none;">
+<div id="sol-body-14" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="sec-dimred.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca</span>(pca_mulvey2015)</span></code></pre></div>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-32-1"></span>
+<span style="display:block;" id="fig:unnamed-chunk-33-1"></span>
 <p class="caption marginnote shownote">
 Figure 2.11: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-32-1.png" alt="Biplot and variables PCA plot of the `mulvey2015` data." width="768">
+<img src="rnaseq_files/figure-html/unnamed-chunk-33-1.png" alt="Biplot and variables PCA plot of the `mulvey2015` data." width="768">
 </div>
 <div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="sec-dimred.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_mulvey2015)</span></code></pre></div>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-32-2"></span>
+<span style="display:block;" id="fig:unnamed-chunk-33-2"></span>
 <p class="caption marginnote shownote">
 Figure 2.12: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-32-2.png" alt="Biplot and variables PCA plot of the `mulvey2015` data." width="768">
+<img src="rnaseq_files/figure-html/unnamed-chunk-33-2.png" alt="Biplot and variables PCA plot of the `mulvey2015` data." width="768">
 </div>
 <div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="sec-dimred.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_mulvey2015, <span class="at">habillage =</span> mulvey2015<span class="sc">$</span>times)</span></code></pre></div>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-32-3"></span>
+<span style="display:block;" id="fig:unnamed-chunk-33-3"></span>
 <p class="caption marginnote shownote">
 Figure 2.13: Biplot and variables PCA plot of the <code>mulvey2015</code> data.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-32-3.png" alt="Biplot and variables PCA plot of the `mulvey2015` data." width="768">
+<img src="rnaseq_files/figure-html/unnamed-chunk-33-3.png" alt="Biplot and variables PCA plot of the `mulvey2015` data." width="768">
 </div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -953,9 +953,9 @@ cube along the three first PCs.</p>
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-16" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-16', 'sol-start-16')"></span>
+► Solution<span id="sol-start-15" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-15', 'sol-start-15')"></span>
 </p>
-<div id="sol-body-16" class="solution-body" style="display: none;">
+<div id="sol-body-15" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="sec-dimred.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rgl"</span>)</span>
 <span id="cb172-2"><a href="sec-dimred.html#cb172-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot3d</span>(pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">1</span>],</span>
 <span id="cb172-3"><a href="sec-dimred.html#cb172-3" aria-hidden="true" tabindex="-1"></a>       pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">2</span>],</span>
@@ -1012,9 +1012,9 @@ with its experimental design and its feature annotation stored in the
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-17" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-17', 'sol-start-17')"></span>
+► Solution<span id="sol-start-16" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-16', 'sol-start-16')"></span>
 </p>
-<div id="sol-body-17" class="solution-body" style="display: none;">
+<div id="sol-body-16" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="sec-dimred.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pRolocdata)</span>
 <span id="cb173-2"><a href="sec-dimred.html#cb173-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(hyperLOPIT2015)</span>
 <span id="cb173-3"><a href="sec-dimred.html#cb173-3" aria-hidden="true" tabindex="-1"></a>hyperLOPIT2015 <span class="ot">&lt;-</span> <span class="fu">as</span>(hyperLOPIT2015, <span class="st">"SummarizedExperiment"</span>)</span>
@@ -1082,9 +1082,9 @@ display a summary of the results.</li>
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-18" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-18', 'sol-start-18')"></span>
+► Solution<span id="sol-start-17" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-17', 'sol-start-17')"></span>
 </p>
-<div id="sol-body-18" class="solution-body" style="display: none;">
+<div id="sol-body-17" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="sec-dimred.html#cb177-1" aria-hidden="true" tabindex="-1"></a>pca_hl <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">assay</span>(hyperLOPIT2015), <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb177-2"><a href="sec-dimred.html#cb177-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca_hl)</span></code></pre></div>
 <pre><code>## Importance of components:
@@ -1123,17 +1123,17 @@ the <code>fviz_screeplot</code> function from the <code>factoextra</code> packag
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-19" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-19', 'sol-start-19')"></span>
+► Solution<span id="sol-start-18" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-18', 'sol-start-18')"></span>
 </p>
-<div id="sol-body-19" class="solution-body" style="display: none;">
+<div id="sol-body-18" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="sec-dimred.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span>
 <span id="cb179-2"><a href="sec-dimred.html#cb179-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_screeplot</span>(pca_hl)</span></code></pre></div>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-36"></span>
+<span style="display:block;" id="fig:unnamed-chunk-37"></span>
 <p class="caption marginnote shownote">
 Figure 2.14: Scree plot for the <code>hyperLOPIT2015</code> data showing the percentage of explained variance onlong the principal components.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-36-1.png" alt="Scree plot for the `hyperLOPIT2015` data showing the percentage of explained variance onlong the principal components." width="672">
+<img src="rnaseq_files/figure-html/unnamed-chunk-37-1.png" alt="Scree plot for the `hyperLOPIT2015` data showing the percentage of explained variance onlong the principal components." width="672">
 </div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1169,24 +1169,24 @@ annotate the plot. Compare and interpret the two plots.</p></li>
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-20" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-20', 'sol-start-20')"></span>
+► Solution<span id="sol-start-19" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-19', 'sol-start-19')"></span>
 </p>
-<div id="sol-body-20" class="solution-body" style="display: none;">
+<div id="sol-body-19" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="sec-dimred.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca</span>(pca_hl)</span></code></pre></div>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-37-1"></span>
+<span style="display:block;" id="fig:unnamed-chunk-38-1"></span>
 <p class="caption marginnote shownote">
 Figure 2.15: Biplot and variables PCA plot of the <code>hyperLOPIT2015</code> data.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-37-1.png" alt="Biplot and variables PCA plot of the `hyperLOPIT2015` data." width="768">
+<img src="rnaseq_files/figure-html/unnamed-chunk-38-1.png" alt="Biplot and variables PCA plot of the `hyperLOPIT2015` data." width="768">
 </div>
 <div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="sec-dimred.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(pca_hl)</span></code></pre></div>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-37-2"></span>
+<span style="display:block;" id="fig:unnamed-chunk-38-2"></span>
 <p class="caption marginnote shownote">
 Figure 2.16: Biplot and variables PCA plot of the <code>hyperLOPIT2015</code> data.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-37-2.png" alt="Biplot and variables PCA plot of the `hyperLOPIT2015` data." width="768">
+<img src="rnaseq_files/figure-html/unnamed-chunk-38-2.png" alt="Biplot and variables PCA plot of the `hyperLOPIT2015` data." width="768">
 </div>
 <div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="sec-dimred.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Manual colour palette (from the pRoloc package)</span></span>
 <span id="cb182-2"><a href="sec-dimred.html#cb182-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1198,21 +1198,21 @@ Figure 2.16: Biplot and variables PCA plot of the <code>hyperLOPIT2015</code> da
 <span id="cb182-8"><a href="sec-dimred.html#cb182-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">habillage =</span> <span class="fu">rowData</span>(hyperLOPIT2015)<span class="sc">$</span>markers,</span>
 <span id="cb182-9"><a href="sec-dimred.html#cb182-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">palette =</span> cls)</span></code></pre></div>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-38-1"></span>
+<span style="display:block;" id="fig:unnamed-chunk-39-1"></span>
 <p class="caption marginnote shownote">
 Figure 2.17: Biplot and individuals PCA plot of the <code>hyperLOPIT2015</code> data showing the sub-cellular localisation of the proteins.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-38-1.png" alt="Biplot and individuals PCA plot of the `hyperLOPIT2015` data showing the sub-cellular localisation of the proteins." width="768">
+<img src="rnaseq_files/figure-html/unnamed-chunk-39-1.png" alt="Biplot and individuals PCA plot of the `hyperLOPIT2015` data showing the sub-cellular localisation of the proteins." width="768">
 </div>
 <div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="sec-dimred.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_hl, <span class="at">geom =</span> <span class="st">"point"</span>,</span>
 <span id="cb183-2"><a href="sec-dimred.html#cb183-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">habillage =</span> <span class="fu">rowData</span>(hyperLOPIT2015)<span class="sc">$</span>final.assignment,</span>
 <span id="cb183-3"><a href="sec-dimred.html#cb183-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">palette =</span> cls)</span></code></pre></div>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-38-2"></span>
+<span style="display:block;" id="fig:unnamed-chunk-39-2"></span>
 <p class="caption marginnote shownote">
 Figure 2.18: Biplot and individuals PCA plot of the <code>hyperLOPIT2015</code> data showing the sub-cellular localisation of the proteins.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-38-2.png" alt="Biplot and individuals PCA plot of the `hyperLOPIT2015` data showing the sub-cellular localisation of the proteins." width="768">
+<img src="rnaseq_files/figure-html/unnamed-chunk-39-2.png" alt="Biplot and individuals PCA plot of the `hyperLOPIT2015` data showing the sub-cellular localisation of the proteins." width="768">
 </div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1239,11 +1239,11 @@ in triplicates in a single batch by the same operator.</p>
 condition. Interpreted the figure in the light of the experimentally
 design and suggest how to best analyse these data.</p>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-39"></span>
+<span style="display:block;" id="fig:unnamed-chunk-40"></span>
 <p class="caption marginnote shownote">
 Figure 2.19: PCA analysis illustrating the global effect of drug A and B.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-39-1.png" alt="PCA analysis illustrating the global effect of drug A and B." width="672">
+<img src="rnaseq_files/figure-html/unnamed-chunk-40-1.png" alt="PCA analysis illustrating the global effect of drug A and B." width="672">
 </div>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1259,11 +1259,11 @@ Figure 2.19: PCA analysis illustrating the global effect of drug A and B.
 below. Interpret the figure in the light of the experimental design
 and suggest how to best analyse these data.</p>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-40"></span>
+<span style="display:block;" id="fig:unnamed-chunk-41"></span>
 <p class="caption marginnote shownote">
 Figure 2.20: PCA analysis illustrating the global effect of drug A and B.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-40-1.png" alt="PCA analysis illustrating the global effect of drug A and B." width="672">
+<img src="rnaseq_files/figure-html/unnamed-chunk-41-1.png" alt="PCA analysis illustrating the global effect of drug A and B." width="672">
 </div>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1284,11 +1284,11 @@ triplicates in a single batch.</p>
 <p>Interpret the PCA plot in the light of the experimental design. Do you
 think the analysis is likely to provide significant results?</p>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-41"></span>
+<span style="display:block;" id="fig:unnamed-chunk-42"></span>
 <p class="caption marginnote shownote">
 Figure 2.21: Quantitative proteomics experiment measuring the effect of drug C121.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-41-1.png" alt="Quantitative proteomics experiment measuring the effect of drug C121." width="672">
+<img src="rnaseq_files/figure-html/unnamed-chunk-42-1.png" alt="Quantitative proteomics experiment measuring the effect of drug C121." width="672">
 </div>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1307,11 +1307,11 @@ identifying novel biomarkers.</p>
 <p>In the light of the experimental design, interpret the PCA plot. What
 are the chances to find good biomarkers?</p>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-42"></span>
+<span style="display:block;" id="fig:unnamed-chunk-43"></span>
 <p class="caption marginnote shownote">
 Figure 2.22: Quantitative proteomics experiment measuring the effect of drug C121.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-42-1.png" alt="Quantitative proteomics experiment measuring the effect of drug C121." width="672">
+<img src="rnaseq_files/figure-html/unnamed-chunk-43-1.png" alt="Quantitative proteomics experiment measuring the effect of drug C121." width="672">
 </div>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1332,11 +1332,11 @@ and C (20 and 7 samples respectively).</p>
 would you suggest to do before testing whether using kit 1 and 2 have
 an impact on the data?</p>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-43"></span>
+<span style="display:block;" id="fig:unnamed-chunk-44"></span>
 <p class="caption marginnote shownote">
 Figure 2.23: Testing the effect of RNA sequencing kits 1 and 2.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-43-1.png" alt="Testing the effect of RNA sequencing kits 1 and 2." width="672">
+<img src="rnaseq_files/figure-html/unnamed-chunk-44-1.png" alt="Testing the effect of RNA sequencing kits 1 and 2." width="672">
 </div>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>

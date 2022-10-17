@@ -621,8 +621,8 @@ opposite responses in the extreme conditions: that the expression of
 some genes will increase in the mutant under dry conditions while they
 will decrease (or change to a lesser extend at least) under humid
 conditions.</p>
-<div id="htmlwidget-7933647ec0ac4d46f011" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7933647ec0ac4d46f011">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12],["WT","WT","WT","WT","WT","WT","MT","MT","MT","MT","MT","MT"],["normal","dry","humid","normal","dry","humid","normal","dry","humid","normal","dry","humid"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>sample<\/th>\n      <th>genotype<\/th>\n      <th>condition<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":12,"autoWidth":true,"columnDefs":[{"className":"dt-right","targets":0}],"order":[],"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Such situation require a new model formula syntax</p>
+<div id="htmlwidget-90b00a99a289e08f5b2c" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-90b00a99a289e08f5b2c">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12],["WT","WT","WT","WT","WT","WT","MT","MT","MT","MT","MT","MT"],["normal","dry","humid","normal","dry","humid","normal","dry","humid","normal","dry","humid"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>sample<\/th>\n      <th>genotype<\/th>\n      <th>condition<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":12,"autoWidth":true,"columnDefs":[{"className":"dt-right","targets":0}],"order":[],"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Such situation require a new model formula syntax</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="finding-ifferentially-expressed-features.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="sc">~</span> genotype <span class="sc">*</span> condition</span></code></pre></div>
 <p>which is equivalent to</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="finding-ifferentially-expressed-features.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="sc">~</span> genotype <span class="sc">+</span> condition <span class="sc">+</span> genotype <span class="sc">*</span> condition</span></code></pre></div>
@@ -1080,41 +1080,17 @@ group A and 3 in group B.</p>
 <pre><code>## 
 ## This is 'rWSBIM1322' version 0.2.0</code></pre>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="finding-ifferentially-expressed-features.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(tdata1)</span>
-<span id="cb78-2"><a href="finding-ifferentially-expressed-features.html#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tdata1)</span></code></pre></div>
-<pre><code>##                 A1         A2         A3         B1         B2        B3
-## feature1  429.6721   433.3133  1806.2773  3534.6396  4541.2757 1139.8326
-## feature2 1320.8827  1085.5660 10643.9541   239.7528 14177.4412  678.5271
-## feature3  321.5151   289.6480  9236.7965 15745.7491   443.8737  198.5716
-## feature4 9348.7749  1274.8021   647.2523   601.6313   595.6266 1040.1568
-## feature5 1616.9009   413.2385    43.0974 10143.6595   575.0549 4048.5851
-## feature6  328.3438 11866.2342 32661.9472  8331.8745   608.3194 9331.7692</code></pre>
-<div class="question">
-<p class="question-begin">
-► Question
-</p>
-<div class="question-body">
-<p>Visualise the distribution of the <code>tdata1</code> data and, if necessary,
-log-transform it.</p>
-<p class="question-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
-<div class="msmb-solution">
-<p class="solution-begin">
-► Solution<span id="sol-start-5" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-5', 'sol-start-5')"></span>
-</p>
-<div id="sol-body-5" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="finding-ifferentially-expressed-features.html#cb80-1" aria-hidden="true" tabindex="-1"></a>log_tdata1 <span class="ot">&lt;-</span> <span class="fu">log2</span>(tdata1)</span>
-<span id="cb80-2"><a href="finding-ifferentially-expressed-features.html#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb80-3"><a href="finding-ifferentially-expressed-features.html#cb80-3" aria-hidden="true" tabindex="-1"></a>limma<span class="sc">::</span><span class="fu">plotDensities</span>(tdata1)</span>
-<span id="cb80-4"><a href="finding-ifferentially-expressed-features.html#cb80-4" aria-hidden="true" tabindex="-1"></a>limma<span class="sc">::</span><span class="fu">plotDensities</span>(log_tdata1)</span></code></pre></div>
-<p><img src="rnaseq_files/figure-html/tex1-1.png" width="672"></p>
-<p class="solution-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
+<span id="cb78-2"><a href="finding-ifferentially-expressed-features.html#cb78-2" aria-hidden="true" tabindex="-1"></a>log_tdata1 <span class="ot">&lt;-</span> <span class="fu">log2</span>(tdata1)</span>
+<span id="cb78-3"><a href="finding-ifferentially-expressed-features.html#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(log_tdata1)</span></code></pre></div>
+<pre><code>##                 A1        A2        A3        B1        B2        B3
+## feature1  8.747092  8.759267 10.818804 11.787347 12.148882 10.154606
+## feature2 10.367287 10.084232 13.377747  7.905404 13.791310  9.406263
+## feature3  8.328743  8.178157 13.173177 13.942675  8.794005  7.633516
+## feature4 13.190562 10.316058  9.338184  9.232736  9.218264 10.022585
+## feature5 10.659016  8.690831  5.429529 13.308291  9.167556 11.983202
+## feature6  8.359063 13.534575 14.995323 13.024425  9.248685 13.187935</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="finding-ifferentially-expressed-features.html#cb80-1" aria-hidden="true" tabindex="-1"></a>limma<span class="sc">::</span><span class="fu">plotDensities</span>(log_tdata1)</span></code></pre></div>
+<p><img src="rnaseq_files/figure-html/unnamed-chunk-21-1.png" width="672"></p>
 <p>We are now going to apply a t-test to feature (row) 73, comparing the
 expression intensities in groups A and B. As we have seen, this can be
 done with the <code>t.test</code> function:</p>
@@ -1152,9 +1128,9 @@ What features are of possible biological interest?</p></li>
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-6" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-6', 'sol-start-6')"></span>
+► Solution<span id="sol-start-5" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-5', 'sol-start-5')"></span>
 </p>
-<div id="sol-body-6" class="solution-body" style="display: none;">
+<div id="sol-body-5" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="finding-ifferentially-expressed-features.html#cb83-1" aria-hidden="true" tabindex="-1"></a>my_t_test <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
 <span id="cb83-2"><a href="finding-ifferentially-expressed-features.html#cb83-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">t.test</span>(x[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], x[<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>])<span class="sc">$</span>p.value</span>
 <span id="cb83-3"><a href="finding-ifferentially-expressed-features.html#cb83-3" aria-hidden="true" tabindex="-1"></a>}</span>
@@ -1192,7 +1168,7 @@ significant p-value at an alpha of 0.05?</p></li>
 cartoon</a> that depicts scientists testing
 whether eating jelly beans causes acne.</p>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-23"></span>
+<span style="display:block;" id="fig:unnamed-chunk-24"></span>
 <p class="caption marginnote shownote">
 Figure 1.1: Do jelly beans cause acne? Scientists investigate. From <a href="https://xkcd.com/882/">xkcd</a>.
 </p>
@@ -1282,9 +1258,9 @@ confirm that none of the features are differentially expressed.</p>
 </div>
 <div class="msmb-solution">
 <p class="solution-begin">
-► Solution<span id="sol-start-7" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-7', 'sol-start-7')"></span>
+► Solution<span id="sol-start-6" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-6', 'sol-start-6')"></span>
 </p>
-<div id="sol-body-7" class="solution-body" style="display: none;">
+<div id="sol-body-6" class="solution-body" style="display: none;">
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="finding-ifferentially-expressed-features.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(adj_pvals <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="finding-ifferentially-expressed-features.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(adj_pvals)</span></code></pre></div>
