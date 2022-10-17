@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto and Axelle Loriot" />
 
-<meta name="date" content="2022-10-16" />
+<meta name="date" content="2022-10-17" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -614,8 +614,8 @@ opposite responses in the extreme conditions: that the expression of
 some genes will increase in the mutant under dry conditions while they
 will decrease (or change to a lesser extend at least) under humid
 conditions.</p>
-<div id="htmlwidget-b40a2fabf9fd95a7d03b" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b40a2fabf9fd95a7d03b">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12],["WT","WT","WT","WT","WT","WT","MT","MT","MT","MT","MT","MT"],["normal","dry","humid","normal","dry","humid","normal","dry","humid","normal","dry","humid"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>sample<\/th>\n      <th>genotype<\/th>\n      <th>condition<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":12,"autoWidth":true,"columnDefs":[{"className":"dt-right","targets":0}],"order":[],"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Such situation require a new model formula syntax</p>
+<div id="htmlwidget-31ad22819ff03cc57de7" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-31ad22819ff03cc57de7">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12],["WT","WT","WT","WT","WT","WT","MT","MT","MT","MT","MT","MT"],["normal","dry","humid","normal","dry","humid","normal","dry","humid","normal","dry","humid"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>sample<\/th>\n      <th>genotype<\/th>\n      <th>condition<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":12,"autoWidth":true,"columnDefs":[{"className":"dt-right","targets":0}],"order":[],"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Such situation require a new model formula syntax</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="finding-ifferentially-expressed-features.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="sc">~</span> genotype <span class="sc">*</span> condition</span></code></pre></div>
 <p>which is equivalent to</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="finding-ifferentially-expressed-features.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="sc">~</span> genotype <span class="sc">+</span> condition <span class="sc">+</span> genotype <span class="sc">*</span> condition</span></code></pre></div>
@@ -905,8 +905,8 @@ the data to help with the interpretation.</p>
 ## Multiple R-squared:  0.7094, Adjusted R-squared:  0.6005 
 ## F-statistic: 6.511 on 3 and 8 DF,  p-value: 0.01536</code></pre>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="finding-ifferentially-expressed-features.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(x_i, cell_type, condition) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(expression))</span></code></pre></div>
-<pre><code>## `summarise()` has grouped output by 'cell_type'. You can override using the `.groups`
-## argument.</code></pre>
+<pre><code>## `summarise()` has grouped output by 'cell_type'. You can override using the
+## `.groups` argument.</code></pre>
 <pre><code>## # A tibble: 4 × 3
 ## # Groups:   cell_type [2]
 ##   cell_type condition  mean
@@ -1141,20 +1141,6 @@ done with the <code>t.test</code> function:</p>
 ► Question
 </p>
 <div class="question-body">
-<ul>
-<li>Interpret the results of the test above.</li>
-<li>Repeat it with another features.</li>
-</ul>
-<p class="question-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
-<div class="question">
-<p class="question-begin">
-► Question
-</p>
-<div class="question-body">
 <p>We would now like to repeat the same analysis on the 100 genes.</p>
 <ul>
 <li><p>Write a function that will take a vector as input and perform a
@@ -1322,7 +1308,7 @@ confirm that none of the features are differentially expressed.</p>
 <a href="sec-dimred.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2022-10-16
+2022-10-17
  using 
 R version 4.2.1 (2022-06-23)
 </p>

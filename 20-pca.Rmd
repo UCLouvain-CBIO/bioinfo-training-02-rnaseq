@@ -302,16 +302,9 @@ biplot(pca1)
 
 `r msmbstyle::question_begin()`
 
-Load the `cptac_prot` data[^msnset1], scale the data (see below for
-why scaling is important), then perform the PCA analysis and interpret
-it. Also produce a PCA for PCs 2 and 3.
-
-[^msnset1]: The [`MSnSet`
-    class](https://lgatto.github.io/MSnbase/reference/MSnSet-class.html)
-    (defined in the `MSnbase` package) is similar to
-    `SummarizedExperiment`, that we have seen in detail in chapter
-    \@ref(sec-obj). You can convert an `MSnSet` object to a
-    `SummarizedExperiment` with `as(x, "SummarizexExperiment")`.
+Load the `cptac_prot` data, scale the data (see below for why scaling
+is important), then perform the PCA analysis and interpret it. Also
+produce a PCA for PCs 2 and 3.
 
 `r msmbstyle::question_end()`
 
@@ -460,8 +453,9 @@ experimental design stored in the *colData* slot.
 
 [^msnset2]: The [`MSnSet`
     class](https://lgatto.github.io/MSnbase/reference/MSnSet-class.html)
-    is similar to the `SummarizedExperiment` class, that we have seen
-    in detail in chapter \@ref(sec-obj).
+    is similar to the `SummarizedExperiment` class and can be
+    converted to a `SummarizedExperiment` with `as(x,
+    "SummarizedExperiment")`.
 
 
 ```{r, eval = FALSE}

@@ -41,7 +41,7 @@ pks <- c("tidyverse", "patchwork",
          "patchwork", "biomaRt",
          "org.Hs.eg.db", "GO.db",
          "org.Hs.eg.db", "msigdbr",
-         "clusterProfiler",
+         "clusterProfiler", "airway"
          "UCLouvain-CBIO/rWSBIM2122",
          "UCLouvain-CBIO/rWSBIM1322")
 

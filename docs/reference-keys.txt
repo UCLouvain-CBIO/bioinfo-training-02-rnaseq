@@ -25,10 +25,10 @@ fig:unnamed-chunk-40
 fig:unnamed-chunk-41
 fig:unnamed-chunk-42
 fig:unnamed-chunk-43
-fig:unnamed-chunk-141
-fig:unnamed-chunk-142
+fig:unnamed-chunk-157
+fig:unnamed-chunk-158
 fig:gsea1
-fig:unnamed-chunk-153
+fig:unnamed-chunk-169
 installation-instructions
 finding-ifferentially-expressed-features
 sec-linmod
@@ -54,6 +54,12 @@ sec-dimred01
 sec-dimred02
 additional-exercises
 summarizedexperiments
+summarizedexperiment
+creating-a-summarizedexperiment
+adding-variables-to-metadata
+subsetting-a-summarizedexperiment
+rangedsummarizedexperiment
+creating-a-count-matrix-from-multiple-files
 sec-hts
 rna-seq-library-preparation
 stranded-versus-unstranded-libraries
