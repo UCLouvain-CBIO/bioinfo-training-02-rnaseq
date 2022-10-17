@@ -37,6 +37,34 @@ fold-change, the associated p-value and visualise the data.
 t.test(expression ~ group, data = gexp)
 ```
 
+We set
+
+- $H_0$: the means of the two groups are the same, $\mu_{1} = \mu_{2}$.
+- $H_1$: the means of the two groups are different, $\mu_{1} \neq \mu_{2}$.
+
+and calculate a two-sided, two-sample t-test (assuming unequal
+variances) with
+
+$$
+t = \frac{ \bar X_{1} - \bar X_{2} }
+         { \sqrt{ \frac{ s_{1}^{2} }{ N_{1} } + \frac{ s_{2}^{2} }{ N_{2} } } }
+$$
+
+
+where $\bar X_i$, $s_{i}^{2}$ and $N_i$ are the mean, variance and
+size of samples 1 and 2.
+
+A t-test has the following assumptions:
+
+- the data are normally distributed;
+- the data are independent and identically distributed;
+- equal or un-equal (Welch test) variances.
+
+Note that the t-test is robust to deviations[^models].
+
+[^models]: All models are wrong. Some are useful.
+
+
 ```{r gexp_vis1, message = FALSE}
 library("ggplot2")
 p <- ggplot(gexp, aes(x = group, y = expression)) +
@@ -272,17 +300,6 @@ define the model formula?
 `r msmbstyle::question_end()`
 
 
-`r msmbstyle::question_begin()`
-
-We have measured the gene expression in cell lines U2OS and Jurkat
-(defined as variable `cell_line`), each in the presence of drug A, B
-or C (defined as variable `drug`). How would you define the model
-formula? Which coefficient would you include in the hypothesis test to
-assess the drug effect?
-
-`r msmbstyle::question_end()`
-
-
 ## Interactions between variables
 
 Consider the following design: two plant genotypes, wild type and a
@@ -484,18 +501,6 @@ design/effect.
 Accumulating models and tests isn't necessarily a solution either, as
 this leads to the accumulation of tests that would require additional
 adjustment for multiple testing.
-
-## Additional reading
-
-
-We will be using linear models when analysing gene expression
-experiment, with concrete RNA sequencing example. The [*A guide to
-creating design matrices for gene expression
-experiments*](https://f1000research.com/articles/9-1444) paper
-[@Law:2020] is an excellent guide describing the basics of how to set
-up design and contrast matrices and great preparation to chapter
-\@ref(sec-rnaseq).
-
 
 ## Testing many features
 

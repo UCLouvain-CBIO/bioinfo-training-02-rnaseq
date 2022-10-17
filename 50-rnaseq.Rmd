@@ -34,24 +34,24 @@ knitr::include_graphics("./figs/deseq2_steps.png")
 ### Size factor estimation
 
 DESeq2 expects as an input a matrix of raw counts (un-normalised counts).
-These counts are supposed to reflect gene abundance (what we are interested in), 
-but they are also dependent on other less interesting factors such as gene length, 
-sequencing biases, sequencing depth or library composition. DESeq2 will estimate 
-scaling factors that will be used internally to account for the “uninteresting” 
-factors rendering the expression levels more comparable between samples. 
+These counts are supposed to reflect gene abundance (what we are interested in),
+but they are also dependent on other less interesting factors such as gene length,
+sequencing biases, sequencing depth or library composition. DESeq2 will estimate
+scaling factors that will be used internally to account for the “uninteresting”
+factors rendering the expression levels more comparable between samples.
 
 
 - **Gene length**
 
 As illustrated in the example below, gene 1 and gene 2 have similar levels of expression,
 but many more reads map to gene 2 than to gene 1. This might not be related to biology
-but it could just reflect the fact that gene 2 is longer. Taking into account gene lengths 
-in the normalisation procedure is important when the purpose is to compare gene expression 
-levels within the same sample. However, for differential expression analysis, as gene 
-expression levels are compared between samples, it is not necessary to use gene lengths to 
-estimate the scaling factors (it is even not recommended). It was just mentioned here for 
-information because many RNAseq common normalisation methods such as TPM (transcripts per 
-million), FPKM (fragments per million), or RPKM (reads per million) take into account gene 
+but it could just reflect the fact that gene 2 is longer. Taking into account gene lengths
+in the normalisation procedure is important when the purpose is to compare gene expression
+levels within the same sample. However, for differential expression analysis, as gene
+expression levels are compared between samples, it is not necessary to use gene lengths to
+estimate the scaling factors (it is even not recommended). It was just mentioned here for
+information because many RNAseq common normalisation methods such as TPM (transcripts per
+million), FPKM (fragments per million), or RPKM (reads per million) take into account gene
 lengths.
 
 ```{r, echo=FALSE, fig.align='center', out.width='100%', purl=TRUE}
@@ -129,7 +129,7 @@ zero. This will hence automatically eliminate genes expressed in some
 samples but not in others and will help to focus the scaling factor on
 housekeeping genes.
 
-**Step 4**: Normalised counts can be obtained by dividing each raw count 
+**Step 4**: Normalised counts can be obtained by dividing each raw count
 values in a given sample by that sample’s scaling factor.
 
 ```{r, echo=FALSE, fig.align='center', out.width='100%', purl=TRUE}
@@ -280,7 +280,7 @@ knitr::include_graphics("./figs/disp_shrinkage.png")
 
 DESeq2 fits a generalized linear model of the form: $$log2(q_{ij}) = \Sigma x_j.β_i$$
 
-where the parameter $q_{ij}$ is proportional to the expected true concentration of 
+where the parameter $q_{ij}$ is proportional to the expected true concentration of
 fragments for sample j:
 
 $$ q_{ij} = \frac{µ_{ij}}{SizeFactor_{j}} $$
@@ -481,7 +481,7 @@ plot the counts distributions of each sample.
 
 ```{r}
 as_tibble(assay(dds)) %>%
-  pivot_longer(names_to = "sample", values_to = "counts", cols = 1:6) %>% 
+  pivot_longer(names_to = "sample", values_to = "counts", cols = 1:6) %>%
   ggplot(aes(x = log2(counts + 1), fill = sample)) +
   geom_histogram(bins = 20) +
   facet_wrap(~ sample)
@@ -1016,8 +1016,8 @@ best_genes <- res_tbl %>%
 
 as_tibble(counts(dds[best_genes$ENSEMBL, ], normalize = TRUE),
           rownames = 'ENSEMBL') %>%
-  pivot_longer(names_to = "sample", values_to = "counts", -ENSEMBL) %>%  
-  left_join(as_tibble(coldata, rownames = "sample")) %>% 
+  pivot_longer(names_to = "sample", values_to = "counts", -ENSEMBL) %>%
+  left_join(as_tibble(coldata, rownames = "sample")) %>%
   ggplot(aes(x = sample, y = counts, fill = Condition)) +
   geom_bar(stat = 'identity', color = "gray30") +
   facet_wrap( ~ ENSEMBL, scales = "free", ncol = 3) +
@@ -1151,3 +1151,14 @@ saveRDS(dds, file = "./data/dds.rds")
 saveRDS(res_tbl, file = "./data/res_tbl.rds")
 saveRDS(ensembl_to_geneName, file = "./data/ensembl_to_geneName.rds")
 ```
+
+
+
+## Additional reading
+
+The [*A guide to creating design matrices for gene expression
+experiments*](https://f1000research.com/articles/9-1444) paper
+[@Law:2020] is an excellent guide describing the basics of how to set
+up design and contrast matrices. See also [this
+chapter](https://uclouvain-cbio.github.io/WSBIM2122/sec-design.html)
+for more complex designs.

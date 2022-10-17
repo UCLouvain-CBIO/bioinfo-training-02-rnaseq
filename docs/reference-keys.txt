@@ -25,11 +25,12 @@ fig:unnamed-chunk-40
 fig:unnamed-chunk-41
 fig:unnamed-chunk-42
 fig:unnamed-chunk-43
-fig:unnamed-chunk-157
 fig:unnamed-chunk-158
+fig:unnamed-chunk-159
 fig:gsea1
-fig:unnamed-chunk-169
+fig:unnamed-chunk-170
 installation-instructions
+data-preparation
 finding-ifferentially-expressed-features
 sec-linmod
 starting-with-a-t-test
@@ -39,7 +40,6 @@ model-generalisation
 interactions-between-variables
 exercise
 which-model-to-use
-additional-reading
 testing-many-features
 adjustment-for-multiple-testing
 sec-dimred
@@ -94,6 +94,7 @@ ma-plot
 volcano-plot
 count-plots
 querying-the-biomart-service
+additional-reading
 sec-gsea
 introduction-1
 gene-sets

@@ -715,7 +715,7 @@ results can be merged in a single count matrix, were each column represents a sa
 and each line represents a gene. This count matrix will be the starting point of a
 differential expression analysis.
 
-```{r, echo = F}
+    ```{r, echo = FALSE}
 load("wsbim2122_data/deseq2/counts.rda")
 head(counts)
 ```
@@ -732,13 +732,16 @@ in the folder `wsbim_data/count_data/`. Use these files to create a count matrix
 `r msmbstyle::solution_begin()`
 
 ```{r, message = FALSE}
-samples <- list.files("wsbim2122_data/count_data/", pattern = "*tsv.gz")
+samples <- list.files("wsbim2122_data/count_data",
+                      pattern = "*tsv.gz",
+                      full.names = TRUE)
+samples
 
-counts <- read_tsv(file = paste0("wsbim2122_data/count_data/", samples[1])) %>%
+counts <- read_tsv(file = samples[1]) %>%
     select(Geneid, ends_with('.bam'))
 
 for (sample in samples[-1]){
-  tmp <- read_tsv(file = paste0("wsbim2122_data/count_data/", sample)) %>%
+  tmp <- read_tsv(sample) %>%
     select(ends_with('.bam'))
   counts <- cbind(counts, tmp)
 }
