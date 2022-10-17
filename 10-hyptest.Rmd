@@ -511,20 +511,11 @@ group A and 3 in group B.
 ```{r}
 library("rWSBIM1322")
 data(tdata1)
-head(tdata1)
+log_tdata1 <- log2(tdata1)
+head(log_tdata1)
 ```
 
-`r msmbstyle::question_begin()`
-Visualise the distribution of the `tdata1` data and, if necessary,
-log-transform it.
-`r msmbstyle::question_end()`
-
-`r msmbstyle::solution_begin()`
-
-```{r tex1}
-log_tdata1 <- log2(tdata1)
-par(mfrow = c(1, 2))
-limma::plotDensities(tdata1)
+```{r}
 limma::plotDensities(log_tdata1)
 ```
 

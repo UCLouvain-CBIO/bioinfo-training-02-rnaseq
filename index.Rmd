@@ -32,7 +32,7 @@ This course is based on material from the
 of Pharmacy and Biomedical
 Sciences](https://uclouvain.be/en/faculties/fasb) at the UCLouvain.
 
-## Installation instructions
+## Installation instructions {-}
 
 ```{r install, eval=FALSE}
 
@@ -51,7 +51,7 @@ if (!require("BiocManager"))
 BiocManager::install(pks)
 ```
 
-## Data preparation
+## Data preparation  {-}
 
 To prepare soem of the data needed in this course, run
 `rWSBIM2122::prepare_shell()` as shown below:

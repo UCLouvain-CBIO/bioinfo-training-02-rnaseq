@@ -29,8 +29,6 @@ fig:unnamed-chunk-158
 fig:unnamed-chunk-159
 fig:gsea1
 fig:unnamed-chunk-170
-installation-instructions
-data-preparation
 finding-ifferentially-expressed-features
 sec-linmod
 starting-with-a-t-test
