@@ -528,142 +528,15 @@ plot3d(pca_mulvey2015$x[, 1],
 
 `r msmbstyle::solution_end()`
 
-### A map of the mouse pluripotent stem cell spatial proteome  {#sec-dimred02}
 
-In this section, we are going to use PCA to explore spatial map of
-mouse pluripotent stem cell by Christoforou *et al.*
+See [this
+section](https://uclouvain-cbio.github.io/WSBIM1322/sec-dimred.html#the-full-pca-workflow)
+for an another application on features this time, taken from the paper
+'[A map of the mouse pluripotent stem cell spatial
+proteome](https://dx.doi.org/10.1038/ncomms9992)'
 [@Christoforou:2016].
 
-> Knowledge of the subcellular distribution of proteins is vital for
-> understanding cellular mechanisms. Capturing the subcellular
-> proteome in a single experiment has proven challenging, with studies
-> focusing on specific compartments or assigning proteins to
-> subcellular niches with low resolution and/or accuracy. Here we
-> introduce hyperLOPIT, a method that couples extensive fractionation,
-> quantitative high-resolution accurate mass spectrometry with
-> multivariate data analysis. We apply hyperLOPIT to a pluripotent
-> stem cell population whose subcellular proteome has not been
-> extensively studied. We provide localization data on over 5,000
-> proteins with unprecedented spatial resolution to reveal the
-> organization of organelles, sub-organellar compartments, protein
-> complexes, functional networks and steady-state dynamics of proteins
-> and unexpected subcellular locations. The method paves the way for
-> characterizing the impact of post-transcriptional and
-> post-translational modification on protein location and studies
-> involving proteome-level locational changes on cellular
-> perturbation. An interactive open-source resource is presented that
-> enables exploration of these data.
-
-
-`r msmbstyle::question_begin()`
-
-Load the `hyperLOPIT2015` data from the `pRolocdata` package. Convert
-the data to a `SummarizedExperiment` object and familiarise yourself
-with its experimental design and its feature annotation stored in the
-*rowData* slot.
-
-`r msmbstyle::question_end()`
-
-`r msmbstyle::solution_begin()`
-
-```{r}
-library(pRolocdata)
-data(hyperLOPIT2015)
-hyperLOPIT2015 <- as(hyperLOPIT2015, "SummarizedExperiment")
-colData(hyperLOPIT2015)
-head(rowData(hyperLOPIT2015)[, c("entry.name", "markers")])
-```
-`r msmbstyle::solution_end()`
-
-Here, we will want to do a PCA analysis on the features. We want to
-remap the `r nrow(hyperLOPIT2015)` proteins from a
-`r ncol(hyperLOPIT2015)`-dimensional space into 2, or
-possibly 3 dimensions. Here, we can use the data as it when
-passing it to the `prcomp` function.
-
-`r msmbstyle::question_begin()`
-
-- Run a PCA analysis on the features of the `hyperLOPIT2015` data and
-  display a summary of the results.
-
-`r msmbstyle::question_end()`
-
-`r msmbstyle::solution_begin()`
-
-```{r}
-pca_hl <- prcomp(assay(hyperLOPIT2015), scale. = TRUE)
-summary(pca_hl)
-```
-
-`r msmbstyle::solution_end()`
-
-`r msmbstyle::question_begin()`
-- Assuming we are happy with a reduced space explaining 75% of the
-  variance of the data, how many PCs do we need?
-
-- Visualise the variance captured by the 18 PCs. To do so, you can use
-  the `fviz_screeplot` function from the `factoextra` package.
-
-`r msmbstyle::question_end()`
-
-
-`r msmbstyle::solution_begin()`
-
-```{r, fig.cap = "Scree plot for the `hyperLOPIT2015` data showing the percentage of explained variance onlong the principal components.", message = FALSE}
-library("factoextra")
-fviz_screeplot(pca_hl)
-```
-
-`r msmbstyle::solution_end()`
-
-`r msmbstyle::question_begin()`
-
-- Visualise your PCA analysis on a biplot. You can use the `fviz_pca`
-  function from the `factoextra` package, or the `fviz_pca_var`
-  function to focus on the variables (the columns of the original
-  input).
-
-- Interpret the variables on the biplot. Which ones are correlated? Is
-  this to be expected in the light of the experimental design.
-
-- Use the `fviz_pca_ind` function to focus on the individuals (the
-  rows of the orgininal input). Use the `habillage` argument of the
-  `fviz_pca_ind` function to highlight sub-cellular locations of the
-  proteins (use the `"markers"` feature variable) and set the `geom`
-  argument to `"point"` to drop the feature names from the plot (which
-  correspond to `geom = "text"`). Interpret the figures in the light of
-  the spatial proteomics experiment.
-
-
-- Repeat the figure above setting the `"final.assignment"` variable to
-  annotate the plot. Compare and interpret the two plots.
-
-`r msmbstyle::question_end()`
-
-`r msmbstyle::solution_begin()`
-```{r, fig.cap = "Biplot and variables PCA plot of the `hyperLOPIT2015` data.", fig.width = 8, fig.height = 4}
-fviz_pca(pca_hl)
-fviz_pca_var(pca_hl)
-```
-
-```{r, fig.cap = "Biplot and individuals PCA plot of the `hyperLOPIT2015` data showing the sub-cellular localisation of the proteins.", fig.width = 8, fig.height = 4}
-## Manual colour palette (from the pRoloc package)
-
-cls <- c("#E41A1C", "#377EB8", "#238B45", "#FF7F00", "#FFD700",
-         "#333333", "#00CED1", "#A65628", "#F781BF", "#984EA3",
-         "#9ACD32", "#B0C4DE", "#00008A", "#8B795E", "#E0E0E060")
-
-fviz_pca_ind(pca_hl, geom = "point",
-             habillage = rowData(hyperLOPIT2015)$markers,
-             palette = cls)
-fviz_pca_ind(pca_hl, geom = "point",
-             habillage = rowData(hyperLOPIT2015)$final.assignment,
-             palette = cls)
-```
-`r msmbstyle::solution_end()`
-
-
-### A note on non-linear dimensionality reduction techniques
+## A note on non-linear dimensionality reduction techniques
 
 Non-linear dimensionality reduction techniques such as t-SNE or UMAP
 are widely used, especially since the advent of single-cell RNA

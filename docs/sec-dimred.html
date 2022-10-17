@@ -192,6 +192,7 @@ div.csl-indent {
 <li class="toc"><a href="#visualisation"> Visualisation</a></li>
 <li class="toc"><a href="#pre-processing-and-missing-values-with-pca"> Pre-processing and missing values with PCA</a></li>
 <li class="toc"><a href="#the-full-pca-workflow"> The full PCA workflow</a></li>
+<li class="toc"><a href="#a-note-on-non-linear-dimensionality-reduction-techniques"> A note on non-linear dimensionality reduction techniques</a></li>
 <li class="toc"><a href="#additional-exercises"> Additional exercises</a></li>
 </ul>
 <a href="summarizedexperiments.html"><span class="toc-section-number">3</span> SummarizedExperiments</a>
@@ -934,263 +935,18 @@ cube along the three first PCs.</p>
 </p>
 </div>
 </div>
-</div>
-<div id="sec-dimred02" class="section level3" number="2.7.2">
-<h3>
-<span class="header-section-number">2.7.2</span> A map of the mouse pluripotent stem cell spatial proteome<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('sec-dimred02')" onmouseout="reset_tooltip('sec-dimred02-tooltip')"><span class="tooltiptext" id="sec-dimred02-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
-</h3>
-<p>In this section, we are going to use PCA to explore spatial map of
-mouse pluripotent stem cell by Christoforou <em>et al.</em>
+<p>See <a href="https://uclouvain-cbio.github.io/WSBIM1322/sec-dimred.html#the-full-pca-workflow">this
+section</a>
+for an another application on features this time, taken from the paper
+‘<a href="https://dx.doi.org/10.1038/ncomms9992">A map of the mouse pluripotent stem cell spatial
+proteome</a>’
 <span class="citation">(<label for="tufte-mn-2" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-2" class="margin-toggle">Christoforou et al. 2016<span class="marginnote">Christoforou, A, C M Mulvey, L M Breckels, A Geladaki, T Hurrell, P C Hayward, T Naake, et al. 2016. <span>“A Draft Map of the Mouse Pluripotent Stem Cell Spatial Proteome.”</span> <em>Nat Commun</em> 7: 8992. <a href="https://doi.org/10.1038/ncomms9992">https://doi.org/10.1038/ncomms9992</a>.</span>)</span>.</p>
-<blockquote>
-<p>Knowledge of the subcellular distribution of proteins is vital for
-understanding cellular mechanisms. Capturing the subcellular
-proteome in a single experiment has proven challenging, with studies
-focusing on specific compartments or assigning proteins to
-subcellular niches with low resolution and/or accuracy. Here we
-introduce hyperLOPIT, a method that couples extensive fractionation,
-quantitative high-resolution accurate mass spectrometry with
-multivariate data analysis. We apply hyperLOPIT to a pluripotent
-stem cell population whose subcellular proteome has not been
-extensively studied. We provide localization data on over 5,000
-proteins with unprecedented spatial resolution to reveal the
-organization of organelles, sub-organellar compartments, protein
-complexes, functional networks and steady-state dynamics of proteins
-and unexpected subcellular locations. The method paves the way for
-characterizing the impact of post-transcriptional and
-post-translational modification on protein location and studies
-involving proteome-level locational changes on cellular
-perturbation. An interactive open-source resource is presented that
-enables exploration of these data.</p>
-</blockquote>
-<div class="question">
-<p class="question-begin">
-► Question
-</p>
-<div class="question-body">
-<p>Load the <code>hyperLOPIT2015</code> data from the <code>pRolocdata</code> package. Convert
-the data to a <code>SummarizedExperiment</code> object and familiarise yourself
-with its experimental design and its feature annotation stored in the
-<em>rowData</em> slot.</p>
-<p class="question-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
 </div>
 </div>
-<div class="msmb-solution">
-<p class="solution-begin">
-► Solution<span id="sol-start-15" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-15', 'sol-start-15')"></span>
-</p>
-<div id="sol-body-15" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="sec-dimred.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pRolocdata)</span>
-<span id="cb171-2"><a href="sec-dimred.html#cb171-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(hyperLOPIT2015)</span>
-<span id="cb171-3"><a href="sec-dimred.html#cb171-3" aria-hidden="true" tabindex="-1"></a>hyperLOPIT2015 <span class="ot">&lt;-</span> <span class="fu">as</span>(hyperLOPIT2015, <span class="st">"SummarizedExperiment"</span>)</span>
-<span id="cb171-4"><a href="sec-dimred.html#cb171-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(hyperLOPIT2015)</span></code></pre></div>
-<pre><code>## DataFrame with 20 rows and 5 columns
-##            Replicate TMT.Reagent Acquisiton.Method Gradient.Fraction
-##            &lt;numeric&gt; &lt;character&gt;          &lt;factor&gt;       &lt;character&gt;
-## X126.rep1          1        X126               MS3           Cytosol
-## X127N.rep1         1       X127N               MS3   1 to 6 (pooled)
-## X127C.rep1         1       X127C               MS3   8 to 9 (pooled)
-## X128N.rep1         1       X128N               MS3 10 to 11 (pooled)
-## X128C.rep1         1       X128C               MS3                12
-## ...              ...         ...               ...               ...
-## X129N.rep2         2       X129N               MS3 14 to 15 (pooled)
-## X129C.rep2         2       X129C               MS3                17
-## X130N.rep2         2       X130N               MS3 18 to 19 (pooled)
-## X130C.rep2         2       X130C               MS3         Chromatin
-## X131.rep2          2        X131               MS3                20
-##            Iodixonal.Density
-##                    &lt;numeric&gt;
-## X126.rep1                0.0
-## X127N.rep1               6.0
-## X127C.rep1              11.0
-## X128N.rep1              13.3
-## X128C.rep1              14.6
-## ...                      ...
-## X129N.rep2              17.3
-## X129C.rep2              20.9
-## X130N.rep2              24.7
-## X130C.rep2                NA
-## X131.rep2               31.9</code></pre>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="sec-dimred.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rowData</span>(hyperLOPIT2015)[, <span class="fu">c</span>(<span class="st">"entry.name"</span>, <span class="st">"markers"</span>)])</span></code></pre></div>
-<pre><code>## DataFrame with 6 rows and 2 columns
-##           entry.name            markers
-##          &lt;character&gt;        &lt;character&gt;
-## Q9JHU4   DYHC1_MOUSE            unknown
-## Q9QXS1-3  PLEC_MOUSE            unknown
-## Q9ERU9    RBP2_MOUSE            unknown
-## P26039    TLN1_MOUSE Actin cytoskeleton
-## Q8BTM8    FLNA_MOUSE            unknown
-## A2ARV4    LRP2_MOUSE            unknown</code></pre>
-<p class="solution-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
-<p>Here, we will want to do a PCA analysis on the features. We want to
-remap the 5032 proteins from a
-20-dimensional space into 2, or
-possibly 3 dimensions. Here, we can use the data as it when
-passing it to the <code>prcomp</code> function.</p>
-<div class="question">
-<p class="question-begin">
-► Question
-</p>
-<div class="question-body">
-<ul>
-<li>Run a PCA analysis on the features of the <code>hyperLOPIT2015</code> data and
-display a summary of the results.</li>
-</ul>
-<p class="question-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
-<div class="msmb-solution">
-<p class="solution-begin">
-► Solution<span id="sol-start-16" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-16', 'sol-start-16')"></span>
-</p>
-<div id="sol-body-16" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="sec-dimred.html#cb175-1" aria-hidden="true" tabindex="-1"></a>pca_hl <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">assay</span>(hyperLOPIT2015), <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb175-2"><a href="sec-dimred.html#cb175-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca_hl)</span></code></pre></div>
-<pre><code>## Importance of components:
-##                          PC1    PC2     PC3     PC4     PC5     PC6     PC7
-## Standard deviation     3.111 2.1843 1.27979 1.10039 0.77542 0.69215 0.66758
-## Proportion of Variance 0.484 0.2386 0.08189 0.06054 0.03006 0.02395 0.02228
-## Cumulative Proportion  0.484 0.7226 0.80450 0.86504 0.89510 0.91906 0.94134
-##                            PC8     PC9    PC10    PC11    PC12   PC13    PC14
-## Standard deviation     0.48081 0.43346 0.40047 0.33093 0.32881 0.2864 0.27239
-## Proportion of Variance 0.01156 0.00939 0.00802 0.00548 0.00541 0.0041 0.00371
-## Cumulative Proportion  0.95290 0.96229 0.97031 0.97579 0.98119 0.9853 0.98900
-##                           PC15    PC16    PC17    PC18     PC19     PC20
-## Standard deviation     0.26359 0.23686 0.22918 0.20449 0.003022 0.002842
-## Proportion of Variance 0.00347 0.00281 0.00263 0.00209 0.000000 0.000000
-## Cumulative Proportion  0.99248 0.99528 0.99791 1.00000 1.000000 1.000000</code></pre>
-<p class="solution-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
-<div class="question">
-<p class="question-begin">
-► Question
-</p>
-<div class="question-body">
-<ul>
-<li><p>Assuming we are happy with a reduced space explaining 75% of the
-variance of the data, how many PCs do we need?</p></li>
-<li><p>Visualise the variance captured by the 18 PCs. To do so, you can use
-the <code>fviz_screeplot</code> function from the <code>factoextra</code> package.</p></li>
-</ul>
-<p class="question-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
-<div class="msmb-solution">
-<p class="solution-begin">
-► Solution<span id="sol-start-17" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-17', 'sol-start-17')"></span>
-</p>
-<div id="sol-body-17" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="sec-dimred.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span>
-<span id="cb177-2"><a href="sec-dimred.html#cb177-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_screeplot</span>(pca_hl)</span></code></pre></div>
-<div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-37"></span>
-<p class="caption marginnote shownote">
-Figure 2.14: Scree plot for the <code>hyperLOPIT2015</code> data showing the percentage of explained variance onlong the principal components.
-</p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-37-1.png" alt="Scree plot for the `hyperLOPIT2015` data showing the percentage of explained variance onlong the principal components." width="672">
-</div>
-<p class="solution-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
-<div class="question">
-<p class="question-begin">
-► Question
-</p>
-<div class="question-body">
-<ul>
-<li><p>Visualise your PCA analysis on a biplot. You can use the <code>fviz_pca</code>
-function from the <code>factoextra</code> package, or the <code>fviz_pca_var</code>
-function to focus on the variables (the columns of the original
-input).</p></li>
-<li><p>Interpret the variables on the biplot. Which ones are correlated? Is
-this to be expected in the light of the experimental design.</p></li>
-<li><p>Use the <code>fviz_pca_ind</code> function to focus on the individuals (the
-rows of the orgininal input). Use the <code>habillage</code> argument of the
-<code>fviz_pca_ind</code> function to highlight sub-cellular locations of the
-proteins (use the <code>"markers"</code> feature variable) and set the <code>geom</code>
-argument to <code>"point"</code> to drop the feature names from the plot (which
-correspond to <code>geom = "text"</code>). Interpret the figures in the light of
-the spatial proteomics experiment.</p></li>
-<li><p>Repeat the figure above setting the <code>"final.assignment"</code> variable to
-annotate the plot. Compare and interpret the two plots.</p></li>
-</ul>
-<p class="question-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
-<div class="msmb-solution">
-<p class="solution-begin">
-► Solution<span id="sol-start-18" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-18', 'sol-start-18')"></span>
-</p>
-<div id="sol-body-18" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="sec-dimred.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca</span>(pca_hl)</span></code></pre></div>
-<div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-38-1"></span>
-<p class="caption marginnote shownote">
-Figure 2.15: Biplot and variables PCA plot of the <code>hyperLOPIT2015</code> data.
-</p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-38-1.png" alt="Biplot and variables PCA plot of the `hyperLOPIT2015` data." width="768">
-</div>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="sec-dimred.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(pca_hl)</span></code></pre></div>
-<div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-38-2"></span>
-<p class="caption marginnote shownote">
-Figure 2.16: Biplot and variables PCA plot of the <code>hyperLOPIT2015</code> data.
-</p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-38-2.png" alt="Biplot and variables PCA plot of the `hyperLOPIT2015` data." width="768">
-</div>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="sec-dimred.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Manual colour palette (from the pRoloc package)</span></span>
-<span id="cb180-2"><a href="sec-dimred.html#cb180-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb180-3"><a href="sec-dimred.html#cb180-3" aria-hidden="true" tabindex="-1"></a>cls <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#E41A1C"</span>, <span class="st">"#377EB8"</span>, <span class="st">"#238B45"</span>, <span class="st">"#FF7F00"</span>, <span class="st">"#FFD700"</span>,</span>
-<span id="cb180-4"><a href="sec-dimred.html#cb180-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">"#333333"</span>, <span class="st">"#00CED1"</span>, <span class="st">"#A65628"</span>, <span class="st">"#F781BF"</span>, <span class="st">"#984EA3"</span>,</span>
-<span id="cb180-5"><a href="sec-dimred.html#cb180-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">"#9ACD32"</span>, <span class="st">"#B0C4DE"</span>, <span class="st">"#00008A"</span>, <span class="st">"#8B795E"</span>, <span class="st">"#E0E0E060"</span>)</span>
-<span id="cb180-6"><a href="sec-dimred.html#cb180-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb180-7"><a href="sec-dimred.html#cb180-7" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_hl, <span class="at">geom =</span> <span class="st">"point"</span>,</span>
-<span id="cb180-8"><a href="sec-dimred.html#cb180-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">habillage =</span> <span class="fu">rowData</span>(hyperLOPIT2015)<span class="sc">$</span>markers,</span>
-<span id="cb180-9"><a href="sec-dimred.html#cb180-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">palette =</span> cls)</span></code></pre></div>
-<div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-39-1"></span>
-<p class="caption marginnote shownote">
-Figure 2.17: Biplot and individuals PCA plot of the <code>hyperLOPIT2015</code> data showing the sub-cellular localisation of the proteins.
-</p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-39-1.png" alt="Biplot and individuals PCA plot of the `hyperLOPIT2015` data showing the sub-cellular localisation of the proteins." width="768">
-</div>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="sec-dimred.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_hl, <span class="at">geom =</span> <span class="st">"point"</span>,</span>
-<span id="cb181-2"><a href="sec-dimred.html#cb181-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">habillage =</span> <span class="fu">rowData</span>(hyperLOPIT2015)<span class="sc">$</span>final.assignment,</span>
-<span id="cb181-3"><a href="sec-dimred.html#cb181-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">palette =</span> cls)</span></code></pre></div>
-<div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-39-2"></span>
-<p class="caption marginnote shownote">
-Figure 2.18: Biplot and individuals PCA plot of the <code>hyperLOPIT2015</code> data showing the sub-cellular localisation of the proteins.
-</p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-39-2.png" alt="Biplot and individuals PCA plot of the `hyperLOPIT2015` data showing the sub-cellular localisation of the proteins." width="768">
-</div>
-<p class="solution-end">
-<span class="fa fa-square-o solution-icon"></span>
-</p>
-</div>
-</div>
-</div>
-<div id="a-note-on-non-linear-dimensionality-reduction-techniques" class="section level3" number="2.7.3">
-<h3>
-<span class="header-section-number">2.7.3</span> A note on non-linear dimensionality reduction techniques<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('a-note-on-non-linear-dimensionality-reduction-techniques')" onmouseout="reset_tooltip('a-note-on-non-linear-dimensionality-reduction-techniques-tooltip')"><span class="tooltiptext" id="a-note-on-non-linear-dimensionality-reduction-techniques-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
-</h3>
+<div id="a-note-on-non-linear-dimensionality-reduction-techniques" class="section level2" number="2.8">
+<h2>
+<span class="header-section-number">2.8</span> A note on non-linear dimensionality reduction techniques<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('a-note-on-non-linear-dimensionality-reduction-techniques')" onmouseout="reset_tooltip('a-note-on-non-linear-dimensionality-reduction-techniques-tooltip')"><span class="tooltiptext" id="a-note-on-non-linear-dimensionality-reduction-techniques-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+</h2>
 <p>Non-linear dimensionality reduction techniques such as t-SNE or UMAP
 are widely used, especially since the advent of single-cell RNA
 sequencing. They do not aim reduce the dimensions according to
@@ -1200,10 +956,9 @@ maintained for close samples: close points in the lower-dimension
 embedding are also close in high dimensions, while it isn’t possible
 to make any conclusion for distant points in low dimensions.</p>
 </div>
-</div>
-<div id="additional-exercises" class="section level2" number="2.8">
+<div id="additional-exercises" class="section level2" number="2.9">
 <h2>
-<span class="header-section-number">2.8</span> Additional exercises<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('additional-exercises')" onmouseout="reset_tooltip('additional-exercises-tooltip')"><span class="tooltiptext" id="additional-exercises-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
+<span class="header-section-number">2.9</span> Additional exercises<div class="tooltip"><button class="internal-link-btn" onclick="copy_link('additional-exercises')" onmouseout="reset_tooltip('additional-exercises-tooltip')"><span class="tooltiptext" id="additional-exercises-tooltip">Copy link</span><i class="fa fa-link"></i></button></div>
 </h2>
 <div class="question">
 <p class="question-begin">
@@ -1219,11 +974,11 @@ in triplicates in a single batch by the same operator.</p>
 condition. Interpreted the figure in the light of the experimentally
 design and suggest how to best analyse these data.</p>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-40"></span>
+<span style="display:block;" id="fig:unnamed-chunk-35"></span>
 <p class="caption marginnote shownote">
-Figure 2.19: PCA analysis illustrating the global effect of drug A and B.
+Figure 2.14: PCA analysis illustrating the global effect of drug A and B.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-40-1.png" alt="PCA analysis illustrating the global effect of drug A and B." width="672">
+<img src="rnaseq_files/figure-html/unnamed-chunk-35-1.png" alt="PCA analysis illustrating the global effect of drug A and B." width="672">
 </div>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1239,11 +994,11 @@ Figure 2.19: PCA analysis illustrating the global effect of drug A and B.
 below. Interpret the figure in the light of the experimental design
 and suggest how to best analyse these data.</p>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-41"></span>
+<span style="display:block;" id="fig:unnamed-chunk-36"></span>
 <p class="caption marginnote shownote">
-Figure 2.20: PCA analysis illustrating the global effect of drug A and B.
+Figure 2.15: PCA analysis illustrating the global effect of drug A and B.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-41-1.png" alt="PCA analysis illustrating the global effect of drug A and B." width="672">
+<img src="rnaseq_files/figure-html/unnamed-chunk-36-1.png" alt="PCA analysis illustrating the global effect of drug A and B." width="672">
 </div>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1264,11 +1019,11 @@ triplicates in a single batch.</p>
 <p>Interpret the PCA plot in the light of the experimental design. Do you
 think the analysis is likely to provide significant results?</p>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-42"></span>
+<span style="display:block;" id="fig:unnamed-chunk-37"></span>
 <p class="caption marginnote shownote">
-Figure 2.21: Quantitative proteomics experiment measuring the effect of drug C121.
+Figure 2.16: Quantitative proteomics experiment measuring the effect of drug C121.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-42-1.png" alt="Quantitative proteomics experiment measuring the effect of drug C121." width="672">
+<img src="rnaseq_files/figure-html/unnamed-chunk-37-1.png" alt="Quantitative proteomics experiment measuring the effect of drug C121." width="672">
 </div>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1287,11 +1042,11 @@ identifying novel biomarkers.</p>
 <p>In the light of the experimental design, interpret the PCA plot. What
 are the chances to find good biomarkers?</p>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-43"></span>
+<span style="display:block;" id="fig:unnamed-chunk-38"></span>
 <p class="caption marginnote shownote">
-Figure 2.22: Quantitative proteomics experiment measuring the effect of drug C121.
+Figure 2.17: Quantitative proteomics experiment measuring the effect of drug C121.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-43-1.png" alt="Quantitative proteomics experiment measuring the effect of drug C121." width="672">
+<img src="rnaseq_files/figure-html/unnamed-chunk-38-1.png" alt="Quantitative proteomics experiment measuring the effect of drug C121." width="672">
 </div>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -1312,11 +1067,11 @@ and C (20 and 7 samples respectively).</p>
 would you suggest to do before testing whether using kit 1 and 2 have
 an impact on the data?</p>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-44"></span>
+<span style="display:block;" id="fig:unnamed-chunk-39"></span>
 <p class="caption marginnote shownote">
-Figure 2.23: Testing the effect of RNA sequencing kits 1 and 2.
+Figure 2.18: Testing the effect of RNA sequencing kits 1 and 2.
 </p>
-<img src="rnaseq_files/figure-html/unnamed-chunk-44-1.png" alt="Testing the effect of RNA sequencing kits 1 and 2." width="672">
+<img src="rnaseq_files/figure-html/unnamed-chunk-39-1.png" alt="Testing the effect of RNA sequencing kits 1 and 2." width="672">
 </div>
 <p class="question-end">
 <span class="fa fa-square-o solution-icon"></span>
