@@ -185,8 +185,8 @@ div.csl-indent {
 <div class="dropdown-content">
 <a href="index.html" id="toc-preamble">Preamble</a>
 <a href="finding-differentially-expressed-features.html" id="toc-finding-differentially-expressed-features"><span class="toc-section-number">1</span> Finding differentially expressed features</a>
-<a href="sec-dimred.html" id="toc-sec-dimred"><span class="toc-section-number">2</span> Dimensionality reduction</a>
-<a href="summarizedexperiments.html" id="toc-summarizedexperiments"><span class="toc-section-number">3</span> SummarizedExperiments</a>
+<a href="summarizedexperiments.html" id="toc-summarizedexperiments"><span class="toc-section-number">2</span> SummarizedExperiments</a>
+<a href="sec-dimred.html" id="toc-sec-dimred"><span class="toc-section-number">3</span> Dimensionality reduction</a>
 <a id="active-page" href="sec-hts.html" id="toc-sec-hts"><span class="toc-section-number">4</span> High throughput sequencing</a><ul class="toc-sections">
 <li class="toc"><a href="#rna-seq-library-preparation"> RNA-seq library preparation</a></li>
 <li class="toc"><a href="#sequencing"> Sequencing</a></li>
@@ -707,8 +707,8 @@ SampleName.bam              # bam file</code></pre>
 the raw counts of each gene in that sample.</p>
 <div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="sec-hts.html#cb204-1" aria-hidden="true" tabindex="-1"></a>counts_result <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="at">file =</span> <span class="st">"wsbim2122_data/count_data/sample1_counts.tsv.gz"</span>)</span>
 <span id="cb204-2"><a href="sec-hts.html#cb204-2" aria-hidden="true" tabindex="-1"></a><span class="fu">datatable</span>(<span class="fu">head</span>(counts_result))</span></code></pre></div>
-<div id="htmlwidget-1e0f51af33b5c2275568" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1e0f51af33b5c2275568">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["ENSG00000223972","ENSG00000227232","ENSG00000278267","ENSG00000243485","ENSG00000284332","ENSG00000237613"],["1;1;1;1;1;1;1;1;1","1;1;1;1;1;1;1;1;1;1;1","1","1;1;1;1;1","1","1;1;1;1;1"],["11869;12010;12179;12613;12613;12975;13221;13221;13453","14404;15005;15796;16607;16858;17233;17606;17915;18268;24738;29534","17369","29554;30267;30564;30976;30976","30366","34554;35245;35277;35721;35721"],["12227;12057;12227;12721;12697;13052;13374;14409;13670","14501;15038;15947;16765;17055;17368;17742;18061;18366;24891;29570","17436","30039;30667;30667;31109;31097","30503","35174;35481;35481;36073;36081"],["+;+;+;+;+;+;+;+;+","-;-;-;-;-;-;-;-;-;-;-","-","+;+;+;+;+","+","-;-;-;-;-"],[1735,1351,68,1021,138,1219],[0,14,8,0,0,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Geneid<\/th>\n      <th>Chr<\/th>\n      <th>Start<\/th>\n      <th>End<\/th>\n      <th>Strand<\/th>\n      <th>Length<\/th>\n      <th>../processed_data/bam/sample1.bam<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[6,7]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div class="question">
+<div id="htmlwidget-73110cc9841cb329edc5" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-73110cc9841cb329edc5">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["ENSG00000223972","ENSG00000227232","ENSG00000278267","ENSG00000243485","ENSG00000284332","ENSG00000237613"],["1;1;1;1;1;1;1;1;1","1;1;1;1;1;1;1;1;1;1;1","1","1;1;1;1;1","1","1;1;1;1;1"],["11869;12010;12179;12613;12613;12975;13221;13221;13453","14404;15005;15796;16607;16858;17233;17606;17915;18268;24738;29534","17369","29554;30267;30564;30976;30976","30366","34554;35245;35277;35721;35721"],["12227;12057;12227;12721;12697;13052;13374;14409;13670","14501;15038;15947;16765;17055;17368;17742;18061;18366;24891;29570","17436","30039;30667;30667;31109;31097","30503","35174;35481;35481;36073;36081"],["+;+;+;+;+;+;+;+;+","-;-;-;-;-;-;-;-;-;-;-","-","+;+;+;+;+","+","-;-;-;-;-"],[1735,1351,68,1021,138,1219],[0,14,8,0,0,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Geneid<\/th>\n      <th>Chr<\/th>\n      <th>Start<\/th>\n      <th>End<\/th>\n      <th>Strand<\/th>\n      <th>Length<\/th>\n      <th>../processed_data/bam/sample1.bam<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[6,7]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div class="question">
 <p class="question-begin">
 ► Question
 </p>
@@ -863,7 +863,7 @@ file that it indexes, and it must have the same basename<a href="sec-hts.html#fn
 </body></html>
 
 <p style="text-align: center;">
-<a href="summarizedexperiments.html"><button class="btn btn-default">Previous</button></a>
+<a href="sec-dimred.html"><button class="btn btn-default">Previous</button></a>
 <a href="sec-rnaseq.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
