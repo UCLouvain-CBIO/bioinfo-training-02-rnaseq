@@ -69,3 +69,11 @@ containing the following sub-directories:
 ```{r show_prepare_shell}
 dir("wsbim2122_data")
 ```
+
+## References {-}
+
+- References are provided throughout the workshop material.
+
+- **Modern Statistics for Modern Biology**, by Susan Holmes and
+  Wolfgang Huber [@MSMB]. A free online version of the book is
+  available [here](https://www-huber.embl.de/msmb/).

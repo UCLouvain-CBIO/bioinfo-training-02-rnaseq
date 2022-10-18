@@ -2,8 +2,9 @@
 
 ## Introduction
 
-In this chapter, we are going to learn about dimensionality reduction,
-also called ordination. The goal of dimensionality reduction is to
+This chapter on PCA is partly based on the corresponding MSMB chapter
+[@MSMB]. We are going to learn about dimensionality reduction, also
+called ordination. The goal of dimensionality reduction is to
 transform a high-dimensional data into data of lesser dimensions while
 minimising the loss of information.
 
