@@ -1,13 +1,12 @@
-# Finding ifferentially expressed features
+# Finding differentially expressed features
 
-## Linear models {#sec-linmod}
+The **objectives** of this chapter is to provide students with an
+intuitive understanding of how linear models are used in significance
+testing, and more specifically
 
-The objective of this chapter is to provide students with an intuitive
-understanding of how linear models are used in significance testing,
-and more specifically
-
-- show how linear models are equivalent to a t-test
-- demonstrate their flexibility.
+- show how linear models are equivalent to a t-test;
+- demonstrate their flexibility;
+- address the multiple testing issue.
 
 ## Starting with a t-test
 
@@ -33,10 +32,6 @@ fold-change, the associated p-value and visualise the data.
 
 `r msmbstyle::solution_begin()`
 
-```{r gexp_t_test1}
-t.test(expression ~ group, data = gexp)
-```
-
 We set
 
 - $H_0$: the means of the two groups are the same, $\mu_{1} = \mu_{2}$.
@@ -53,6 +48,10 @@ $$
 
 where $\bar X_i$, $s_{i}^{2}$ and $N_i$ are the mean, variance and
 size of samples 1 and 2.
+
+```{r gexp_t_test1}
+t.test(expression ~ group, data = gexp)
+```
 
 A t-test has the following assumptions:
 
@@ -482,8 +481,8 @@ summary(lm(expression ~ condition * cell_type, data = x_i))
 ```
 
 In high throughput experiments, where we test tens of thousands of
-genes, we thus can't explore each gene separately with multiple
-models. The same model is applied to all genes and the significance of
+genes, we can't explore each gene separately with multiple models. The
+same model must be applied to all genes and the significance of
 coefficient(s) of interest is/are considered.
 
 Solving this dilema isn't a statistical but a scientific question. You
@@ -500,7 +499,7 @@ design/effect.
 
 Accumulating models and tests isn't necessarily a solution either, as
 this leads to the accumulation of tests that would require additional
-adjustment for multiple testing.
+adjustment for multiple testing... see below.
 
 ## Testing many features
 
@@ -508,10 +507,11 @@ Let's now use the `tdata1` dataset from the `rWSBIM1322` package that
 provide gene expression data for 100 genes and 6 samples, three in
 group A and 3 in group B.
 
-```{r}
+```{r load_tdata1, message=FALSE}
 library("rWSBIM1322")
 data(tdata1)
 log_tdata1 <- log2(tdata1)
+log_tdata1 <- scale(log_tdata1)
 head(log_tdata1)
 ```
 

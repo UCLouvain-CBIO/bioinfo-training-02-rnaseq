@@ -293,7 +293,7 @@ the PCA analysis and interpret it. Also produce a PCA for PCs 2 and 3.
 
 `r msmbstyle::solution_begin()`
 
-```{r pcaex2, fig.cap = ""}
+```{r pcaex2, fig.cap = "", message=FALSE}
 library("rWSBIM1322")
 library("SummarizedExperiment")
 data(cptac_se_prot)
@@ -416,7 +416,7 @@ yourself with its experimental design stored in the *colData* slot.
 
 `r msmbstyle::solution_begin()`
 
-```{r}
+```{r, message=FALSE}
 library(pRolocdata)
 data(mulvey2015_se)
 colData(mulvey2015_se)
@@ -519,12 +519,12 @@ proteome](https://dx.doi.org/10.1038/ncomms9992)'
 
 Non-linear dimensionality reduction techniques such as t-SNE or UMAP
 are widely used, especially since the advent of single-cell RNA
-sequencing. They do not aim reduce the dimensions according to
+sequencing. They do not aim at reducing the dimensions according to
 variance, as PCA, but focus on preserve neighbourhood between samples
-in a lower-dimension embedding. However, this neighbourhood is only
-maintained for close samples: close points in the lower-dimension
-embedding are also close in high dimensions, while it isn't possible
-to make any conclusion for distant points in low dimensions.
+in a lower-dimensions. However, this neighbourhood is only maintained
+for close samples: close points in the lower dimension are also close
+in high dimensions, while it isn't possible to make any conclusion for
+distant points in low dimensions.
 
 
 ## Additional exercises
