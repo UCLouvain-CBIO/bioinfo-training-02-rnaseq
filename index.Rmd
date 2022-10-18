@@ -35,7 +35,7 @@ Sciences](https://uclouvain.be/en/faculties/fasb) at the UCLouvain.
 ## Installation instructions {-}
 
 ```{r install, eval=FALSE}
-pks <- c("tidyverse", "patchwork",
+pks <- c("tidyverse", "patchwork", "remotes",
          "SummarizedExperiment", "DESeq2",
          "biomaRt", "factoextra", "pRolocdata",
          "org.Hs.eg.db", "GO.db", "msigdbr",

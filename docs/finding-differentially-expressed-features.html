@@ -81,7 +81,6 @@ function reset_tooltip(id) {
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -116,7 +115,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -129,7 +128,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -183,8 +182,8 @@ div.csl-indent {
 <li class="dropdown" style="float:right">
 <a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
 <div class="dropdown-content">
-<a href="index.html" id="toc-preamble">Preamble</a>
-<a id="active-page" href="finding-differentially-expressed-features.html" id="toc-finding-differentially-expressed-features"><span class="toc-section-number">1</span> Finding differentially expressed features</a><ul class="toc-sections">
+<a href="index.html">Preamble</a>
+<a id="active-page" href="finding-differentially-expressed-features.html"><span class="toc-section-number">1</span> Finding differentially expressed features</a><ul class="toc-sections">
 <li class="toc"><a href="#starting-with-a-t-test"> Starting with a t-test</a></li>
 <li class="toc"><a href="#the-linear-model-equivalence"> The linear model equivalence</a></li>
 <li class="toc"><a href="#paired-t-test"> Paired t-test</a></li>
@@ -195,11 +194,11 @@ div.csl-indent {
 <li class="toc"><a href="#testing-many-features"> Testing many features</a></li>
 <li class="toc"><a href="#adjustment-for-multiple-testing"> Adjustment for multiple testing</a></li>
 </ul>
-<a href="summarizedexperiments.html" id="toc-summarizedexperiments"><span class="toc-section-number">2</span> SummarizedExperiments</a>
-<a href="sec-dimred.html" id="toc-sec-dimred"><span class="toc-section-number">3</span> Dimensionality reduction</a>
-<a href="sec-hts.html" id="toc-sec-hts"><span class="toc-section-number">4</span> High throughput sequencing</a>
-<a href="sec-rnaseq.html" id="toc-sec-rnaseq"><span class="toc-section-number">5</span> Differential expression analysis</a>
-<a href="sec-gsea.html" id="toc-sec-gsea"><span class="toc-section-number">6</span> Enrichment analyses</a>
+<a href="summarizedexperiments.html"><span class="toc-section-number">2</span> SummarizedExperiments</a>
+<a href="sec-dimred.html"><span class="toc-section-number">3</span> Dimensionality reduction</a>
+<a href="sec-hts.html"><span class="toc-section-number">4</span> High throughput sequencing</a>
+<a href="sec-rnaseq.html"><span class="toc-section-number">5</span> Differential expression analysis</a>
+<a href="sec-gsea.html"><span class="toc-section-number">6</span> Enrichment analyses</a>
 </div>
 </li>
 </ul>
@@ -209,8 +208,7 @@ div.csl-indent {
 <div class="row">
 <div class="col-sm-12">
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-<html><body>
-<div id="finding-differentially-expressed-features" class="section level1" number="1">
+<html><body><div id="finding-differentially-expressed-features" class="section level1" number="1">
 <h1>
 <span class="header-section-number">Chapter 1</span> Finding differentially expressed features</h1>
 <p>The <strong>objectives</strong> of this chapter is to provide students with an
@@ -304,7 +302,7 @@ size of samples 1 and 2.</p>
 <li>the data are independent and identically distributed;</li>
 <li>equal or un-equal (Welch test) variances.</li>
 </ul>
-<p>Note that the t-test is robust to deviations<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<p>Note that the t-test is robust to deviations<label for="tufte-sn-1" class="margin-toggle sidenote-number">1</label><input type="checkbox" id="tufte-sn-1" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">1</span> All models are wrong. Some are useful.</span>.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="finding-differentially-expressed-features.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
 <span id="cb11-2"><a href="finding-differentially-expressed-features.html#cb11-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(gexp, <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> expression)) <span class="sc">+</span></span>
 <span id="cb11-3"><a href="finding-differentially-expressed-features.html#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">geom_jitter</span>()</span>
@@ -472,7 +470,7 @@ p-value.</p>
 </p>
 </div>
 </div>
-<p>This comparison can be replicated using a linar model<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<p>This comparison can be replicated using a linar model<label for="tufte-sn-2" class="margin-toggle sidenote-number">2</label><input type="checkbox" id="tufte-sn-2" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">2</span> See below for the exact equation.</span></p>
 <p><span class="math display">\[y = \beta_0 + \beta_1 \times group + \beta_i \times ID_i + \epsilon\]</span></p>
 <p>where the <span class="math inline">\(\beta_i\)</span> coefficients will encode the relation between
 pairs of individuals. We model this with</p>
@@ -570,7 +568,8 @@ from ID1.</p>
 </h2>
 <p>In the example above, we had two variables that influenced the gene
 expression, namely the group and the specific individual and we ended
-up with a model that included both of these<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>:</p>
+up with a model that included both of these<label for="tufte-sn-3" class="margin-toggle sidenote-number">3</label><input type="checkbox" id="tufte-sn-3" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">3</span> We will drop the left-hand side term of our formula, setting
+it by default as the quantiative expression data.</span>:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="finding-differentially-expressed-features.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="sc">~</span> group <span class="sc">+</span> ID</span></code></pre></div>
 <p>Any additional variables could be added to the model if deemed
 necessary.</p>
@@ -616,8 +615,8 @@ opposite responses in the extreme conditions: that the expression of
 some genes will increase in the mutant under dry conditions while they
 will decrease (or change to a lesser extend at least) under humid
 conditions.</p>
-<div id="htmlwidget-c99488d30bc6080b9853" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c99488d30bc6080b9853">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12],["WT","WT","WT","WT","WT","WT","MT","MT","MT","MT","MT","MT"],["normal","dry","humid","normal","dry","humid","normal","dry","humid","normal","dry","humid"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>sample<\/th>\n      <th>genotype<\/th>\n      <th>condition<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":12,"autoWidth":true,"columnDefs":[{"className":"dt-right","targets":0}],"order":[],"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Such situation require a new model formula syntax</p>
+<div id="htmlwidget-d037d1f05d108a1d0b7e" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d037d1f05d108a1d0b7e">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12],["WT","WT","WT","WT","WT","WT","MT","MT","MT","MT","MT","MT"],["normal","dry","humid","normal","dry","humid","normal","dry","humid","normal","dry","humid"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>sample<\/th>\n      <th>genotype<\/th>\n      <th>condition<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":12,"autoWidth":true,"columnDefs":[{"className":"dt-right","targets":0}],"order":[],"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>Such situation require a new model formula syntax</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="finding-differentially-expressed-features.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="sc">~</span> genotype <span class="sc">*</span> condition</span></code></pre></div>
 <p>which is equivalent to</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="finding-differentially-expressed-features.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="sc">~</span> genotype <span class="sc">+</span> condition <span class="sc">+</span> genotype <span class="sc">*</span> condition</span></code></pre></div>
@@ -1053,7 +1052,7 @@ same model must be applied to all genes and the significance of
 coefficient(s) of interest is/are considered.</p>
 <p>Solving this dilema isn’t a statistical but a scientific question. You
 will have to define the hypothesis that underlies the
-experiment<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. If there are reasons to believe that an interaction
+experiment<label for="tufte-sn-4" class="margin-toggle sidenote-number">4</label><input type="checkbox" id="tufte-sn-4" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">4</span> ideally even before generating any data.</span>. If there are reasons to believe that an interaction
 effect is relevant (i.e. there are different effects in the two cell
 types), then the more complex model (with an interaction) is
 appropriate. If no such interaction is expected, then testing for it
@@ -1266,18 +1265,7 @@ confirm that none of the features are differentially expressed.</p>
 </div>
 
 </div>
-</div>
-<div class="footnotes">
-<hr>
-<ol start="1">
-<li id="fn1"><p>All models are wrong. Some are useful.<a href="finding-differentially-expressed-features.html#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>See below for the exact equation.<a href="finding-differentially-expressed-features.html#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>We will drop the left-hand side term of our formula, setting
-it by default as the quantiative expression data.<a href="finding-differentially-expressed-features.html#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>ideally even before generating any data.<a href="finding-differentially-expressed-features.html#fnref4" class="footnote-back">↩︎</a></p></li>
-</ol>
-</div>
-</body></html>
+</div></body></html>
 
 <p style="text-align: center;">
 <a href="index.html"><button class="btn btn-default">Previous</button></a>
@@ -1286,7 +1274,7 @@ it by default as the quantiative expression data.<a href="finding-differentially
 <p class="build-date">Page built: 
 2022-10-18
  using 
-R version 4.2.0 Patched (2022-05-13 r82357)
+R version 4.2.1 (2022-06-23)
 </p>
 </div>
 </div>
