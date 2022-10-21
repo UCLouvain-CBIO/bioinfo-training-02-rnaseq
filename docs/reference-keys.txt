@@ -34,7 +34,7 @@ exercise
 which-model-to-use
 testing-many-features
 adjustment-for-multiple-testing
-summarizedexperiments
+sec-se
 summarizedexperiment
 creating-a-summarizedexperiment
 subsetting-a-summarizedexperiment
@@ -62,7 +62,7 @@ processing-pipeline
 quality-control
 alignment
 counting
-preparing-the-count-matrix
+sec-counts
 sec-rnaseq
 theory-behind-deseq2
 size-factor-estimation
@@ -103,3 +103,4 @@ using-kegg-sets
 using-msigdb-sets
 visualisation-of-enrichment-analyses
 discussion
+conclusions

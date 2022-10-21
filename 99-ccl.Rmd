@@ -1,0 +1,10 @@
+# Conclusions
+
+As a summary, analysing an RNA-Seq experiment entails:
+
+1. Processing the raw data: QC, trimming, alignment and counting (see
+   chapter \@ref(sec-hts)).
+2. Constructing the count matrix and the sample annotation (see
+   section \@ref(sec-counts) and/or chapter \@ref(sec-se)).
+3. Run a `DESeq2` analysis (see chapter \@ref(sec-rnaseq)).
+4. Perform an enrichment analysis (see chapter \@ref(sec-gsea)).

@@ -704,7 +704,7 @@ to avoid elimination of counts equal to zero.
 
 `r msmbstyle::solution_end()`
 
-## Preparing the count matrix
+## Preparing the count matrix {#sec-counts}
 
 The aim of an RNAseq experiment is often to compare different types of
 cells, or to compare treated cells to control cells, to see if some
