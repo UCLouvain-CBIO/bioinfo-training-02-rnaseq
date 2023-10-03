@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto and Axelle Loriot" />
 
-<meta name="date" content="2022-10-21" />
+<meta name="date" content="2023-10-03" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -65,13 +65,13 @@ function reset_tooltip(id) {
   tooltip.innerHTML = 'Copy link';
 }
 </script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.25/datatables.js"></script>
+<script src="libs/datatables-binding-0.28/datatables.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+<link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
 <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
 
@@ -79,8 +79,9 @@ function reset_tooltip(id) {
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -115,7 +116,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -128,7 +129,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -182,10 +183,10 @@ div.csl-indent {
 <li class="dropdown" style="float:right">
 <a href="javascript:void(0)" class="dropbtn">&#x25BE; Chapters</a>
 <div class="dropdown-content">
-<a href="index.html">Preamble</a>
-<a href="finding-differentially-expressed-features.html"><span class="toc-section-number">1</span> Finding differentially expressed features</a>
-<a href="sec-se.html"><span class="toc-section-number">2</span> SummarizedExperiments</a>
-<a id="active-page" href="sec-dimred.html"><span class="toc-section-number">3</span> Dimensionality reduction</a><ul class="toc-sections">
+<a href="index.html" id="toc-preamble">Preamble</a>
+<a href="finding-differentially-expressed-features.html" id="toc-finding-differentially-expressed-features"><span class="toc-section-number">1</span> Finding differentially expressed features</a>
+<a href="sec-se.html" id="toc-sec-se"><span class="toc-section-number">2</span> SummarizedExperiments</a>
+<a id="active-page" href="sec-dimred.html" id="toc-sec-dimred"><span class="toc-section-number">3</span> Dimensionality reduction</a><ul class="toc-sections">
 <li class="toc"><a href="#introduction"> Introduction</a></li>
 <li class="toc"><a href="#lower-dimensional-projections"> Lower-dimensional projections</a></li>
 <li class="toc"><a href="#the-new-linear-combinations"> The new linear combinations</a></li>
@@ -196,10 +197,10 @@ div.csl-indent {
 <li class="toc"><a href="#a-note-on-non-linear-dimensionality-reduction-techniques"> A note on non-linear dimensionality reduction techniques</a></li>
 <li class="toc"><a href="#additional-exercises"> Additional exercises</a></li>
 </ul>
-<a href="sec-hts.html"><span class="toc-section-number">4</span> High throughput sequencing</a>
-<a href="sec-rnaseq.html"><span class="toc-section-number">5</span> Differential expression analysis</a>
-<a href="sec-gsea.html"><span class="toc-section-number">6</span> Enrichment analyses</a>
-<a href="conclusions.html"><span class="toc-section-number">7</span> Conclusions</a>
+<a href="sec-hts.html" id="toc-sec-hts"><span class="toc-section-number">4</span> High throughput sequencing</a>
+<a href="sec-rnaseq.html" id="toc-sec-rnaseq"><span class="toc-section-number">5</span> Differential expression analysis</a>
+<a href="sec-gsea.html" id="toc-sec-gsea"><span class="toc-section-number">6</span> Enrichment analyses</a>
+<a href="conclusions.html" id="toc-conclusions"><span class="toc-section-number">7</span> Conclusions</a>
 </div>
 </li>
 </ul>
@@ -346,10 +347,10 @@ Figure 3.7: Original data (left). PC1 will maximise the variability while minimi
 <p>In R, we can use the <code>prcomp</code> function. A summary of the <code>prcomp</code>
 output shows that along PC1, we are able to retain close to 92%
 of the total variability in the data.</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="sec-dimred.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
-<span id="cb156-2"><a href="sec-dimred.html#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(xy)</span>
-<span id="cb156-3"><a href="sec-dimred.html#cb156-3" aria-hidden="true" tabindex="-1"></a>pca_xy <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(xy)</span>
-<span id="cb156-4"><a href="sec-dimred.html#cb156-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca_xy)</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="sec-dimred.html#cb156-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
+<span id="cb156-2"><a href="sec-dimred.html#cb156-2" tabindex="-1"></a><span class="fu">data</span>(xy)</span>
+<span id="cb156-3"><a href="sec-dimred.html#cb156-3" tabindex="-1"></a>pca_xy <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(xy)</span>
+<span id="cb156-4"><a href="sec-dimred.html#cb156-4" tabindex="-1"></a><span class="fu">summary</span>(pca_xy)</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2
 ## Standard deviation     1.3308 0.4784
@@ -358,7 +359,7 @@ of the total variability in the data.</p>
 <p>This <code>pca_xy</code> variable is an object of class <code>prcomp</code>. To learn what
 it contains, we can look at its structure with <code>str</code> and read the
 <code>?prcomp</code> manual page.</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="sec-dimred.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(pca_xy)</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="sec-dimred.html#cb158-1" tabindex="-1"></a><span class="fu">str</span>(pca_xy)</span></code></pre></div>
 <pre><code>## List of 5
 ##  $ sdev    : num [1:2] 1.331 0.478
 ##  $ rotation: num [1:2, 1:2] 0.707 0.707 -0.707 0.707
@@ -381,18 +382,18 @@ it contains, we can look at its structure with <code>str</code> and read the
 variances, the percentages of variance explained by the individual
 PCs, and the cumulative variances.</li>
 </ul>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="sec-dimred.html#cb160-1" aria-hidden="true" tabindex="-1"></a>(var <span class="ot">&lt;-</span> pca_xy<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="sec-dimred.html#cb160-1" tabindex="-1"></a>(var <span class="ot">&lt;-</span> pca_xy<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 1.7711407 0.2288593</code></pre>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="sec-dimred.html#cb162-1" aria-hidden="true" tabindex="-1"></a>(pve <span class="ot">&lt;-</span> var<span class="sc">/</span><span class="fu">sum</span>(var))</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="sec-dimred.html#cb162-1" tabindex="-1"></a>(pve <span class="ot">&lt;-</span> var<span class="sc">/</span><span class="fu">sum</span>(var))</span></code></pre></div>
 <pre><code>## [1] 0.8855704 0.1144296</code></pre>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="sec-dimred.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cumsum</span>(pve)</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="sec-dimred.html#cb164-1" tabindex="-1"></a><span class="fu">cumsum</span>(pve)</span></code></pre></div>
 <pre><code>## [1] 0.8855704 1.0000000</code></pre>
 <ul>
 <li>
 <strong>x</strong> contains the coordinates of the data along the PCs. These are
 the values we could use to produce the PCA plot as above by hand.</li>
 </ul>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="sec-dimred.html#cb166-1" aria-hidden="true" tabindex="-1"></a>pca_xy<span class="sc">$</span>x</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="sec-dimred.html#cb166-1" tabindex="-1"></a>pca_xy<span class="sc">$</span>x</span></code></pre></div>
 <pre><code>##               PC1         PC2
 ##  [1,] -2.72848772  0.17019003
 ##  [2,] -2.40018291  0.11371158
@@ -414,7 +415,7 @@ the values we could use to produce the PCA plot as above by hand.</li>
 ## [18,]  1.28218805 -0.32631519
 ## [19,]  1.46938699 -0.32768480
 ## [20,]  0.72379344 -1.24506826</code></pre>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="sec-dimred.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pca_xy<span class="sc">$</span>x)</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="sec-dimred.html#cb168-1" tabindex="-1"></a><span class="fu">plot</span>(pca_xy<span class="sc">$</span>x)</span></code></pre></div>
 <p><img src="rnaseq_files/figure-html/pcaplot-1.png" width="672"></p>
 </div>
 <div id="visualisation" class="section level2" number="3.5">
@@ -425,7 +426,7 @@ the values we could use to produce the PCA plot as above by hand.</li>
 first two PCs as well as the original features as vectors along the
 same PCs. Feature vectors that are in the same direction in PC space
 are also correlated in the original data space.</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="sec-dimred.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca_xy)</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="sec-dimred.html#cb169-1" tabindex="-1"></a><span class="fu">biplot</span>(pca_xy)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:biplot"></span>
 <p class="caption marginnote shownote">
@@ -439,7 +440,7 @@ dealing with high dimensional data, as PC1 and PC2 (that are generally
 used for visualisation), might only account for an insufficient
 proportion of variance to be relevant on their own. This can be
 visualised on a <strong>screeplot</strong>, that can be produced with</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="sec-dimred.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pca_xy)</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="sec-dimred.html#cb170-1" tabindex="-1"></a><span class="fu">plot</span>(pca_xy)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:screeplot"></span>
 <p class="caption marginnote shownote">
@@ -465,10 +466,10 @@ the PCA analysis and interpret it. Also produce a PCA for PCs 2 and 3.</p>
 ► Solution<span id="sol-start-10" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-10', 'sol-start-10')"></span>
 </p>
 <div id="sol-body-10" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="sec-dimred.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
-<span id="cb171-2"><a href="sec-dimred.html#cb171-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"SummarizedExperiment"</span>)</span>
-<span id="cb171-3"><a href="sec-dimred.html#cb171-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(cptac_se_prot)</span>
-<span id="cb171-4"><a href="sec-dimred.html#cb171-4" aria-hidden="true" tabindex="-1"></a>cptac_se_prot</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="sec-dimred.html#cb171-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rWSBIM1322"</span>)</span>
+<span id="cb171-2"><a href="sec-dimred.html#cb171-2" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"SummarizedExperiment"</span>)</span>
+<span id="cb171-3"><a href="sec-dimred.html#cb171-3" tabindex="-1"></a><span class="fu">data</span>(cptac_se_prot)</span>
+<span id="cb171-4"><a href="sec-dimred.html#cb171-4" tabindex="-1"></a>cptac_se_prot</span></code></pre></div>
 <pre><code>## class: SummarizedExperiment 
 ## dim: 114 6 
 ## metadata(3): MSnbaseFiles MSnbaseProcessing MSnbaseVersion
@@ -479,21 +480,21 @@ the PCA analysis and interpret it. Also produce a PCA for PCs 2 and 3.</p>
 ## rowData names(3): Proteins Sequence nNA
 ## colnames(6): 6A_7 6A_8 ... 6B_8 6B_9
 ## colData names(3): group sample nNA</code></pre>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="sec-dimred.html#cb173-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">scale</span>(<span class="fu">assay</span>(cptac_se_prot))</span>
-<span id="cb173-2"><a href="sec-dimred.html#cb173-2" aria-hidden="true" tabindex="-1"></a>pca2 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(x)</span>
-<span id="cb173-3"><a href="sec-dimred.html#cb173-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca2)</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="sec-dimred.html#cb173-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">scale</span>(<span class="fu">assay</span>(cptac_se_prot))</span>
+<span id="cb173-2"><a href="sec-dimred.html#cb173-2" tabindex="-1"></a>pca2 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(x)</span>
+<span id="cb173-3"><a href="sec-dimred.html#cb173-3" tabindex="-1"></a><span class="fu">summary</span>(pca2)</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2     PC3     PC4     PC5     PC6
 ## Standard deviation     2.3718 0.4106 0.30777 0.22335 0.20650 0.13692
 ## Proportion of Variance 0.9376 0.0281 0.01579 0.00831 0.00711 0.00312
 ## Cumulative Proportion  0.9376 0.9657 0.98145 0.98977 0.99688 1.00000</code></pre>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="sec-dimred.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">screeplot</span>(pca2)</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="sec-dimred.html#cb175-1" tabindex="-1"></a><span class="fu">screeplot</span>(pca2)</span></code></pre></div>
 <p><img src="rnaseq_files/figure-html/pcaex2-1.png" width="672"></p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="sec-dimred.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca2)</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="sec-dimred.html#cb176-1" tabindex="-1"></a><span class="fu">biplot</span>(pca2)</span></code></pre></div>
 <p><img src="rnaseq_files/figure-html/pcaex2-2.png" width="672"></p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="sec-dimred.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pca2<span class="sc">$</span>x[, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="sec-dimred.html#cb177-1" tabindex="-1"></a><span class="fu">plot</span>(pca2<span class="sc">$</span>x[, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>])</span></code></pre></div>
 <p><img src="rnaseq_files/figure-html/pcaex2-3.png" width="672"></p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="sec-dimred.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca2, <span class="at">choices =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="sec-dimred.html#cb178-1" tabindex="-1"></a><span class="fu">biplot</span>(pca2, <span class="at">choices =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>)</span></code></pre></div>
 <p><img src="rnaseq_files/figure-html/pcaex2-4.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -518,17 +519,17 @@ samples. Interprete the figures.</p>
 ► Solution<span id="sol-start-11" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-11', 'sol-start-11')"></span>
 </p>
 <div id="sol-body-11" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="sec-dimred.html#cb179-1" aria-hidden="true" tabindex="-1"></a>x_t <span class="ot">&lt;-</span> <span class="fu">t</span>(x)</span>
-<span id="cb179-2"><a href="sec-dimred.html#cb179-2" aria-hidden="true" tabindex="-1"></a>pca3 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(x_t)</span>
-<span id="cb179-3"><a href="sec-dimred.html#cb179-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca3)</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="sec-dimred.html#cb179-1" tabindex="-1"></a>x_t <span class="ot">&lt;-</span> <span class="fu">t</span>(x)</span>
+<span id="cb179-2"><a href="sec-dimred.html#cb179-2" tabindex="-1"></a>pca3 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(x_t)</span>
+<span id="cb179-3"><a href="sec-dimred.html#cb179-3" tabindex="-1"></a><span class="fu">summary</span>(pca3)</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2    PC3    PC4     PC5       PC6
-## Standard deviation     1.9522 1.4632 1.0618 0.9817 0.65186 6.826e-16
+## Standard deviation     1.9522 1.4632 1.0618 0.9817 0.65186 8.723e-16
 ## Proportion of Variance 0.4501 0.2528 0.1331 0.1138 0.05018 0.000e+00
 ## Cumulative Proportion  0.4501 0.7029 0.8360 0.9498 1.00000 1.000e+00</code></pre>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="sec-dimred.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">screeplot</span>(pca3)</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="sec-dimred.html#cb181-1" tabindex="-1"></a><span class="fu">screeplot</span>(pca3)</span></code></pre></div>
 <p><img src="rnaseq_files/figure-html/unnamed-chunk-45-1.png" width="672"></p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="sec-dimred.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca3)</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="sec-dimred.html#cb182-1" tabindex="-1"></a><span class="fu">biplot</span>(pca3)</span></code></pre></div>
 <p><img src="rnaseq_files/figure-html/unnamed-chunk-45-2.png" width="672"></p>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
@@ -562,9 +563,9 @@ scaling. Compare and interpret the results.</p>
 ► Solution<span id="sol-start-12" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-12', 'sol-start-12')"></span>
 </p>
 <div id="sol-body-12" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="sec-dimred.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb183-2"><a href="sec-dimred.html#cb183-2" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(<span class="fu">prcomp</span>(mtcars, <span class="at">scale =</span> <span class="cn">FALSE</span>), <span class="at">main =</span> <span class="st">"No scaling"</span>)  <span class="do">## 1</span></span>
-<span id="cb183-3"><a href="sec-dimred.html#cb183-3" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(<span class="fu">prcomp</span>(mtcars, <span class="at">scale =</span> <span class="cn">TRUE</span>), <span class="at">main =</span> <span class="st">"With scaling"</span>) <span class="do">## 2</span></span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="sec-dimred.html#cb183-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb183-2"><a href="sec-dimred.html#cb183-2" tabindex="-1"></a><span class="fu">biplot</span>(<span class="fu">prcomp</span>(mtcars, <span class="at">scale =</span> <span class="cn">FALSE</span>), <span class="at">main =</span> <span class="st">"No scaling"</span>)  <span class="do">## 1</span></span>
+<span id="cb183-3"><a href="sec-dimred.html#cb183-3" tabindex="-1"></a><span class="fu">biplot</span>(<span class="fu">prcomp</span>(mtcars, <span class="at">scale =</span> <span class="cn">TRUE</span>), <span class="at">main =</span> <span class="st">"With scaling"</span>) <span class="do">## 2</span></span></code></pre></div>
 <p><img src="rnaseq_files/figure-html/scalepcasol-1.png" width="672"></p>
 <p>Without scaling, <code>disp</code> and <code>hp</code> are the features with the highest
 loadings along PC1 and 2 (all others are negligible), which are also
@@ -640,9 +641,9 @@ yourself with its experimental design stored in the <em>colData</em> slot.</p>
 ► Solution<span id="sol-start-13" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-13', 'sol-start-13')"></span>
 </p>
 <div id="sol-body-13" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="sec-dimred.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pRolocdata)</span>
-<span id="cb184-2"><a href="sec-dimred.html#cb184-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mulvey2015_se)</span>
-<span id="cb184-3"><a href="sec-dimred.html#cb184-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(mulvey2015_se)</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="sec-dimred.html#cb184-1" tabindex="-1"></a><span class="fu">library</span>(pRolocdata)</span>
+<span id="cb184-2"><a href="sec-dimred.html#cb184-2" tabindex="-1"></a><span class="fu">data</span>(mulvey2015_se)</span>
+<span id="cb184-3"><a href="sec-dimred.html#cb184-3" tabindex="-1"></a><span class="fu">colData</span>(mulvey2015_se)</span></code></pre></div>
 <pre><code>## DataFrame with 18 rows and 3 columns
 ##                 rep     times      cond
 ##           &lt;numeric&gt; &lt;integer&gt; &lt;numeric&gt;
@@ -685,8 +686,8 @@ display a summary of the results.</li>
 ► Solution<span id="sol-start-14" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-14', 'sol-start-14')"></span>
 </p>
 <div id="sol-body-14" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="sec-dimred.html#cb186-1" aria-hidden="true" tabindex="-1"></a>pca_mulvey2015 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">t</span>(<span class="fu">assay</span>(mulvey2015_se)), <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb186-2"><a href="sec-dimred.html#cb186-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca_mulvey2015)</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="sec-dimred.html#cb186-1" tabindex="-1"></a>pca_mulvey2015 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">t</span>(<span class="fu">assay</span>(mulvey2015_se)), <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb186-2"><a href="sec-dimred.html#cb186-2" tabindex="-1"></a><span class="fu">summary</span>(pca_mulvey2015)</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                            PC1     PC2     PC3     PC4     PC5     PC6     PC7
 ## Standard deviation     34.2468 24.0808 16.8485 7.37212 6.79981 5.84729 5.50515
@@ -697,7 +698,7 @@ display a summary of the results.</li>
 ## Proportion of Variance 0.01149 0.0095 0.00857 0.00684 0.00644 0.00533 0.00451
 ## Cumulative Proportion  0.95359 0.9631 0.97166 0.97850 0.98494 0.99027 0.99479
 ##                           PC15    PC16   PC17      PC18
-## Standard deviation     3.04106 1.24069 1.1806 1.636e-14
+## Standard deviation     3.04106 1.24069 1.1806 1.709e-14
 ## Proportion of Variance 0.00396 0.00066 0.0006 0.000e+00
 ## Cumulative Proportion  0.99874 0.99940 1.0000 1.000e+00</code></pre>
 <p class="solution-end">
@@ -726,8 +727,8 @@ the <code>fviz_screeplot</code> function from the <code>factoextra</code> packag
 ► Solution<span id="sol-start-15" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-15', 'sol-start-15')"></span>
 </p>
 <div id="sol-body-15" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="sec-dimred.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span>
-<span id="cb188-2"><a href="sec-dimred.html#cb188-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_screeplot</span>(pca_mulvey2015)</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="sec-dimred.html#cb188-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span>
+<span id="cb188-2"><a href="sec-dimred.html#cb188-2" tabindex="-1"></a><span class="fu">fviz_screeplot</span>(pca_mulvey2015)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-48"></span>
 <p class="caption marginnote shownote">
@@ -764,7 +765,7 @@ the light of the experimental design.</p></li>
 ► Solution<span id="sol-start-16" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-16', 'sol-start-16')"></span>
 </p>
 <div id="sol-body-16" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="sec-dimred.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca</span>(pca_mulvey2015)</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="sec-dimred.html#cb189-1" tabindex="-1"></a><span class="fu">fviz_pca</span>(pca_mulvey2015)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-49-1"></span>
 <p class="caption marginnote shownote">
@@ -772,7 +773,7 @@ Figure 3.11: Biplot and variables PCA plot of the <code>mulvey2015_se</code> dat
 </p>
 <img src="rnaseq_files/figure-html/unnamed-chunk-49-1.png" alt="Biplot and variables PCA plot of the `mulvey2015_se` data." width="768">
 </div>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="sec-dimred.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_mulvey2015)</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="sec-dimred.html#cb190-1" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_mulvey2015)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-49-2"></span>
 <p class="caption marginnote shownote">
@@ -780,7 +781,7 @@ Figure 3.12: Biplot and variables PCA plot of the <code>mulvey2015_se</code> dat
 </p>
 <img src="rnaseq_files/figure-html/unnamed-chunk-49-2.png" alt="Biplot and variables PCA plot of the `mulvey2015_se` data." width="768">
 </div>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="sec-dimred.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_mulvey2015, <span class="at">habillage =</span> mulvey2015_se<span class="sc">$</span>times)</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="sec-dimred.html#cb191-1" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(pca_mulvey2015, <span class="at">habillage =</span> mulvey2015_se<span class="sc">$</span>times)</span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:unnamed-chunk-49-3"></span>
 <p class="caption marginnote shownote">
@@ -811,12 +812,12 @@ cube along the three first PCs.</p>
 ► Solution<span id="sol-start-17" class="fa fa-plus-square solution-icon clickable" onclick="toggle_visibility('sol-body-17', 'sol-start-17')"></span>
 </p>
 <div id="sol-body-17" class="solution-body" style="display: none;">
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="sec-dimred.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rgl"</span>)</span>
-<span id="cb192-2"><a href="sec-dimred.html#cb192-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot3d</span>(pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">1</span>],</span>
-<span id="cb192-3"><a href="sec-dimred.html#cb192-3" aria-hidden="true" tabindex="-1"></a>       pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">2</span>],</span>
-<span id="cb192-4"><a href="sec-dimred.html#cb192-4" aria-hidden="true" tabindex="-1"></a>       pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">3</span>],</span>
-<span id="cb192-5"><a href="sec-dimred.html#cb192-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> mulvey2015_se<span class="sc">$</span>times,</span>
-<span id="cb192-6"><a href="sec-dimred.html#cb192-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="sec-dimred.html#cb192-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rgl"</span>)</span>
+<span id="cb192-2"><a href="sec-dimred.html#cb192-2" tabindex="-1"></a><span class="fu">plot3d</span>(pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">1</span>],</span>
+<span id="cb192-3"><a href="sec-dimred.html#cb192-3" tabindex="-1"></a>       pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">2</span>],</span>
+<span id="cb192-4"><a href="sec-dimred.html#cb192-4" tabindex="-1"></a>       pca_mulvey2015<span class="sc">$</span>x[, <span class="dv">3</span>],</span>
+<span id="cb192-5"><a href="sec-dimred.html#cb192-5" tabindex="-1"></a>       <span class="at">col =</span> mulvey2015_se<span class="sc">$</span>times,</span>
+<span id="cb192-6"><a href="sec-dimred.html#cb192-6" tabindex="-1"></a>       <span class="at">size =</span> <span class="dv">10</span>)</span></code></pre></div>
 <p class="solution-end">
 <span class="fa fa-square-o solution-icon"></span>
 </p>
@@ -973,9 +974,9 @@ Figure 3.18: Testing the effect of RNA sequencing kits 1 and 2.
 <a href="sec-hts.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2022-10-21
+2023-10-03
  using 
-R version 4.2.1 (2022-06-23)
+R version 4.3.1 Patched (2023-07-10 r84676)
 </p>
 </div>
 </div>
