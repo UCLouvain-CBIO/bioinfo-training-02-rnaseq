@@ -387,6 +387,12 @@ dds_tmp$Condition <- dds_tmp$Condition[sample(ncol(dds_tmp))]
 colData(dds)
 colData(dds_tmp)
 
+ensembl_to_geneName <- tibble(ENSEMBL = rownames(dds)) %>% 
+  mutate(gene = AnnotationDbi::mapIds(org.Hs.eg.db, ENSEMBL, "SYMBOL", 
+                                      "ENSEMBL")) %>% 
+  mutate(ENTREZID = AnnotationDbi::mapIds(org.Hs.eg.db, ENSEMBL, "ENTREZID", 
+                                          "ENSEMBL"))
+
 res_tmp <- DESeq(dds_tmp) %>%
     results(name = "Condition_KD_vs_mock") %>%
     as_tibble(rownames = "ENSEMBL") %>%
