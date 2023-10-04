@@ -13,7 +13,7 @@
 
 <meta name="author" content="Laurent Gatto and Axelle Loriot" />
 
-<meta name="date" content="2023-10-03" />
+<meta name="date" content="2023-10-04" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -268,7 +268,7 @@ provided (after raw data have been processed).</p>
 <strong>An expression matrix</strong>: we load the count matrix, specifying that
 the first columns contains row/gene names, and convert the
 <code>data.frame</code> to a <code>matrix</code>. You can download it
-<a href="https://raw.githubusercontent.com/carpentries-incubator/bioc-intro/main/_episodes_rmd/data/count_matrix.csv">here</a>.</li>
+<a href="https://carpentries-incubator.github.io/bioc-intro/data/count_matrix.csv">here</a>.</li>
 </ul>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="sec-se.html#cb91-1" tabindex="-1"></a>count_matrix <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/count_matrix.csv"</span>,</span>
 <span id="cb91-2"><a href="sec-se.html#cb91-2" tabindex="-1"></a>                         <span class="at">row.names =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
@@ -301,7 +301,7 @@ the first columns contains row/gene names, and convert the
 <ul>
 <li>
 <strong>A table describing the samples</strong>, available
-<a href="https://raw.githubusercontent.com/carpentries-incubator/bioc-intro/main/_episodes_rmd/data/sample_metadata.csv">here</a>.</li>
+<a href="https://carpentries-incubator.github.io/bioc-intro/data/sample_metadata.csv">here</a>.</li>
 </ul>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="sec-se.html#cb95-1" tabindex="-1"></a>sample_metadata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/sample_metadata.csv"</span>)</span>
 <span id="cb95-2"><a href="sec-se.html#cb95-2" tabindex="-1"></a>sample_metadata</span></code></pre></div>
@@ -323,7 +323,7 @@ the first columns contains row/gene names, and convert the
 <ul>
 <li>
 <strong>A table describing the genes</strong>, available
-<a href="https://raw.githubusercontent.com/carpentries-incubator/bioc-intro/main/_episodes_rmd/data/gene_metadata.csv">here</a>.</li>
+<a href="https://carpentries-incubator.github.io/bioc-intro/data/gene_metadata.csv">here</a>.</li>
 </ul>
 <div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="sec-se.html#cb99-1" tabindex="-1"></a>gene_metadata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/gene_metadata.csv"</span>)</span>
 <span id="cb99-2"><a href="sec-se.html#cb99-2" tabindex="-1"></a>gene_metadata[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span></code></pre></div>
@@ -986,7 +986,7 @@ programming language, and is open source and open development.<a href="sec-se.ht
 <a href="sec-dimred.html"><button class="btn btn-default">Next</button></a>
 </p>
 <p class="build-date">Page built: 
-2023-10-03
+2023-10-04
  using 
 R version 4.3.1 Patched (2023-07-10 r84676)
 </p>
