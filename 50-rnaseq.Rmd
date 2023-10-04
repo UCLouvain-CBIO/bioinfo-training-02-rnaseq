@@ -910,7 +910,7 @@ rejections is within 1 residual standard deviation to the peak of the curve.
 as_tibble(metadata(res)$filterNumRej) %>%
   ggplot(aes(x = theta, y = numRej)) +
   geom_point() +
-  geom_vline(xintercept = 0.4071429,
+  geom_vline(xintercept = 0.484,
              color = 'red')
 ```
 
